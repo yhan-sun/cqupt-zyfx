@@ -45,7 +45,7 @@ with sync_playwright() as p:
     check('archive: official photographs are local and decoded', page.locator('img[data-official-image]').count() >= 7 and page.locator('img[data-official-image]').evaluate_all("ims => ims.every(i => i.naturalWidth > 0 && new URL(i.src).origin === location.origin)"))
     check('archive: historic training warning is explicit', '不代表当前训练时间' in page.locator('#training-history').inner_text())
     check('archive: no current signup deadline or personal contact leaked', '2025.10.27' not in page.locator('main').inner_text() and not page.locator('main').evaluate("el => /1[3-9]\\d{9}/.test(el.innerText)"))
-    check('archive: first expedition wording is scoped', '不用于推断协会成立时间' in page.locator('#post-relay-2024').inner_text())
+    check('archive: first expedition wording is scoped', '不用于推断协会成立年份' in page.locator('#post-relay-2024').inner_text())
     check('archive: volunteer count is scoped to the university', '并非跑团队员人数' in page.locator('#post-cqmarathon-2025').inner_text())
     page.locator('[data-club-year="2025"]').click()
     check('archive filter: 2025 shows four source records', page.locator('[data-official-post]:visible').count() == 4)
