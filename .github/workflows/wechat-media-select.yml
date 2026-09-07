@@ -1,0 +1,66 @@
+name: WeChat official photograph selection
+
+on:
+  push:
+    branches: [research/wechat-official-content]
+    paths: [.github/workflows/wechat-media-select.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  select:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install Pillow==11.3.0 requests==2.32.5
+      - name: Download selected public article photographs
+        run: |
+          python - <<'PY'
+          import io, json, time, hashlib
+          from pathlib import Path
+          import requests
+          from PIL import Image, ImageOps, ImageDraw, ImageFont
+
+          items = [
+            ('2026-qingyuan-team','https://mmbiz.qpic.cn/mmbiz_jpg/UPlaRMicnOjiaEib3hr2HLpPWqebB6gJ1yL7HPhINIMiahiclodFsqGRic3FR4EUz5V1H9ibvIyF4J5CpZUdBSjgAh2UKKvdYpcUU1IzoTvaEXouRE/640?wx_fmt=jpeg&from=appmsg'),
+            ('2025-test-team','https://mmbiz.qpic.cn/sz_mmbiz_jpg/yQNsK5k7B9dFL1f3Lc4HIicc8prhtU5iblVXGpsVuDEaUT6wt6dxdwjjRULk1y7uPtfw7ziaKVHRuFy4fRKDoiarwQ/640?wx_fmt=jpeg&from=appmsg&watermark=1'),
+            ('2025-test-run','https://mmbiz.qpic.cn/sz_mmbiz_jpg/yQNsK5k7B9dFL1f3Lc4HIicc8prhtU5ibldCpD4UcLWKicaEUqky4IQHha7ORNlibWAP2icjalIMoNfyWj4TqLJq0EA/640?wx_fmt=jpeg&from=appmsg&watermark=1'),
+            ('2025-cqmarathon-07','https://mmbiz.qpic.cn/sz_mmbiz_jpg/yQNsK5k7B9dZTBoBOmia7SRT5XH2b6XUe5GXxOCviavgwfibrOMTxT5qkgUB7RobKK7sG0lxZWxzx0JA4NceSRCIA/640?wx_fmt=jpeg&from=appmsg'),
+            ('2025-cqmarathon-10','https://mmbiz.qpic.cn/sz_mmbiz_jpg/yQNsK5k7B9dZTBoBOmia7SRT5XH2b6XUeNDWjUIstjYiaNb6Npa2PapnliczIhaibraEXMmVqcU3qSaNEqyrdVgdzg/640?wx_fmt=jpeg&from=appmsg'),
+            ('2024-relay-team','https://mmbiz.qpic.cn/sz_mmbiz_jpg/yQNsK5k7B9fh0aoYp8XrFToribHFmxT9CHeRpXnf6EaZcO4b9mNGUkyFGnE7lo8iaXIlgWWpqfcwvgBMrwPDPTQg/640?wx_fmt=jpeg&from=appmsg'),
+            ('2024-guiyang-team','https://mmbiz.qpic.cn/sz_mmbiz_jpg/yQNsK5k7B9fOYr2KQ7dTv3ZUdEKbTvMuvBqTuvnIkIIJu3tian82okV3tAMzWGqLWDy3O6eu6GpQehCaic0FMjUw/640?wx_fmt=jpeg'),
+            ('2024-night-05','https://mmbiz.qpic.cn/sz_mmbiz_jpg/yQNsK5k7B9eJl3jmEs1T8VuFKCjdjIeEafJudHLC9aqc1N6GEK1wab1GuvicoWx3hNMHIGS1K2P46GQ2EnT1ZhQ/640?wx_fmt=jpeg&from=appmsg'),
+            ('2024-night-10','https://mmbiz.qpic.cn/sz_mmbiz_jpg/yQNsK5k7B9eJl3jmEs1T8VuFKCjdjIeENP2wpGJNsYqIYXjlXTN1UHLxCO5b7p9wtn2B9MbcYh5MMCKqAo5wBA/640?wx_fmt=jpeg&from=appmsg'),
+            ('2024-night-12','https://mmbiz.qpic.cn/sz_mmbiz_jpg/yQNsK5k7B9eJl3jmEs1T8VuFKCjdjIeEdhXA0icYVib26lwOFrGH5Kl0jLkKzsUwLx6eicLt8dPqCoSVbe5SeUn1g/640?wx_fmt=jpeg&from=appmsg'),
+            ('2025-qingyuan-race','https://mmbiz.qpic.cn/sz_mmbiz_jpg/blVFZKicRdnjmibFpeuSyc3EX0x6QBiacOnj051xiahKKvFAesicJOl34ENic1FibLJlC1vAzdAfrcnT3lyysLfVQe6Wg/640?wx_fmt=jpeg&from=appmsg'),
+            ('2025-qingyuan-04','https://mmbiz.qpic.cn/sz_mmbiz_jpg/blVFZKicRdnjmibFpeuSyc3EX0x6QBiacOnicRgjBXqWTBOzjyL5y8ALaBicDpkhWAhOeHSyNURjjAMf9icnKx99Zp8g/640?wx_fmt=jpeg&from=appmsg'),
+            ('2025-qingyuan-05','https://mmbiz.qpic.cn/sz_mmbiz_jpg/blVFZKicRdnjmibFpeuSyc3EX0x6QBiacOnts7OezUK1xP87HEb7InF2rGAlLkz7Zqia6TkQJ47ricmXF4f549dfYYg/640?wx_fmt=jpeg&from=appmsg'),
+            ('2025-qingyuan-06','https://mmbiz.qpic.cn/sz_mmbiz_jpg/blVFZKicRdnjmibFpeuSyc3EX0x6QBiacOnNIynyGWJ8FKjt7l8lOpcNIzPibH8GjricJVM3iaKkPMarA79NrsP0N1DA/640?wx_fmt=jpeg&from=appmsg'),
+          ]
+          out=Path('selected'); out.mkdir()
+          report=[]
+          headers={'User-Agent':'Mozilla/5.0','Referer':'https://mp.weixin.qq.com/'}
+          thumbs=[]
+          for n,(name,url) in enumerate(items):
+            r=requests.get(url,headers=headers,timeout=30); r.raise_for_status(); raw=r.content
+            im=Image.open(io.BytesIO(raw)); im.load(); rgb=im.convert('RGB')
+            path=out/(name+'.jpg'); rgb.save(path,quality=92,optimize=True)
+            report.append({'name':name,'sourceUrl':url,'width':im.width,'height':im.height,'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw)})
+            thumb=ImageOps.fit(rgb,(360,270),method=Image.Resampling.LANCZOS)
+            card=Image.new('RGB',(380,315),'white'); card.paste(thumb,(10,10)); ImageDraw.Draw(card).text((12,286),name,fill='black'); thumbs.append(card)
+            print(name,im.size,len(raw)); time.sleep(.6)
+          sheet=Image.new('RGB',(380*3,315*((len(thumbs)+2)//3)),'#ddd')
+          for i,card in enumerate(thumbs): sheet.paste(card,((i%3)*380,(i//3)*315))
+          sheet.save(out/'contact-sheet.jpg',quality=90)
+          (out/'report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wechat-selected-photographs
+          path: selected/
+          retention-days: 7
