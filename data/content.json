@@ -1,0 +1,61 @@
+{
+  "name": "重庆邮电大学跑步爱好者协会",
+  "shortName": "跑步爱好者协会",
+  "alias": "重邮约跑团 · 自邮飞翔",
+  "updated": "2026-09-07",
+  "join": {"verified": false, "url": null, "label": "进入招新通道"},
+  "stories": [
+    {
+      "id": "marathon-2026", "year": "2026", "date": "2026-03-29",
+      "title": "第八届重邮人马拉松比赛在太极运动场举行",
+      "summary": "师生、校友相聚校园，沿樱花大道与校园地标完成春日赛程。",
+      "image": "campus-pond", "imageNote": "校园资料图，非本届比赛现场",
+      "source": "https://www.cqnews.net/web/content_1487904406326575104.html", "sourceName": "第1眼TV－华龙网",
+      "paragraphs": [
+        "2026年3月29日，第八届重邮人马拉松比赛在重庆邮电大学太极运动场举行。参赛者包括在校师生、海内外校友及合作企业代表。",
+        "比赛路线经过校园樱花大道与标志性建筑。赛事设置学生接力赛，校友、教职工和学生个人组别，以及亲子组、校友线上跑等体验项目。",
+        "本页整理校园赛事公开报道，便于跑友查阅。赛事组织、成绩与后续活动信息，请以学校或赛事主办方发布为准。"
+      ]
+    },
+    {
+      "id": "marathon-2025", "year": "2025", "date": "2025-03-29",
+      "title": "第七届重邮人马拉松比赛暨建校75周年系列活动启动",
+      "summary": "以校园“樱花赛道”为特色，设置个人、接力与体验项目。",
+      "image": "race-2025", "imageNote": "2025年比赛现场，主办方供图",
+      "source": "https://www.cq.chinanews.com.cn/news/2025/0330/39-48269.html", "sourceName": "中新网重庆",
+      "paragraphs": [
+        "2025年3月29日，第七届重邮人马拉松比赛暨建校75周年系列活动启动仪式在学校太极运动场举行。",
+        "本届比赛路线途经校园标志性建筑和樱花大道，设置学生接力赛、不同身份组别的个人赛，以及亲子和线上体验项目。",
+        "据原始报道，赛事由学校体育学院、教育基金会、校友联谊会、党委宣传部、团委联合主办。本站作资料回顾，不将学校赛事表述为协会主办活动。"
+      ]
+    },
+    {
+      "id": "marathon-2024", "year": "2024", "date": "2024-03-23",
+      "title": "第六届重邮人马拉松比赛举行，校友返校同跑",
+      "summary": "从太极运动场出发，跑过熟悉的校园，与返校校友在赛道相逢。",
+      "image": "race-start", "imageNote": "2024年比赛现场，重庆邮电大学供稿",
+      "source": "https://chongqing.eol.cn/cqzy/202403/t20240323_2571457.shtml", "sourceName": "教育在线（重庆邮电大学供稿）",
+      "paragraphs": [
+        "2024年3月23日，第六届重邮人马拉松比赛在太极运动场举行。返校校友与在校师生共同参加比赛。",
+        "报道记载，当届赛事全程10公里，设有校友、教职工、学生个人体验组，以及学生接力和教职工亲子组。赛前还举行了校友火炬接力活动。",
+        "本页保留赛事日期、活动概况与公开报道链接。此处距离与组别仅对应2024年该届赛事，不作为日常校园路线的距离或新的报名安排。"
+      ]
+    }
+  ],
+  "slides": [
+    {"image":"campus-pond","kicker":"重庆邮电大学 · 学生社团","title":"跑步爱好者协会","subtitle":"重邮约跑团 · 自邮飞翔","href":"#about","label":"了解协会","note":"校园风光 / 重庆邮电大学官网"},
+    {"image":"race-start","kicker":"校园赛事 · 2024年3月23日","title":"第六届重邮人马拉松比赛","subtitle":"太极运动场 · 校园赛事回顾","href":"news/marathon-2024.html","label":"查看赛事回顾","note":"2024年比赛现场 / 重庆邮电大学供稿"},
+    {"image":"race-course","kicker":"校园影像 · 2024","title":"校园里的马拉松赛道","subtitle":"第六届重邮人马拉松比赛沿途影像","href":"#gallery","label":"浏览校园影像","note":"2024年比赛沿途 / 重庆邮电大学供稿"}
+  ],
+  "gallery": ["campus-pond","campus-gate","race-runners","race-relay","race-start","race-course","campus-autumn","campus-teaching"],
+  "routes": [
+    {"id":"track","title":"太极运动场","image":"race-warmup","caption":"2024年校园马拉松赛前场景","description":"校园马拉松多次从太极运动场出发。日常绕圈可按自己的状态安排距离，集体约跑前先确认集合位置与场地开放情况。","note":"开放时段、跑道使用规则以学校当日安排为准。","map":"https://uri.amap.com/search?keyword=%E9%87%8D%E5%BA%86%E9%82%AE%E7%94%B5%E5%A4%A7%E5%AD%A6%E5%A4%AA%E6%9E%81%E8%BF%90%E5%8A%A8%E5%9C%BA&city=%E9%87%8D%E5%BA%86"},
+    {"id":"campus","title":"校园慢跑","image":"race-course","caption":"2024年校园马拉松沿途资料图","description":"日常慢跑优先选择熟悉、人车较少的开放路段。经过路口与教学区域时减速，不必照搬比赛赛道。","note":"本站提供场景参考，不提供实测路线、里程或导航轨迹。","map":"https://uri.amap.com/search?keyword=%E9%87%8D%E5%BA%86%E9%82%AE%E7%94%B5%E5%A4%A7%E5%AD%A6&city=%E9%87%8D%E5%BA%86"}
+  ],
+  "notes": [{
+    "id":"track-prep","title":"田径场跑步准备","originalTitle":"在起跑线，重新认识田径场。","date":"2026-05-15",
+    "image":"track","imageNote":"田径场资料图，非重邮实拍；2007年，Elaron 摄",
+    "source":"https://github.com/yhan-sun/cqupt-zyfx/commit/8c7f88cdcc18a1f0631f6653a227cc84c15faf78",
+    "paragraphs":["日常慢跑和备赛都可以从操场开始。参加集体约跑前，先确认活动距离、配速分组和集合位置。","出发前留意场地开放情况，与组织者约定集合方式。新加入的跑友可以先说明自己的经验，按合适的节奏参与。","本页根据社团来稿整理，不是活动课表或报名通知。具体招新时间和集训安排，请通过校内渠道向社团确认。"]
+  }]
+}

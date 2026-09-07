@@ -1,11 +1,13 @@
 # Repository guidelines
 
-Read README.md, docs/CONTENT.md and sources.html before changing content.
+Read README.md, docs/CONTENT.md and data/media.json before changing content.
 
-Preserve the editorial, warm-paper and track-red visual direction. Avoid adding generic gradient cards, fake counters, fabricated achievements, unverified schedules or fake signup success states.
+The current user direction supersedes the first edition: follow CQUPT's teal-and-white university style, clear Chinese navigation, sourced campus photography and dated news. Do not restore the warm-paper/red campaign design, giant English slogans, sticker seals, fake counters or generic stock runners.
 
-Maintain progressive enhancement, relative asset paths for GitHub project Pages, mobile navigation, keyboard focus, reduced-motion behavior and no-JavaScript readable content. Do not introduce runtime JavaScript dependencies without a concrete need.
+Source content is data/content.json and data/media.json. Render static HTML through scripts/render.mjs; never maintain a second stale copy in the repository root or edit dist. Every news article has a real static path and a linked source. Dist is generated and ignored.
 
-Run npm test, npm run build and the Chromium browser checks. Production builds must download the licensed media, and deployment must depend on successful tests. Do not weaken tests or permission boundaries to make CI green. The repository administrator enables Pages; do not request broad tokens.
+Preserve keyboard operation, manual (not autoplay) carousel, gallery focus restoration, mobile navigation, no-JavaScript reading and relative paths for project Pages. Keep runtime JavaScript dependency-free unless a concrete need justifies a change.
 
-Keep factual claims tied to sources. Preserve image authorship and licenses. Do not add personal phone numbers, student IDs or membership data to this public repository.
+Run npm test, npm run build and Chromium tests. Failed media fetches or image validation must fail production builds, not substitute a broken image. Respect the deployment gate and minimal permissions. Administrator-only Pages enablement is not a capability of GITHUB_TOKEN.
+
+Never claim attribution grants a license. Retain original rights, authorship, years and source links. Do not fabricate school endorsement, association history, results, event schedules, QR codes or membership contacts. Never add private phone numbers or student IDs to the public repository.

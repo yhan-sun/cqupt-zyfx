@@ -2,7 +2,7 @@ name: Website · test and deploy
 
 on:
   push:
-    branches: [main]
+    branches: [main, design/cqupt-campus-style]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -27,11 +27,13 @@ jobs:
       - run: npm ci --ignore-scripts
       - name: Unit and content tests
         run: npm test
-      - name: Build with locally hosted photographs
-        run: npm run build
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install image tooling
+        run: python -m pip install Pillow==11.3.0
+      - name: Build and optimize campus photography
+        run: npm run build
       - name: Install browser test runner
         run: |
           python -m pip install playwright==1.55.0
@@ -55,6 +57,14 @@ jobs:
           name: browser-evidence
           path: test-results/
           if-no-files-found: ignore
+          retention-days: 14
+      - name: Export offline interactive preview
+        run: node scripts/preview.mjs
+      - name: Save interactive preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: interactive-preview
+          path: cqupt-campus-preview.html
           retention-days: 14
       - name: Save portable website
         uses: actions/upload-artifact@v4

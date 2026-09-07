@@ -27,3 +27,8 @@ export function verifiedJoinUrl(join) {
     return null;
   }
 }
+
+export function cycleIndex(index, length) {
+  if (!Number.isInteger(index) || !Number.isInteger(length) || length < 1) throw new RangeError("Invalid carousel index or length");
+  return ((index % length) + length) % length;
+}
