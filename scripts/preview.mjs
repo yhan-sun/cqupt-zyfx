@@ -3,7 +3,7 @@ import path from 'node:path';
 
 const root = path.resolve(import.meta.dirname, '..');
 const dist = path.join(root, 'dist');
-const scripts = ['assets/core.mjs','assets/app.js','assets/science-core.mjs','assets/science.js'];
+const scripts = ['assets/core.mjs','assets/app.js','assets/science-core.mjs','assets/science.js','assets/join.js'];
 const runtime = (await Promise.all(scripts.map(async file => (await readFile(path.join(dist,file),'utf8')).replace(/^import[^;]+;/gm,'').replace(/export /g,'')))).join('\n');
 async function htmlFiles(directory, prefix = '') {
   const names = [];
@@ -18,7 +18,7 @@ const pages = {};
 const uris = new Map();
 const uri = async filename => {
   if (uris.has(filename)) return uris.get(filename);
-  const type = {'.webp':'image/webp','.png':'image/png','.svg':'image/svg+xml','.gif':'image/gif'}[path.extname(filename)];
+  const type = {'.webp':'image/webp','.png':'image/png','.svg':'image/svg+xml','.gif':'image/gif','.jpg':'image/jpeg','.jpeg':'image/jpeg'}[path.extname(filename).toLowerCase()];
   if (!type) throw new Error('Unknown preview image format: '+filename);
   const result = `data:${type};base64,${(await readFile(path.join(dist,filename))).toString('base64')}`;
   uris.set(filename,result);
@@ -51,5 +51,6 @@ await writeFile(output,shell);
 await mkdir(path.join(root,'.cache'),{recursive:true});
 await writeFile(path.join(root,'.cache','preview-home.html'),pages['index.html']);
 await writeFile(path.join(root,'.cache','preview-science.html'),pages['science.html']);
+await writeFile(path.join(root,'.cache','preview-join.html'),pages['join.html']);
 await writeFile(path.join(root,'.cache','preview-pages.json'),JSON.stringify(pages));
 console.log(`Wrote standalone ${names.length}-page preview: ${output}`);
