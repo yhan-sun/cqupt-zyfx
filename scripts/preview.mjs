@@ -3,7 +3,7 @@ import path from 'node:path';
 
 const root = path.resolve(import.meta.dirname, '..');
 const dist = path.join(root, 'dist');
-const scripts = ['assets/core.mjs','assets/app.js','assets/science-core.mjs','assets/science.js','assets/join.js'];
+const scripts = ['assets/core.mjs','assets/app.js','assets/science-core.mjs','assets/science.js','assets/join.js','assets/gallery.js','assets/motion.js'];
 const runtime = (await Promise.all(scripts.map(async file => (await readFile(path.join(dist,file),'utf8')).replace(/^import[^;]+;/gm,'').replace(/export /g,'')))).join('\n');
 async function htmlFiles(directory, prefix = '') {
   const names = [];
@@ -34,10 +34,11 @@ for (const filename of names) {
   html = html.replace(/\s+srcset="[^"]+"\s+sizes="[^"]+"/g,'');
   const resources = [...new Set([...html.matchAll(/(?:src|href|data-motion|data-still)="((?:\.\.\/)?(?:media|assets)\/[^"#]+)"/g)].map(m=>m[1]))];
   for (const resource of resources) html = html.replaceAll(`"${resource}"`,`"${await uri(resource.replace(/^\.\.\//,''))}"`);
-  const data = html.match(/<script type="application\/json" id="gallery-data">(.*?)<\/script>/s);
-  if (data) {
+  for (const id of ['gallery-data','running-gallery-data']) {
+    const data = html.match(new RegExp(`<script type="application/json" id="${id}">(.*?)<\\/script>`,'s'));
+    if (!data) continue;
     const images = JSON.parse(data[1]);
-    for (const image of images) if (!image.src.startsWith('data:')) image.src = await uri(image.src);
+    for (const image of images) if (image.src && !image.src.startsWith('data:')) image.src = await uri(image.src);
     html = html.replace(data[1],()=>JSON.stringify(images).replaceAll('<','\\u003c'));
   }
   const navigation = `document.addEventListener('click',event=>{const a=event.target.closest('a[href]');if(!a||event.defaultPrevented||event.ctrlKey||event.metaKey||a.target==='_blank')return;const href=a.getAttribute('href');if(/^(https?:|mailto:|data:)/.test(href))return;const u=new URL(href,'https://preview.invalid/${filename}');let file=u.pathname.slice(1);if(!file||file.endsWith('/'))file+='index.html';if(file==='${filename}'&&u.hash){event.preventDefault();document.getElementById(decodeURIComponent(u.hash.slice(1)))?.scrollIntoView();return;}event.preventDefault();parent.postMessage({type:'cqupt-preview-navigation',path:file,anchor:u.hash},'*');});`;
