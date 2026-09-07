@@ -27,9 +27,11 @@ for (const [filename, html] of pages) {
 await cp(path.join(root, 'assets'), path.join(dist, 'assets'), { recursive: true });
 const { buildOfficialArchive } = await import('./official-build.mjs');
 const officialPages = await buildOfficialArchive();
+const { buildJoinExperience } = await import('./join-build.mjs');
+const joinPages = await buildJoinExperience();
 const origin = 'https://yhan-sun.github.io/cqupt-zyfx/';
 await writeFile(path.join(dist, '.nojekyll'), '');
 await writeFile(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${origin}sitemap.xml\n`);
-const locations = [...pages.keys(), ...officialPages].filter(file => file !== '404.html').map(file => `<url><loc>${origin}${file === 'index.html' ? '' : file}</loc></url>`).join('');
+const locations = [...pages.keys(), ...officialPages, ...joinPages].filter(file => file !== '404.html').map(file => `<url><loc>${origin}${file === 'index.html' ? '' : file}</loc></url>`).join('');
 await writeFile(path.join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${locations}</urlset>\n`);
-console.log(`Built ${pages.size + officialPages.length} pages, ${media.length} campus images and a source-verified official club archive${offline ? ' from the offline source cache' : ''}.`);
+console.log(`Built ${pages.size + officialPages.length + joinPages.length} pages, ${media.length} campus images, the source-verified official club archive and the verified QQ join experience${offline ? ' from the offline source cache' : ''}.`);
