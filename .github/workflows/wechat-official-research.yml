@@ -1,0 +1,124 @@
+name: WeChat official article research
+
+on:
+  push:
+    branches: [research/wechat-official-content]
+    paths: [.github/workflows/wechat-official-research.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install browser tooling
+        run: |
+          python -m pip install playwright==1.55.0 beautifulsoup4==4.13.5 pillow==11.3.0
+          python -m playwright install --with-deps chromium
+      - name: Read supplied official-account articles
+        run: |
+          python - <<'PY'
+          import asyncio
+          import json
+          import re
+          from pathlib import Path
+          from urllib.parse import urlparse
+          from playwright.async_api import async_playwright
+
+          urls = [
+            'https://mp.weixin.qq.com/s/rFnYKMVPCkgz5MUhlAGItQ',
+            'https://mp.weixin.qq.com/s/oLYmMv0S4soq2ChWtPLHWg',
+            'https://mp.weixin.qq.com/s/fZVA4Lsqpr102jepbY_npQ',
+            'https://mp.weixin.qq.com/s/U_4tlKjOeIJlLzvHX20Acw',
+            'https://mp.weixin.qq.com/s/JmoIiIjkod0naGt8qbe_ow',
+            'https://mp.weixin.qq.com/s/C-GQGBGGyfbhJroNFiP3_Q',
+            'https://mp.weixin.qq.com/s/0jrkMYn-sz61tvc6fPbs8w',
+            'https://mp.weixin.qq.com/s/t6qtceKISqwcFAXWZ6vF0g',
+          ]
+          out = Path('wechat-research')
+          out.mkdir(exist_ok=True)
+
+          async def text_or(page, selector):
+            try:
+              node = page.locator(selector).first
+              if await node.count():
+                return (await node.inner_text(timeout=1500)).strip()
+            except Exception:
+              pass
+            return ''
+
+          async def run():
+            async with async_playwright() as p:
+              browser = await p.chromium.launch(headless=True, args=['--no-sandbox'])
+              context = await browser.new_context(
+                viewport={'width': 430, 'height': 932},
+                user_agent='Mozilla/5.0 (Linux; Android 14; Pixel 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Mobile Safari/537.36',
+                locale='zh-CN',
+              )
+              results = []
+              for index, url in enumerate(urls, 1):
+                page = await context.new_page()
+                record = {'index': index, 'url': url}
+                try:
+                  response = await page.goto(url, wait_until='domcontentloaded', timeout=60000)
+                  record['httpStatus'] = response.status if response else None
+                  await page.wait_for_timeout(2500)
+                  for y in range(0, 9000, 800):
+                    await page.evaluate('(y) => window.scrollTo(0, y)', y)
+                    await page.wait_for_timeout(100)
+                  await page.evaluate('window.scrollTo(0, 0)')
+                  record['finalUrl'] = page.url
+                  record['documentTitle'] = await page.title()
+                  record['title'] = await text_or(page, '#activity-name') or await text_or(page, '.rich_media_title')
+                  record['account'] = await text_or(page, '#js_name') or await text_or(page, '.rich_media_meta_nickname')
+                  record['publishTime'] = await text_or(page, '#publish_time') or await text_or(page, '.rich_media_meta_text')
+                  record['content'] = await text_or(page, '#js_content')
+                  record['bodyExcerpt'] = (await page.locator('body').inner_text())[:4000]
+                  record['blocked'] = any(term in record['bodyExcerpt'] for term in ['环境异常', '完成验证', '访问过于频繁', '系统繁忙'])
+                  record['images'] = await page.locator('#js_content img, .rich_media_content img').evaluate_all('''imgs => imgs.map((img, i) => ({
+                    index: i,
+                    src: img.getAttribute('data-src') || img.currentSrc || img.src || '',
+                    originalSrc: img.getAttribute('data-src') || '',
+                    alt: img.alt || '',
+                    width: img.naturalWidth || img.width || 0,
+                    height: img.naturalHeight || img.height || 0
+                  })).filter(x => x.src)''')
+                  record['links'] = await page.locator('#js_content a').evaluate_all("els => els.map(a => ({text:(a.innerText||'').trim(), href:a.href||''})).filter(x=>x.href)")
+                  html = await page.content()
+                  (out / f'{index:02d}.html').write_text(html, encoding='utf-8')
+                  await page.screenshot(path=str(out / f'{index:02d}.png'), full_page=True)
+                except Exception as error:
+                  record['error'] = repr(error)
+                  try:
+                    record['bodyExcerpt'] = (await page.locator('body').inner_text())[:4000]
+                    await page.screenshot(path=str(out / f'{index:02d}-error.png'), full_page=True)
+                  except Exception:
+                    pass
+                finally:
+                  results.append(record)
+                  await page.close()
+              await browser.close()
+              (out / 'articles.json').write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding='utf-8')
+              for item in results:
+                print('\n###', item['index'], item.get('httpStatus'), 'blocked=', item.get('blocked'))
+                print('TITLE:', item.get('title') or item.get('documentTitle'))
+                print('ACCOUNT:', item.get('account'), 'DATE:', item.get('publishTime'))
+                print((item.get('content') or item.get('bodyExcerpt') or '')[:800].replace('\n',' | '))
+                print('IMAGES:', len(item.get('images', [])))
+
+          asyncio.run(run())
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wechat-official-research
+          path: wechat-research/
+          if-no-files-found: warn
+          retention-days: 7
