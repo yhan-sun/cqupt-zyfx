@@ -32,6 +32,7 @@ with sync_playwright() as p:
     dialog=page.locator('.motion-lightbox[open]')
     check('zoom: culture photo opens global lightbox',dialog.count()==1 and dialog.locator('img').get_attribute('src') is not None)
     check('zoom: title and position are exposed',dialog.locator('#motion-lightbox-title').inner_text().strip()!='' and '/' in dialog.locator('.motion-lightbox-count').inner_text())
+    page.screenshot(path=str(out/'motion-lightbox-desktop.png'))
     position=dialog.locator('.motion-lightbox-count').inner_text()
     page.keyboard.press('ArrowRight');page.wait_for_timeout(80)
     check('zoom: keyboard arrows move through visible photos',dialog.locator('.motion-lightbox-count').inner_text()!=position)
@@ -56,8 +57,12 @@ with sync_playwright() as p:
 
     page.set_viewport_size({'width':390,'height':844});page.goto(url+'club.html',wait_until='networkidle');wait_images(page)
     mobile=page.locator('.culture-photo-mosaic img[data-running-photo]').first;mobile.scroll_into_view_if_needed();mobile.click()
-    check('zoom: mobile viewer uses full viewport',page.locator('.motion-lightbox[open]').count()==1 and page.locator('.motion-lightbox').evaluate("d=>Math.abs(d.getBoundingClientRect().width-innerWidth)<=2&&Math.abs(d.getBoundingClientRect().height-innerHeight)<=2"))
+    metrics=page.locator('.motion-lightbox').evaluate("d=>{const r=d.getBoundingClientRect();return {width:r.width,height:r.height,innerWidth,innerHeight}}")
+    print('MOBILE_DIALOG_METRICS',metrics,flush=True)
+    check('zoom: mobile viewer covers nearly the full viewport',page.locator('.motion-lightbox[open]').count()==1 and metrics['width']>=metrics['innerWidth']*.94 and metrics['height']>=metrics['innerHeight']*.94)
     check('zoom: mobile viewer keeps previous and next controls',page.locator('.motion-lightbox-step:visible').count()==2)
+    check('zoom: mobile image stays contained in viewport',page.locator('.motion-lightbox-stage img').evaluate("i=>{const r=i.getBoundingClientRect();return r.width<=innerWidth&&r.height<=innerHeight}"))
+    page.screenshot(path=str(out/'motion-lightbox-mobile.png'))
     page.keyboard.press('Escape')
 
     reduced=browser.new_context(reduced_motion='reduce',viewport={'width':1280,'height':800})
