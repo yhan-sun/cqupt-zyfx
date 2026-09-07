@@ -94,7 +94,7 @@ with sync_playwright() as p:
     check('no JS: navigation and article links remain available',fallback.locator('#main-nav a').count()>=7 and fallback.locator('.news-row a').count()>=2)
     check('no JS: gallery retains source links',fallback.locator('.gallery-item .photo-link').count()==8)
     check('no JS: mobile has no horizontal overflow',fallback.evaluate('document.documentElement.scrollWidth<=innerWidth'))
-    fallback.goto(url+'news/cqupt-marathon-2025.html',wait_until='domcontentloaded')
+    fallback.goto(url+'news/marathon-2025.html',wait_until='domcontentloaded')
     check('no JS: static article body remains readable',fallback.locator('.article-body').is_visible())
     nojs.close();browser.close()
 
