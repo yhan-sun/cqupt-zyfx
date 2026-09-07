@@ -4,6 +4,7 @@ if(scope){
   const items=[...scope.querySelectorAll('[data-gallery-page-item]')];
   const status=scope.querySelector('#running-gallery-status');
   if(filters.length){
+    scope.querySelector('.running-gallery-filters')?.removeAttribute('hidden');
     filters.forEach(button=>button.hidden=false);
     filters.forEach(button=>button.addEventListener('click',()=>{
       const value=button.dataset.galleryPageFilter;
