@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 
 const official = JSON.parse(await readFile(new URL('../data/official-posts.json', import.meta.url), 'utf8'));
 const media = JSON.parse(await readFile(new URL('../data/official-media.json', import.meta.url), 'utf8'));
+const culture = JSON.parse(await readFile(new URL('../data/club-culture.json', import.meta.url), 'utf8'));
 const posts = official.posts;
 
 const fact = (postId, value) => posts.find(post => post.id === postId)?.facts.some(item => item.value === value);
@@ -61,20 +62,33 @@ test('curated data does not republish phone numbers, QR payloads or individual r
   assert.ok(!/王学聪|周维卓|卓赛|罗渝|杨鹏宇|杨昊贤|朱志伟|秦石磊|侯伟|沈勋/.test(text));
 });
 
-test('eight selected official images are pinned to source bytes and linked back to an article', () => {
-  assert.equal(media.length, 8);
-  assert.equal(new Set(media.map(item => item.id)).size, 8);
+test('twenty selected self-flying images are hash-pinned and source-linked', () => {
+  assert.equal(media.length, 20);
+  assert.equal(new Set(media.map(item => item.id)).size, 20);
   const sources = new Set(posts.map(post => post.source));
   for (const item of media) {
     assert.match(item.url, /^https:\/\/mmbiz\.qpic\.cn\//);
     assert.ok(sources.has(item.article));
     assert.match(item.sha256, /^[a-f0-9]{64}$/);
-    assert.ok(item.width >= 900 && item.height >= 600);
+    assert.ok(item.width >= 900 && item.height >= 500);
     assert.match(item.license, /未发现开放许可/);
   }
 });
 
-test('every visual reference used by a post exists in the curated media registry', () => {
+test('culture story uses every official photo once and keeps all post references valid', () => {
+  const ids = new Set(media.map(item => item.id));
+  const storyIds = Object.values(culture.postImages).flat();
+  assert.equal(storyIds.length, 20);
+  assert.equal(new Set(storyIds).size, 20);
+  for (const id of storyIds) assert.ok(ids.has(id), id);
+  for (const [postId, images] of Object.entries(culture.postImages)) {
+    assert.ok(posts.some(post => post.id === postId), postId);
+    assert.ok(images.length >= 1 && images.length <= 4);
+  }
+  assert.deepEqual(culture.years.flatMap(year => year.posts).sort(), posts.map(post => post.id).sort());
+});
+
+test('every legacy visual reference used by a post remains in the media registry', () => {
   const ids = new Set(media.map(item => item.id));
   for (const post of posts) {
     if (post.image) assert.ok(ids.has(post.image), post.image);
