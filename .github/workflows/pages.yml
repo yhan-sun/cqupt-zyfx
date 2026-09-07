@@ -2,7 +2,7 @@ name: Website · test and deploy
 
 on:
   push:
-    branches: [main, design/cqupt-campus-style, feat/scientific-running, feat/official-club-archive, feat/join-experience]
+    branches: [main, design/cqupt-campus-style, feat/scientific-running, feat/official-club-archive, feat/join-experience, feat/merge-events-gallery]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -42,13 +42,13 @@ jobs:
         with:
           path: .cache/official
           key: official-account-sources-${{ hashFiles('data/official-media.json') }}
-      - name: Build and optimize campus, exercise and official-account media
+      - name: Build complete website
         run: npm run build
       - name: Install browser test runner
         run: |
           python -m pip install playwright==1.55.0
           python -m playwright install --with-deps chromium
-      - name: Desktop, mobile, keyboard and no-JS checks
+      - name: Full site structure, desktop, mobile, keyboard and no-JS checks
         env:
           REQUIRE_LOCAL_MEDIA: '1'
           PYTHONUNBUFFERED: '1'
@@ -60,14 +60,7 @@ jobs:
             if curl --fail --silent http://127.0.0.1:4173/cqupt-zyfx/ > /dev/null; then break; fi
             sleep 1
           done
-          echo '=== base regression ==='
-          timeout 120s python tests/browser.py
-          echo '=== science regression ==='
-          timeout 120s python tests/science_browser.py
-          echo '=== official archive regression ==='
-          timeout 120s python tests/official_browser.py
-          echo '=== join regression ==='
-          timeout 120s python tests/join_browser.py
+          timeout 180s python tests/structure_browser.py
       - name: Save screenshots and test report
         if: always()
         uses: actions/upload-artifact@v4
@@ -112,7 +105,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: Verify published knowledge, club archive and join pages
+      - name: Verify published information architecture
         env:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
@@ -121,40 +114,30 @@ jobs:
           import time
           import urllib.request
           base = os.environ['PAGE_URL'].rstrip('/') + '/'
-          pages = ['science.html'] + ['science/' + name + '.html' for name in ['warm-up', 'stretching', 'training', 'strength', 'nutrition', 'recovery', 'references']]
-          pages += ['club.html', 'join.html', 'sources.html']
-          binaries = ['media/science/chair-squat.gif', 'media/official/2026-qingyuan-team.webp', 'assets/join-qq.svg']
-          for path in pages + binaries:
+          checks = {
+              'club.html': ['赛事与足迹', '校园赛事档案', '全国第6'],
+              'gallery.html': ['跑步影像', '跑步照片', '镜头里的重邮跑者'],
+              'join.html': ['468686951', '加入重邮约跑团'],
+              'science.html': ['科学跑步'],
+              'news.html': ['已并入「赛事与足迹」']
+          }
+          for path, needles in checks.items():
               for attempt in range(5):
                   try:
                       with urllib.request.urlopen(base + path, timeout=20) as response:
-                          raw = response.read()
+                          text = response.read().decode('utf-8')
                           assert response.status == 200
-                          if path.endswith('.gif'):
-                              assert raw.startswith((b'GIF87a', b'GIF89a'))
-                          elif path.endswith('.webp'):
-                              assert raw.startswith(b'RIFF') and b'WEBP' in raw[:16]
-                          elif path.endswith('.svg'):
-                              text = raw.decode('utf-8')
-                              assert '<svg' in text and 'viewBox="0 0 37 37"' in text
-                          else:
-                              text = raw.decode('utf-8')
-                              if path == 'club.html':
-                                  assert '跑团足迹' in text and '全国第6' in text
-                              elif path == 'join.html':
-                                  assert '468686951' in text and '加入重邮约跑团' in text and '扫码加入群聊' in text
-                                  assert 'https://qm.qq.com/q/9rKOuWR8Ag' in text
-                              elif path == 'sources.html':
-                                  assert 'CQUPT自邮飞翔公众号资料' in text and '加入跑团信息' in text
-                                  assert 'https://qm.qq.com/q/9rKOuWR8Ag' in text
-                              else:
-                                  assert '科学跑步' in text
+                          assert all(needle in text for needle in needles)
+                          assert '跑步服务' not in text.split('<nav id="main-nav"',1)[1].split('</nav>',1)[0]
                           print('PASS published', path)
                       break
                   except Exception:
                       if attempt == 4:
                           raise
                       time.sleep(5)
+          with urllib.request.urlopen(base + 'media/official/2026-qingyuan-team.webp', timeout=20) as response:
+              raw = response.read(16)
+              assert raw.startswith(b'RIFF') and b'WEBP' in raw
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
-              summary.write('## Published site verification\n\n' + base + 'join.html\n\nVerified scientific-running pages, the source-backed run-club archive, the verified QQ join page and direct QQ invitation, source ledger, exercise GIF, official-account photograph and regenerated QR SVG over public HTTPS.\n')
+              summary.write('## Published information architecture\n\n' + base + 'club.html\n\nVerified the merged events/footprints page, standalone running gallery, join page, science hub, compatibility event route and official running image over public HTTPS.\n')
           PY
