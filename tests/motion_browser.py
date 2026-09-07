@@ -56,7 +56,7 @@ with sync_playwright() as p:
 
     page.set_viewport_size({'width':390,'height':844});page.goto(url+'club.html',wait_until='networkidle');wait_images(page)
     mobile=page.locator('.culture-photo-mosaic img[data-running-photo]').first;mobile.scroll_into_view_if_needed();mobile.click()
-    check('zoom: mobile viewer uses full viewport',page.locator('.motion-lightbox[open]').count()==1 and page.locator('.motion-lightbox').evaluate("d=>Math.round(d.getBoundingClientRect().width)===innerWidth"))
+    check('zoom: mobile viewer uses full viewport',page.locator('.motion-lightbox[open]').count()==1 and page.locator('.motion-lightbox').evaluate("d=>Math.abs(d.getBoundingClientRect().width-innerWidth)<=2&&Math.abs(d.getBoundingClientRect().height-innerHeight)<=2"))
     check('zoom: mobile viewer keeps previous and next controls',page.locator('.motion-lightbox-step:visible').count()==2)
     page.keyboard.press('Escape')
 
