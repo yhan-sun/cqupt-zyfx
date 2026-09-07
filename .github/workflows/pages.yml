@@ -2,7 +2,7 @@ name: Website · test and deploy
 
 on:
   push:
-    branches: [main, design/cqupt-campus-style, feat/scientific-running, feat/official-club-archive]
+    branches: [main, design/cqupt-campus-style, feat/scientific-running, feat/official-club-archive, feat/join-experience]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -62,6 +62,7 @@ jobs:
           python tests/browser.py
           python tests/science_browser.py
           python tests/official_browser.py
+          python tests/join_browser.py
       - name: Save screenshots and test report
         if: always()
         uses: actions/upload-artifact@v4
@@ -106,7 +107,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: Verify published knowledge and club archive pages
+      - name: Verify published knowledge, club archive and join pages
         env:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
@@ -116,8 +117,8 @@ jobs:
           import urllib.request
           base = os.environ['PAGE_URL'].rstrip('/') + '/'
           pages = ['science.html'] + ['science/' + name + '.html' for name in ['warm-up', 'stretching', 'training', 'strength', 'nutrition', 'recovery', 'references']]
-          pages += ['club.html', 'sources.html']
-          binaries = ['media/science/chair-squat.gif', 'media/official/2026-qingyuan-team.webp']
+          pages += ['club.html', 'join.html', 'sources.html']
+          binaries = ['media/science/chair-squat.gif', 'media/official/2026-qingyuan-team.webp', 'assets/join-qq.jpg']
           for path in pages + binaries:
               for attempt in range(5):
                   try:
@@ -128,12 +129,16 @@ jobs:
                               assert raw.startswith((b'GIF87a', b'GIF89a'))
                           elif path.endswith('.webp'):
                               assert raw.startswith(b'RIFF') and b'WEBP' in raw[:16]
+                          elif path.endswith('.jpg'):
+                              assert raw.startswith(b'\xff\xd8') and raw.endswith(b'\xff\xd9')
                           else:
                               text = raw.decode('utf-8')
                               if path == 'club.html':
                                   assert '跑团足迹' in text and '全国第6' in text
+                              elif path == 'join.html':
+                                  assert '468686951' in text and '加入重邮约跑团' in text and '扫码加入群聊' in text
                               elif path == 'sources.html':
-                                  assert 'CQUPT自邮飞翔公众号资料' in text
+                                  assert 'CQUPT自邮飞翔公众号资料' in text and '加入跑团信息' in text
                               else:
                                   assert '科学跑步' in text
                           print('PASS published', path)
@@ -143,5 +148,5 @@ jobs:
                           raise
                       time.sleep(5)
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
-              summary.write('## Published site verification\n\n' + base + 'club.html\n\nVerified the eight scientific-running pages, the source-backed run-club archive, source ledger, one original exercise GIF and one curated official-account photograph over public HTTPS.\n')
+              summary.write('## Published site verification\n\n' + base + 'join.html\n\nVerified scientific-running pages, the source-backed run-club archive, the verified QQ join page, source ledger, exercise GIF, official-account photograph and supplied QQ QR over public HTTPS.\n')
           PY
