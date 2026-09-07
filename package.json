@@ -1,0 +1,14 @@
+{
+  "name": "cqupt-zyfx",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "自邮飞翔 · 重庆邮电大学跑步爱好者协会",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:e2e": "python tests/browser.py"
+  },
+  "engines": { "node": ">=22" }
+}
