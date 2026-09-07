@@ -7,7 +7,7 @@ const option = (name, fallback) => args.includes(name) ? args[args.indexOf(name)
 const root = path.resolve(option('--dir', '.'));
 const port = Number(option('--port', process.env.PORT || '4173'));
 const base = option('--base', '/');
-const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.mjs': 'text/javascript', '.svg': 'image/svg+xml', '.jpg': 'image/jpeg', '.png': 'image/png', '.json': 'application/json', '.xml': 'application/xml', '.txt': 'text/plain' };
+const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.mjs': 'text/javascript', '.svg': 'image/svg+xml', '.jpg': 'image/jpeg', '.png': 'image/png', '.gif': 'image/gif', '.webp': 'image/webp', '.json': 'application/json', '.xml': 'application/xml', '.txt': 'text/plain' };
 http.createServer(async (request, response) => {
   try {
     const url = new URL(request.url, 'http://localhost');

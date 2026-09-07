@@ -53,8 +53,8 @@ test('all gallery images and hero references exist', () => {
   for (const id of [...content.gallery,...content.slides.map(i=>i.image),...content.routes.map(i=>i.image)]) assert.ok(ids.has(id));
   assert.equal(new Set(content.gallery).size,8);
 });
-test('all eight static pages and article source captions are rendered', () => {
-  assert.equal(pages.size,8);
+test('all sixteen static pages and article source captions are rendered', () => {
+  assert.equal(pages.size,16);
   for (const story of content.stories) {
     const html = pages.get(`news/${story.id}.html`);
     assert.ok(html.includes(story.imageNote));

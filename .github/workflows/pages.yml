@@ -2,7 +2,7 @@ name: Website · test and deploy
 
 on:
   push:
-    branches: [main, design/cqupt-campus-style]
+    branches: [main, design/cqupt-campus-style, feat/scientific-running]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -32,7 +32,7 @@ jobs:
           python-version: '3.12'
       - name: Install image tooling
         run: python -m pip install Pillow==11.3.0
-      - name: Build and optimize campus photography
+      - name: Build and optimize campus photography and exercise media
         run: npm run build
       - name: Install browser test runner
         run: |
@@ -50,6 +50,7 @@ jobs:
             sleep 1
           done
           python tests/browser.py
+          python tests/science_browser.py
       - name: Save screenshots and test report
         if: always()
         uses: actions/upload-artifact@v4
@@ -94,3 +95,33 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify published science pages and GIF
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          python - <<'PY'
+          import os
+          import time
+          import urllib.request
+          base = os.environ['PAGE_URL'].rstrip('/') + '/'
+          paths = ['science.html'] + ['science/' + name + '.html' for name in ['warm-up', 'stretching', 'training', 'strength', 'nutrition', 'recovery', 'references']]
+          paths.append('media/science/chair-squat.gif')
+          for path in paths:
+              for attempt in range(5):
+                  try:
+                      with urllib.request.urlopen(base + path, timeout=20) as response:
+                          raw = response.read()
+                          assert response.status == 200
+                          if path.endswith('.gif'):
+                              assert raw.startswith((b'GIF87a', b'GIF89a'))
+                          else:
+                              assert '科学跑步' in raw.decode('utf-8')
+                          print('PASS published', path)
+                      break
+                  except Exception:
+                      if attempt == 4:
+                          raise
+                      time.sleep(5)
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+              summary.write('## Published science section\n\n' + base + 'science.html\n\nVerified all eight science pages and an original exercise GIF over public HTTPS.\n')
+          PY
