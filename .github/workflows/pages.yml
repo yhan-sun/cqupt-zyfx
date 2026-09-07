@@ -2,7 +2,7 @@ name: Website · test and deploy
 
 on:
   push:
-    branches: [main, design/cqupt-campus-style, feat/scientific-running]
+    branches: [main, design/cqupt-campus-style, feat/scientific-running, feat/official-club-archive]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -17,7 +17,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 14
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -37,7 +37,12 @@ jobs:
         with:
           path: .cache/science
           key: movement-sources-${{ hashFiles('data/science-media.json') }}
-      - name: Build and optimize campus photography and exercise media
+      - name: Reuse hash-pinned official-account photographs
+        uses: actions/cache@v4
+        with:
+          path: .cache/official
+          key: official-account-sources-${{ hashFiles('data/official-media.json') }}
+      - name: Build and optimize campus, exercise and official-account media
         run: npm run build
       - name: Install browser test runner
         run: |
@@ -56,6 +61,7 @@ jobs:
           done
           python tests/browser.py
           python tests/science_browser.py
+          python tests/official_browser.py
       - name: Save screenshots and test report
         if: always()
         uses: actions/upload-artifact@v4
@@ -100,7 +106,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: Verify published science pages and GIF
+      - name: Verify published knowledge and club archive pages
         env:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
@@ -109,9 +115,10 @@ jobs:
           import time
           import urllib.request
           base = os.environ['PAGE_URL'].rstrip('/') + '/'
-          paths = ['science.html'] + ['science/' + name + '.html' for name in ['warm-up', 'stretching', 'training', 'strength', 'nutrition', 'recovery', 'references']]
-          paths.append('media/science/chair-squat.gif')
-          for path in paths:
+          pages = ['science.html'] + ['science/' + name + '.html' for name in ['warm-up', 'stretching', 'training', 'strength', 'nutrition', 'recovery', 'references']]
+          pages += ['club.html', 'sources.html']
+          binaries = ['media/science/chair-squat.gif', 'media/official/2026-qingyuan-team.webp']
+          for path in pages + binaries:
               for attempt in range(5):
                   try:
                       with urllib.request.urlopen(base + path, timeout=20) as response:
@@ -119,8 +126,16 @@ jobs:
                           assert response.status == 200
                           if path.endswith('.gif'):
                               assert raw.startswith((b'GIF87a', b'GIF89a'))
+                          elif path.endswith('.webp'):
+                              assert raw.startswith(b'RIFF') and b'WEBP' in raw[:16]
                           else:
-                              assert '科学跑步' in raw.decode('utf-8')
+                              text = raw.decode('utf-8')
+                              if path == 'club.html':
+                                  assert '跑团足迹' in text and '全国第6' in text
+                              elif path == 'sources.html':
+                                  assert 'CQUPT自邮飞翔公众号资料' in text
+                              else:
+                                  assert '科学跑步' in text
                           print('PASS published', path)
                       break
                   except Exception:
@@ -128,5 +143,5 @@ jobs:
                           raise
                       time.sleep(5)
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
-              summary.write('## Published science section\n\n' + base + 'science.html\n\nVerified all eight science pages and an original exercise GIF over public HTTPS.\n')
+              summary.write('## Published site verification\n\n' + base + 'club.html\n\nVerified the eight scientific-running pages, the source-backed run-club archive, source ledger, one original exercise GIF and one curated official-account photograph over public HTTPS.\n')
           PY
