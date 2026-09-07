@@ -60,7 +60,7 @@ jobs:
             if curl --fail --silent http://127.0.0.1:4173/cqupt-zyfx/ > /dev/null; then break; fi
             sleep 1
           done
-          timeout 180s python tests/site_browser.py
+          timeout 180s python tests/structure_browser.py
       - name: Save screenshots and test report
         if: always()
         uses: actions/upload-artifact@v4
