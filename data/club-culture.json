@@ -1,0 +1,81 @@
+{
+  "reviewedAt": "2026-09-07",
+  "hero": {
+    "eyebrow": "自邮飞翔 · 公开跑团档案 2024—2026",
+    "title": "一起训练，\n也一起出发。",
+    "description": "在太极运动场集合，在城市马拉松和高校联赛重逢。公众号留下的不只有成绩，还有训练、合影、校友集结和赛后交流。",
+    "images": ["2025-track-training", "2026-qingyuan-team", "2024-night-flag"]
+  },
+  "years": [
+    {
+      "year": "2026",
+      "label": "跑向全国高校赛场",
+      "summary": "清远高校联赛把在校生与不同届校友再次聚到同一面重邮旗帜下。",
+      "posts": ["qingyuan-2026"]
+    },
+    {
+      "year": "2025",
+      "label": "训练、测试与一次次集结",
+      "summary": "太极运动场的集体训练和5K测试，与重庆、清远的比赛记录一起，构成这一年的公开跑团档案。",
+      "posts": ["recruit-2025", "test-2025", "qingyuan-2025", "cqmarathon-2025"]
+    },
+    {
+      "year": "2024",
+      "label": "从接力赛开始留下公开记录",
+      "summary": "马拉松战队首次出征、贵阳高校联赛与重庆夜跑，留下了现有公众号档案中最早的一批跑团赛事记录。",
+      "posts": ["night-run-2024", "guiyang-2024", "relay-2024"]
+    }
+  ],
+  "postImages": {
+    "qingyuan-2026": ["2026-qingyuan-team", "2026-qingyuan-eventwall", "2026-qingyuan-selfie", "2026-qingyuan-social"],
+    "recruit-2025": ["2025-recruit-group", "2025-track-training", "2025-track-squad"],
+    "test-2025": ["2025-test-team", "2025-test-run", "2025-test-start"],
+    "qingyuan-2025": ["2025-qingyuan-06", "2025-qingyuan-social", "2025-qingyuan-race"],
+    "cqmarathon-2025": ["2025-cqmarathon-10", "2025-cqmarathon-group", "2025-cqmarathon-social"],
+    "night-run-2024": ["2024-night-05", "2024-night-flag"],
+    "guiyang-2024": ["2024-guiyang-team"],
+    "relay-2024": ["2024-relay-team"]
+  },
+  "moments": [
+    {
+      "label": "校园训练",
+      "title": "操场，是很多故事开始的地方。",
+      "description": "2025年公开文章里可以看到太极运动场的集体跑、训练合影和5K测试准备。具体训练时间属于历史资料，不作为当前课表。",
+      "images": ["2025-track-training", "2025-track-squad", "2025-test-start"]
+    },
+    {
+      "label": "一起出发",
+      "title": "换一座城市，旗帜还是那一面。",
+      "description": "清远、重庆、贵阳和接力赛的公开影像，记录了跑友组队出征、赛前集合和赛道上的同伴。",
+      "images": ["2026-qingyuan-eventwall", "2025-qingyuan-race", "2025-cqmarathon-group"]
+    },
+    {
+      "label": "赛道之外",
+      "title": "跑完之后，留下的不只是完赛时间。",
+      "description": "公众号也记录了跑友自拍、赛后聚会和跨届校友交流。这里不展示个人成绩表，只保留团队层面的公开影像。",
+      "images": ["2026-qingyuan-selfie", "2026-qingyuan-social", "2025-qingyuan-social", "2025-cqmarathon-social"]
+    }
+  ],
+  "galleryCategories": {
+    "2025-track-training": "training",
+    "2025-track-squad": "training",
+    "2025-test-team": "training",
+    "2025-test-run": "training",
+    "2025-test-start": "training",
+    "2025-recruit-group": "team",
+    "2026-qingyuan-team": "race",
+    "2026-qingyuan-eventwall": "race",
+    "2026-qingyuan-selfie": "social",
+    "2026-qingyuan-social": "social",
+    "2025-qingyuan-06": "team",
+    "2025-qingyuan-social": "social",
+    "2025-qingyuan-race": "race",
+    "2025-cqmarathon-10": "race",
+    "2025-cqmarathon-group": "team",
+    "2025-cqmarathon-social": "social",
+    "2024-night-05": "team",
+    "2024-night-flag": "race",
+    "2024-guiyang-team": "team",
+    "2024-relay-team": "team"
+  }
+}
