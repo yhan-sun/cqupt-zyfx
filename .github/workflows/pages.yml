@@ -32,6 +32,11 @@ jobs:
           python-version: '3.12'
       - name: Install image tooling
         run: python -m pip install Pillow==11.3.0
+      - name: Reuse hash-pinned movement sources
+        uses: actions/cache@v4
+        with:
+          path: .cache/science
+          key: movement-sources-${{ hashFiles('data/science-media.json') }}
       - name: Build and optimize campus photography and exercise media
         run: npm run build
       - name: Install browser test runner
