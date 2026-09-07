@@ -123,7 +123,7 @@ jobs:
           base = os.environ['PAGE_URL'].rstrip('/') + '/'
           pages = ['science.html'] + ['science/' + name + '.html' for name in ['warm-up', 'stretching', 'training', 'strength', 'nutrition', 'recovery', 'references']]
           pages += ['club.html', 'join.html', 'sources.html']
-          binaries = ['media/science/chair-squat.gif', 'media/official/2026-qingyuan-team.webp', 'assets/join-qq.jpg']
+          binaries = ['media/science/chair-squat.gif', 'media/official/2026-qingyuan-team.webp', 'assets/join-qq.svg']
           for path in pages + binaries:
               for attempt in range(5):
                   try:
@@ -134,16 +134,19 @@ jobs:
                               assert raw.startswith((b'GIF87a', b'GIF89a'))
                           elif path.endswith('.webp'):
                               assert raw.startswith(b'RIFF') and b'WEBP' in raw[:16]
-                          elif path.endswith('.jpg'):
-                              assert raw.startswith(b'\xff\xd8') and raw.endswith(b'\xff\xd9')
+                          elif path.endswith('.svg'):
+                              text = raw.decode('utf-8')
+                              assert '<svg' in text and 'viewBox="0 0 37 37"' in text
                           else:
                               text = raw.decode('utf-8')
                               if path == 'club.html':
                                   assert '跑团足迹' in text and '全国第6' in text
                               elif path == 'join.html':
                                   assert '468686951' in text and '加入重邮约跑团' in text and '扫码加入群聊' in text
+                                  assert 'https://qm.qq.com/q/9rKOuWR8Ag' in text
                               elif path == 'sources.html':
                                   assert 'CQUPT自邮飞翔公众号资料' in text and '加入跑团信息' in text
+                                  assert 'https://qm.qq.com/q/9rKOuWR8Ag' in text
                               else:
                                   assert '科学跑步' in text
                           print('PASS published', path)
@@ -153,5 +156,5 @@ jobs:
                           raise
                       time.sleep(5)
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
-              summary.write('## Published site verification\n\n' + base + 'join.html\n\nVerified scientific-running pages, the source-backed run-club archive, the verified QQ join page, source ledger, exercise GIF, official-account photograph and supplied QQ QR over public HTTPS.\n')
+              summary.write('## Published site verification\n\n' + base + 'join.html\n\nVerified scientific-running pages, the source-backed run-club archive, the verified QQ join page and direct QQ invitation, source ledger, exercise GIF, official-account photograph and regenerated QR SVG over public HTTPS.\n')
           PY
