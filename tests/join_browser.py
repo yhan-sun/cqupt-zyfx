@@ -14,8 +14,10 @@ def check(name, condition):
     print('PASS', name, flush=True)
 
 def wait_qr(page, scope):
+    image = page.locator(scope)
+    image.scroll_into_view_if_needed(timeout=10000)
     page.wait_for_function("selector => { const img=document.querySelector(selector); return !!img && img.complete && img.naturalWidth > 0 && img.naturalHeight > 0; }", arg=scope, timeout=15000)
-    return page.locator(scope)
+    return image
 
 with sync_playwright() as p:
     options = {'headless': True, 'args': ['--no-sandbox']}
@@ -90,8 +92,10 @@ with sync_playwright() as p:
     fallback.set_default_timeout(15000)
     fallback.set_default_navigation_timeout(20000)
     fallback.goto(url + 'join.html', wait_until='domcontentloaded')
+    image = fallback.locator('img[data-join-qr]')
+    image.scroll_into_view_if_needed(timeout=10000)
     fallback.wait_for_function("() => { const img=document.querySelector('img[data-join-qr]'); return !!img && img.complete && img.naturalWidth > 0; }", timeout=15000)
-    check('join no JS: QR and group number remain readable', fallback.locator('img[data-join-qr]').is_visible() and '468686951' in fallback.locator('main').inner_text())
+    check('join no JS: QR and group number remain readable', image.is_visible() and '468686951' in fallback.locator('main').inner_text())
     check('join no JS: dead copy buttons stay hidden', fallback.locator('[data-copy-group]:visible').count() == 0)
     check('join no JS: all FAQs remain native details elements', fallback.locator('.join-faq details').count() == 5)
     check('join: no uncaught JavaScript errors', not errors)
