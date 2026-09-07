@@ -5,10 +5,13 @@ on:
     paths: [.github/workflows/photo-audit.yml]
 permissions:
   contents: read
+concurrency:
+  group: footprint-photo-audit
+  cancel-in-progress: true
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 7
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -18,7 +21,7 @@ jobs:
       - name: Fetch supplied official-account articles and enumerate photographs
         run: |
           python - <<'PY'
-          import hashlib, html, json, re, time, urllib.request
+          import hashlib, html, json, re, urllib.request
           from io import BytesIO
           from pathlib import Path
           from PIL import Image, ImageOps, ImageDraw
@@ -33,53 +36,44 @@ jobs:
             ('night-2024','https://mp.weixin.qq.com/s/0jrkMYn-sz61tvc6fPbs8w'),
             ('qingyuan-2025','https://mp.weixin.qq.com/s/t6qtceKISqwcFAXWZ6vF0g')
           ]
-          root=Path('photo-audit'); rawdir=root/'raw'; thumbdir=root/'thumbs'; rawdir.mkdir(parents=True); thumbdir.mkdir()
+          root=Path('photo-audit'); rawdir=root/'raw'; rawdir.mkdir(parents=True)
           all_items=[]
           headers={'User-Agent':'Mozilla/5.0 (Linux; Android 14; Pixel 8 Pro) AppleWebKit/537.36 Chrome/140.0 Mobile Safari/537.36 MicroMessenger/8.0','Accept-Language':'zh-CN,zh;q=0.9','Referer':'https://mp.weixin.qq.com/'}
           for article_id,url in articles:
             print('ARTICLE', article_id, flush=True)
             req=urllib.request.Request(url,headers=headers)
-            with urllib.request.urlopen(req,timeout=30) as r: text=r.read().decode('utf-8','ignore')
-            (root/(article_id+'.html')).write_text(text)
+            with urllib.request.urlopen(req,timeout=15) as r: text=r.read().decode('utf-8','ignore')
             candidates=[]
             for match in re.findall(r'https?:\\?/\\?/mmbiz\.qpic\.cn[^"\'<> ]+', text):
-              u=html.unescape(match.replace('\\/','/')).replace('&amp;','&')
-              u=u.rstrip('\\')
+              u=html.unescape(match.replace('\\/','/')).replace('&amp;','&').rstrip('\\')
               if u not in candidates: candidates.append(u)
             for match in re.findall(r'(?:data-src|src)=["\']([^"\']*mmbiz\.qpic\.cn[^"\']+)', text):
               u=html.unescape(match.replace('\\/','/')).replace('&amp;','&')
               if u.startswith('//'): u='https:'+u
               if u not in candidates: candidates.append(u)
-            print(' candidates',len(candidates),flush=True)
+            candidates=candidates[:50]
+            print(' candidates used',len(candidates),flush=True)
             article_items=[]
             for idx,u in enumerate(candidates):
               try:
                 req=urllib.request.Request(u,headers={**headers,'Referer':url})
-                with urllib.request.urlopen(req,timeout=25) as r: data=r.read(10_000_001)
-                if len(data)>10_000_000: continue
-                im=Image.open(BytesIO(data)); im.load()
-                w,h=im.size
+                with urllib.request.urlopen(req,timeout=8) as r: data=r.read(8_000_001)
+                if len(data)>8_000_000: continue
+                im=Image.open(BytesIO(data)); im.load(); w,h=im.size
                 if w<280 or h<180: continue
                 item={'article':article_id,'index':idx,'url':u,'width':w,'height':h,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()}
-                filename=f'{article_id}-{idx:02d}.jpg'
-                try: im.convert('RGB').save(rawdir/filename,quality=90)
-                except Exception: continue
-                item['file']=filename
+                filename=f'{article_id}-{idx:02d}.jpg'; im.convert('RGB').save(rawdir/filename,quality=90); item['file']=filename
                 article_items.append(item); all_items.append(item)
-                time.sleep(.15)
               except Exception as exc:
-                print(' failed',idx,str(exc)[:100],flush=True)
+                print(' failed',idx,str(exc)[:80],flush=True)
             print(' usable',len(article_items),flush=True)
             thumbs=[]
             for item in article_items:
-              im=Image.open(rawdir/item['file']).convert('RGB')
-              pic=ImageOps.fit(im,(260,180),method=Image.Resampling.LANCZOS)
-              card=Image.new('RGB',(280,230),'white'); card.paste(pic,(10,10))
-              draw=ImageDraw.Draw(card); draw.text((10,195),f"{article_id}  #{item['index']}  {item['width']}x{item['height']}",fill='black')
-              thumbs.append(card)
+              im=Image.open(rawdir/item['file']).convert('RGB'); pic=ImageOps.fit(im,(260,180),method=Image.Resampling.LANCZOS)
+              card=Image.new('RGB',(280,230),'white'); card.paste(pic,(10,10)); draw=ImageDraw.Draw(card)
+              draw.text((10,195),f"{article_id}  #{item['index']}  {item['width']}x{item['height']}",fill='black'); thumbs.append(card)
             if thumbs:
-              cols=4; rows=(len(thumbs)+cols-1)//cols
-              sheet=Image.new('RGB',(cols*280,rows*230),(236,240,239))
+              cols=4; rows=(len(thumbs)+cols-1)//cols; sheet=Image.new('RGB',(cols*280,rows*230),(236,240,239))
               for i,card in enumerate(thumbs): sheet.paste(card,((i%cols)*280,(i//cols)*230))
               sheet.save(root/(article_id+'-sheet.jpg'),quality=90)
           (root/'images.json').write_text(json.dumps(all_items,ensure_ascii=False,indent=2))
