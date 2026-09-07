@@ -33,6 +33,17 @@ export const routes = Object.freeze({
 
 export const stories = Object.freeze([
   {
+    id: 'track-prep', category: 'club', date: '2026-05-15', eyebrow: '社团活动 · 2026.05',
+    title: '在起跑线，重新认识田径场。',
+    paragraphs: [
+      '太极运动场的跑道上，每天都有不一样的风景。跑步爱好者协会的成员们在这里集合，准备迎接新一轮的训练与挑战。',
+      '无论是备战校园马拉松，还是日常的放松慢跑，跑道记录了每一步的坚持。迈开步伐，喝彩与突破都在前方等待。',
+      '由于相关线下活动招新正在进行中，请通过校内官方渠道了解最新的集训安排。'
+    ],
+    source: 'https://github.com/yhan-sun/cqupt-zyfx', sourceName: '重庆邮电大学跑步爱好者协会'
+  },
+
+  {
     id: 'campus-2026', category: 'campus', date: '2026-03-29', eyebrow: '校园赛事 · 2026.03',
     title: '樱花开的时候，重邮又跑了起来。',
     paragraphs: [

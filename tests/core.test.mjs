@@ -21,11 +21,11 @@ test('duration formatting handles zero, rounding and invalid values', () => {
   assert.equal(formatDuration(NaN), '—');
 });
 test('story filters do not mutate source data', () => {
-  assert.equal(filterStories(stories, 'all').length, 3);
+  assert.equal(filterStories(stories, 'all').length, 4);
   assert.equal(filterStories(stories, 'campus').length, 2);
-  assert.equal(filterStories(stories, 'club').length, 1);
+  assert.equal(filterStories(stories, 'club').length, 2);
   assert.equal(filterStories(stories, 'unknown').length, 0);
-  assert.equal(stories.length, 3);
+  assert.equal(stories.length, 4);
 });
 test('unverified, insecure and malformed signup links cannot be enabled', () => {
   for (const join of [null, {}, {verified:false,url:'https://example.org'},{verified:true,url:'javascript:alert(1)'},{verified:true,url:'http://example.org'},{verified:true,url:'bad'}]) assert.equal(verifiedJoinUrl(join), null);
@@ -49,7 +49,7 @@ test('all local HTML references resolve and anchor ids are unique', async () => 
 });
 test('media credits are complete and built assets use relative URLs', async () => {
   const media = JSON.parse(await readFile(new URL('../data/media.json', import.meta.url), 'utf8'));
-  assert.equal(media.length, 2);
+  assert.equal(media.length, 3);
   for (const item of media) {
     assert.ok(item.author && item.source && item.license);
     assert.match(item.filename, /^[a-z]+\.jpg$/);
