@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
 const join = JSON.parse(await readFile(new URL('../data/join.json', import.meta.url), 'utf8'));
-const qr = await readFile(new URL('../assets/join-qq.jpg', import.meta.url));
+const qr = await readFile(new URL('../assets/join-qq.svg', import.meta.url), 'utf8');
 const builder = await readFile(new URL('../scripts/join-build.mjs', import.meta.url), 'utf8');
 
 test('join: supplied QQ group is stored as current verified participation information', () => {
@@ -12,6 +12,15 @@ test('join: supplied QQ group is stored as current verified participation inform
   assert.equal(join.groupNumber, '468686951');
   assert.equal(join.reviewedAt, '2026-09-07');
   assert.equal(join.source, '跑团提供');
+});
+
+test('join: supplied QR resolves to a current HTTPS QQ invitation', () => {
+  assert.equal(join.joinUrl, 'https://qm.qq.com/q/9rKOuWR8Ag');
+  assert.equal(join.qrImage, 'assets/join-qq.svg');
+  assert.match(qr, /^<\?xml/);
+  assert.match(qr, /<svg[^>]*width="560"[^>]*height="560"/);
+  assert.match(qr, /<path[^>]*fill="#087780"/);
+  assert.ok(qr.length > 5000);
 });
 
 test('join: current wording keeps irregular activities and event participation conditional', () => {
@@ -27,15 +36,6 @@ test('join: four participation modes cover conversation, check-in, training and 
   for (const item of join.activities) assert.ok(item.title && item.summary);
 });
 
-test('join: QR is a real local JPEG asset and not a hotlink', () => {
-  assert.equal(join.qrImage, 'assets/join-qq.jpg');
-  assert.ok(qr.length > 1024);
-  assert.equal(qr[0], 0xff);
-  assert.equal(qr[1], 0xd8);
-  assert.equal(qr[qr.length - 2], 0xff);
-  assert.equal(qr[qr.length - 1], 0xd9);
-});
-
 test('join: current data does not inherit expired recruitment deadlines or personal contacts', () => {
   const text = JSON.stringify(join);
   assert.ok(!text.includes('2025.10.27'));
@@ -43,9 +43,10 @@ test('join: current data does not inherit expired recruitment deadlines or perso
   assert.ok(!text.includes('成绩门槛'));
 });
 
-test('join: generated experience includes standalone page, source note and no registration form', () => {
+test('join: generated experience includes standalone page, direct QQ entry, source note and no registration form', () => {
   assert.ok(builder.includes("return ['join.html']"));
   assert.ok(builder.includes('加入跑团信息'));
+  assert.ok(builder.includes('打开 QQ 加群'));
   assert.ok(builder.includes('网站没有入群申请表或报名后台'));
   assert.ok(!builder.includes('<form'));
 });
