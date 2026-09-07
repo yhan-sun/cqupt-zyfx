@@ -1,0 +1,53 @@
+name: Temporary preview verification
+
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/preview.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Verify public HTML, CSS, JavaScript and source page
+        env:
+          PREVIEW_SHA: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          import os
+          import time
+          import urllib.request
+
+          base = 'https://raw.githack.com/yhan-sun/cqupt-zyfx/' + os.environ['PREVIEW_SHA'] + '/'
+          checks = {
+              'index.html': ('text/html', '自邮飞翔'),
+              'assets/styles.css': ('text/css', '--paper'),
+              'assets/app.js': ('javascript', 'calculateSeconds'),
+              'assets/core.mjs': ('javascript', 'export function'),
+              'data/site.mjs': ('javascript', '重邮约跑团'),
+              'sources.html': ('text/html', 'CC BY-SA 4.0'),
+          }
+          for path, (mime, content) in checks.items():
+              for attempt in range(3):
+                  try:
+                      with urllib.request.urlopen(base + path, timeout=25) as response:
+                          text = response.read().decode('utf-8')
+                          assert response.status == 200
+                          assert mime in response.headers.get('Content-Type', ''), response.headers
+                          assert content in text, path
+                          print(f'PASS HTTP 200 {path}')
+                      break
+                  except Exception:
+                      if attempt == 2:
+                          raise
+                      time.sleep(3)
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+              summary.write('## Temporary source preview\n\n' + base + 'index.html\n\n')
+              summary.write('Verified HTTP 200 and correct content types for HTML, CSS, JavaScript modules and source page. This is not GitHub Pages. Browsers may show the hosting service confirmation screen. Production deployment remains gated on the Pages administrator setting.\n')
+          print('PREVIEW_URL=' + base + 'index.html')
+          PY
