@@ -89,7 +89,7 @@ with sync_playwright() as p:
     page.screenshot(path=str(output/'science-mobile-top.png'))
     check('science mobile: no horizontal overflow',page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
     page.locator('.menu-toggle').click()
-    check('science mobile: seven navigation links available',page.locator('#main-nav a:visible').count()==7)
+    check('science mobile: eight navigation links available',page.locator('#main-nav a:visible').count()==8)
     page.keyboard.press('Escape')
     check('science mobile: Escape closes menu',page.locator('.menu-toggle').get_attribute('aria-expanded')=='false')
     nojs=browser.new_context(java_script_enabled=False,viewport={'width':390,'height':844})
