@@ -3,6 +3,13 @@ import { calculateSeconds, formatDuration, cycleIndex } from './core.mjs';
 const $ = selector => document.querySelector(selector);
 const $$ = selector => [...document.querySelectorAll(selector)];
 document.documentElement.classList.add('js');
+
+const polish = document.createElement('link');
+polish.rel = 'stylesheet';
+polish.href = new URL('./polish.css', import.meta.url).href;
+polish.dataset.visualPolish = 'home-science';
+document.head.append(polish);
+
 const toggle = $('.menu-toggle');
 const nav = $('#main-nav');
 if (toggle && nav) {
