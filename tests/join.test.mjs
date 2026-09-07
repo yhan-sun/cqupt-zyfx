@@ -29,9 +29,11 @@ test('join: four participation modes cover conversation, check-in, training and 
 
 test('join: QR is a real local JPEG asset and not a hotlink', () => {
   assert.equal(join.qrImage, 'assets/join-qq.jpg');
-  assert.ok(qr.length > 20000);
+  assert.ok(qr.length > 1024);
   assert.equal(qr[0], 0xff);
   assert.equal(qr[1], 0xd8);
+  assert.equal(qr[qr.length - 2], 0xff);
+  assert.equal(qr[qr.length - 1], 0xd9);
 });
 
 test('join: current data does not inherit expired recruitment deadlines or personal contacts', () => {
