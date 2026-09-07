@@ -32,7 +32,7 @@ for item in items:
                 request = urllib.request.Request(
                     item['url'],
                     headers={
-                        'User-Agent': 'Mozilla/5.0 (compatible; CQUPT-Running-Archive/1.0; +https://github.com/yhan-sun/cqupt-zyfx)',
+                        'User-Agent': 'Mozilla/5.0',
                         'Referer': 'https://mp.weixin.qq.com/'
                     }
                 )
