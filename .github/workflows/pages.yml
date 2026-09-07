@@ -51,6 +51,7 @@ jobs:
       - name: Desktop, mobile, keyboard and no-JS checks
         env:
           REQUIRE_LOCAL_MEDIA: '1'
+          PYTHONUNBUFFERED: '1'
         run: |
           node scripts/serve.mjs --dir dist --base /cqupt-zyfx/ &
           server_pid=$!
@@ -59,10 +60,14 @@ jobs:
             if curl --fail --silent http://127.0.0.1:4173/cqupt-zyfx/ > /dev/null; then break; fi
             sleep 1
           done
-          python tests/browser.py
-          python tests/science_browser.py
-          python tests/official_browser.py
-          python tests/join_browser.py
+          echo '=== base regression ==='
+          timeout 120s python tests/browser.py
+          echo '=== science regression ==='
+          timeout 120s python tests/science_browser.py
+          echo '=== official archive regression ==='
+          timeout 120s python tests/official_browser.py
+          echo '=== join regression ==='
+          timeout 120s python tests/join_browser.py
       - name: Save screenshots and test report
         if: always()
         uses: actions/upload-artifact@v4
