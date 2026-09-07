@@ -14,7 +14,7 @@ def check(name, condition):
     print('PASS', name, flush=True)
 
 def wait_qr(page, scope):
-    page.wait_for_function("selector => { const img=document.querySelector(selector); return !!img && img.complete && img.naturalWidth > 0 && img.naturalHeight > 0; }", scope, timeout=15000)
+    page.wait_for_function("selector => { const img=document.querySelector(selector); return !!img && img.complete && img.naturalWidth > 0 && img.naturalHeight > 0; }", arg=scope, timeout=15000)
     return page.locator(scope)
 
 with sync_playwright() as p:
