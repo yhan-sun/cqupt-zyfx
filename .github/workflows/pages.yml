@@ -2,7 +2,7 @@ name: Website · test and deploy
 
 on:
   push:
-    branches: [main, feat/footprint-culture]
+    branches: [main]
   pull_request:
     branches: [main]
   workflow_dispatch:
