@@ -1,18 +1,15 @@
 [
-  {
-    "id": "start",
-    "filename": "start.jpg",
-    "url": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&fm=jpg&q=80&w=1400",
-    "source": "https://unsplash.com/photos/man-on-running-field-9HI8UJMSdZA",
-    "author": "Braden Collum",
-    "license": "https://unsplash.com/license"
-  },
-  {
-    "id": "campus",
-    "filename": "campus.jpg",
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Tengfei_Gate_Chongqing_University_of_Posts_and_Telecommunications.jpg/1280px-Tengfei_Gate_Chongqing_University_of_Posts_and_Telecommunications.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Tengfei_Gate_Chongqing_University_of_Posts_and_Telecommunications.jpg",
-    "author": "Junyi Lou",
-    "license": "https://creativecommons.org/licenses/by-sa/4.0/"
-  }
+  {"id":"logo","url":"https://www.cqupt.edu.cn/images/logo1.png","source":"https://www.cqupt.edu.cn/","title":"重庆邮电大学校名标识","category":"identity","credit":"重庆邮电大学官网","year":"","license":"版权归原权利人；未发现开放许可","licenseUrl":null,"format":"png"},
+  {"id":"logo-white","url":"https://www.cqupt.edu.cn/images/logo2.png","source":"https://www.cqupt.edu.cn/","title":"重庆邮电大学校名标识（反白）","category":"identity","credit":"重庆邮电大学官网","year":"","license":"版权归原权利人；未发现开放许可","licenseUrl":null,"format":"png"},
+  {"id":"campus-pond","url":"https://www.cqupt.edu.cn/images/banner/hutaoboziwei-4.jpg","source":"https://www.cqupt.edu.cn/","title":"校园湖畔","category":"campus","credit":"重庆邮电大学官网","year":"","license":"版权归原权利人；未发现开放许可","licenseUrl":null,"format":"webp"},
+  {"id":"campus-autumn","url":"https://www.cqupt.edu.cn/images/sub-img.jpg","source":"https://www.cqupt.edu.cn/","title":"校园秋色","category":"campus","credit":"重庆邮电大学官网","year":"","license":"版权归原权利人；未发现开放许可","licenseUrl":null,"format":"webp"},
+  {"id":"campus-teaching","url":"https://www.cqupt.edu.cn/images/jgszxt.jpg","source":"https://www.cqupt.edu.cn/","title":"第二教学楼","category":"campus","credit":"重庆邮电大学官网","year":"","license":"版权归原权利人；未发现开放许可","licenseUrl":null,"format":"webp"},
+  {"id":"campus-letters","url":"https://www.cqupt.edu.cn/images/rcpyxt.jpg","source":"https://www.cqupt.edu.cn/","title":"校园一角","category":"campus","credit":"重庆邮电大学官网","year":"","license":"版权归原权利人；未发现开放许可","licenseUrl":null,"format":"webp"},
+  {"id":"race-2025","url":"https://www.cq.chinanews.com.cn/2025/0330/U1139P942DT20250330145148.jpg","source":"https://www.cq.chinanews.com.cn/news/2025/0330/39-48269.html","title":"第七届重邮人马拉松比赛现场","category":"race","credit":"主办方供图 / 中新网重庆","year":"2025","license":"版权归原权利人；未发现开放许可","licenseUrl":null,"format":"webp"},
+  {"id":"race-start","url":"https://chongqing.eol.cn/cqzy/202403/W020240323405611598423.jpg","source":"https://chongqing.eol.cn/cqzy/202403/t20240323_2571457.shtml","title":"第六届重邮人马拉松起跑现场","category":"race","credit":"重庆邮电大学供稿 / 教育在线","year":"2024","license":"版权归原权利人；未发现开放许可","licenseUrl":null,"format":"webp"},
+  {"id":"race-relay","url":"https://chongqing.eol.cn/cqzy/202403/W020240323405611614566.jpg","source":"https://chongqing.eol.cn/cqzy/202403/t20240323_2571457.shtml","title":"校园马拉松火炬接力","category":"race","credit":"重庆邮电大学供稿 / 教育在线","year":"2024","license":"版权归原权利人；未发现开放许可","licenseUrl":null,"format":"webp"},
+  {"id":"race-runners","url":"https://chongqing.eol.cn/cqzy/202403/W020240323405611624511.jpg","source":"https://chongqing.eol.cn/cqzy/202403/t20240323_2571457.shtml","title":"奔跑在校园里","category":"race","credit":"重庆邮电大学供稿 / 教育在线","year":"2024","license":"版权归原权利人；未发现开放许可","licenseUrl":null,"format":"webp"},
+  {"id":"race-warmup","url":"https://chongqing.eol.cn/cqzy/202403/W020240323405611640733.jpg","source":"https://chongqing.eol.cn/cqzy/202403/t20240323_2571457.shtml","title":"太极运动场赛前准备","category":"race","credit":"重庆邮电大学供稿 / 教育在线","year":"2024","license":"版权归原权利人；未发现开放许可","licenseUrl":null,"format":"webp"},
+  {"id":"race-course","url":"https://chongqing.eol.cn/cqzy/202403/W020240323405611651173.jpg","source":"https://chongqing.eol.cn/cqzy/202403/t20240323_2571457.shtml","title":"校园马拉松沿途","category":"race","credit":"重庆邮电大学供稿 / 教育在线","year":"2024","license":"版权归原权利人；未发现开放许可","licenseUrl":null,"format":"webp"},
+  {"id":"campus-gate","url":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Tengfei_Gate_Chongqing_University_of_Posts_and_Telecommunications.jpg/1280px-Tengfei_Gate_Chongqing_University_of_Posts_and_Telecommunications.jpg","source":"https://commons.wikimedia.org/wiki/File:Tengfei_Gate_Chongqing_University_of_Posts_and_Telecommunications.jpg","title":"腾飞门","category":"campus","credit":"Junyi Lou / Wikimedia Commons","year":"2019","license":"CC BY-SA 4.0；缩放与格式转换版本沿用相同许可","licenseUrl":"https://creativecommons.org/licenses/by-sa/4.0/","format":"webp"}
 ]

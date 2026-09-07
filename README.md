@@ -1,19 +1,20 @@
-# 自邮飞翔 · 重邮约跑团
+# 重庆邮电大学跑步爱好者协会
 
-重庆邮电大学跑步爱好者协会展示网站。以纸白、跑道红、运动摄影与编辑式排版呈现校园跑步社群，不使用虚构人数、赛事战绩、训练安排或报名通道。
+重邮约跑团 · 自邮飞翔。第二版参考重邮现版官网：青绿色、白底、中文栏目、通栏校园照片与日期式新闻列表。移除第一版的跑道红、大英文、贴纸印章及口号式文案。
 
-预期 Pages 地址：https://yhan-sun.github.io/cqupt-zyfx/ 。首次上线必须在仓库 **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**；地址是否已上线请以 Actions 部署记录和实际访问为准。
+预期 Pages 地址：https://yhan-sun.github.io/cqupt-zyfx/ 。是否已上线，以同一提交的部署记录及实际访问为准。首次启用需要管理员在 Settings → Pages → Source 选择 GitHub Actions。
 
-## 本地运行
+## 开发与构建
 
-需要 Node.js 22 或更高版本。生产代码没有第三方 JavaScript 依赖。
+Node.js 22+、Python 3.12+，以及 Pillow。浏览器运行代码没有第三方 JavaScript 依赖。
 
 ```sh
+python -m pip install Pillow==11.3.0
 npm ci
 npm run dev
 ```
 
-打开 http://localhost:4173 。
+打开 http://localhost:4173/ 。正式构建从13个已登记的图片地址取得照片和学校标识，验证图片、移除附带元数据，生成 WebP 与响应式小图，全部同站托管。网络失败会重试，最终失败则停止构建，不以空白图片通过。
 
 ```sh
 npm test
@@ -21,34 +22,38 @@ npm run build
 node scripts/serve.mjs --dir dist --base /cqupt-zyfx/
 ```
 
-离线检查可使用 `npm run build -- --offline`，此模式保留原始图片地址，不代表照片已下载。正式构建要求两张授权摄影成功下载、通过 JPEG 类型与大小检查，随后同站托管，失败则终止构建。
+项目子路径测试地址：http://localhost:4173/cqupt-zyfx/ 。`npm run build -- --offline` 仅使用已有图片缓存；缓存缺失时失败，不会退回外部图库。
 
-## 浏览器验证
+## 自动化检查
 
 ```sh
 python -m pip install playwright==1.55.0
 python -m playwright install chromium
-REQUIRE_LOCAL_MEDIA=1 python tests/browser.py
+python tests/browser.py
 ```
 
-另一个终端先运行上面的 dist 服务。默认测试地址为 http://127.0.0.1:4173/cqupt-zyfx/ ，可通过 `SITE_URL` 覆盖。`CHROMIUM_PATH` 可指定已有浏览器。测试覆盖桌面、320/390/768px、菜单、筛选、路线切换、弹窗焦点、配速边界、复制反馈、无 JavaScript 降级和正式图片加载。截图保存在 `test-results/`。
+先启动 dist 服务。`SITE_URL` 可指定其他预览服务；`CHROMIUM_PATH` 可指定已安装的 Chromium。截图和结果保存在 `test-results/`。
 
-## 内容维护
+Actions 运行单元与内容检查、图片处理、桌面/手机浏览器检查、静态多页面路由检查，以及无 JavaScript 降级检查。构建只读，只有 main 部署任务有 `pages: write` 与 `id-token: write`；不会在失败后跳过门禁。推送设计分支仅构建不部署。
 
-- `data/site.mjs`：社团信息、经核实的报名 URL、路线文字与来源、手记详情。
-- `index.html`：静态首屏、手记列表摘要与 FAQ。为保证无 JavaScript 可读，修改列表时需与数据文件同步。
-- `data/media.json`、`sources.html`：摄影来源、作者、许可与公开资料依据。
-- `assets/styles.css`：设计变量与响应式布局；`assets/app.js`：渐进增强交互；`assets/core.mjs`：纯计算与过滤逻辑。
-- `docs/CONTENT.md`：上线内容边界和交接清单。
+`npm run preview:export` 导出 `cqupt-campus-preview.html`，把7个页面、照片、样式及交互内置到一个离线 HTML，适合直接用浏览器预览。完整生产网站在 `dist/`，包含真正独立的新闻详情页，不依赖 SPA 重定向。
 
-## 自动部署
+## 维护位置
 
-`.github/workflows/pages.yml` 在 main 推送和 Pull Request 时执行单元/内容测试、正式构建、真实 Chromium 测试并保存截图。只有 main 的非 PR 工作流可以部署，并且部署必须依赖所有构建与测试成功。
+| 文件 | 内容 |
+| --- | --- |
+| `data/content.json` | 社团名称、经核实的招新链接、轮播、赛事、相册和跑步场地 |
+| `data/media.json` | 每项图片的原始地址、供稿方、年份及权利说明 |
+| `scripts/render.mjs` | 构建时生成7个页面，详情页与首页共用同一资料源 |
+| `scripts/media.py` | 图片验证、响应式压缩与来源记录 |
+| `assets/styles.css` | 重邮风格布局与手机适配 |
+| `assets/app.js` | 手动轮播、筛选、图片查看、菜单、配速和复制 |
+| `docs/CONTENT.md` | 资料边界及运营交接 |
 
-工作流遵循最小权限：构建只读；部署仅需要 `pages: write` 和 `id-token: write`。不需要仓库保存任何 PAT。第一次开启 Pages 是仓库管理员设置，不冒充 `GITHUB_TOKEN` 可以取得管理员权限。启用后可在 Actions 重跑失败的 deploy job，或手动运行整个工作流。
+不要直接编辑 dist。新增赛事应补齐来源与日期，配图年份必须与说明一致。2026年报道使用明确标注的校园资料图，不冒充当届比赛现场。
 
-## 素材与隐私
+## 素材权利与隐私
 
-Braden Collum 的跑步照片采用 Unsplash License；Junyi Lou 的重邮腾飞门照片采用 CC BY-SA 4.0，改编版本保留同一许可。详见网站“素材与说明”。新闻只使用自行编写的简短摘要和原文链接，不拷贝新闻图片。原创标记不冒充官方校徽或历史会徽。
+当前资料包括重邮官网校园图片、学校供稿的2024年比赛照片、2025年报道现场图，以及 Junyi Lou 的2019年腾飞门照片。除腾飞门的 CC BY-SA 4.0 外，官网和新闻图片未发现开放许可，署名不等于已获授权；运营方正式使用前须确认许可范围或换成自有照片。完整出处随站点生成在 sources.html。
 
-没有账号、报名后端或追踪脚本。配速计算只在浏览器进行；复制只在点击后写入剪贴板，不读取内容。没有以公开 Issue 收集手机号、学号或报名资料的流程。
+学校标识仅用于识别所属学校，不宣称学校认证。本项目没有报名后台，不保存个人信息，不伪造报名成功。配速与复制只在本地执行，照片不使用外部热链。
