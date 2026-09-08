@@ -5,9 +5,9 @@
     "category": "training",
     "title": "太极运动场并肩训练",
     "description": "两位跑者在太极运动场进行跑步训练。",
-    "width": 720,
-    "height": 480,
-    "sha256": "26d35edc247b6e45f37378fd6c424fc7c7b5ea4a96d1dab733db21368a371203"
+    "width": 640,
+    "height": 427,
+    "sha256": "49f75ebeb654ab31b07dbd4d5db90799370ca292ea339cd17c76e0e2937d9a18"
   },
   {
     "id": "track-training-solo",
@@ -15,9 +15,9 @@
     "category": "training",
     "title": "太极运动场跑步训练",
     "description": "跑者在太极运动场进行跑步训练，呈现校园日常训练场景。",
-    "width": 720,
-    "height": 480,
-    "sha256": "e65acb1682f90b58537a32969450ab2748725e327bf9c22ed61f6df45302f2fe"
+    "width": 640,
+    "height": 427,
+    "sha256": "d32d2ae0640f32fc40ab5914cc26b185cb6debf1093945aecbc17d9354b26dca"
   },
   {
     "id": "hundred-mile-southwest-2025",
@@ -25,9 +25,9 @@
     "category": "race",
     "title": "高校百英里西南分站赛集结",
     "description": "2025年高校百英里西南分站赛现场的团队集结合影。",
-    "width": 720,
-    "height": 480,
-    "sha256": "b1c48490e8ade7e66346c027d1718db622b5303768adf47bf271a29f5768f6c8"
+    "width": 640,
+    "height": 427,
+    "sha256": "ca3a3edb5caa4afc72c5c48afd5a0e37b0f5348cf1edc8e0ac80c229f938765c"
   },
   {
     "id": "changjiahui-team-2025",
@@ -35,9 +35,9 @@
     "category": "race",
     "title": "长嘉汇跑友合影",
     "description": "2025年长嘉汇跑步活动后的跑友合影。",
-    "width": 600,
-    "height": 450,
-    "sha256": "21fe791721ccc9b663566c71a9ae2d68998e91d0cf201902c96f26d0ab9862d5"
+    "width": 640,
+    "height": 480,
+    "sha256": "1e24e3c8f7a6f6d9e522e4b688cd7d155a01475e10c52eb80c3e966fe6e9e741"
   },
   {
     "id": "changjiahui-medals-2025",
@@ -45,9 +45,9 @@
     "category": "social",
     "title": "长嘉汇完赛奖牌",
     "description": "跑友用完赛奖牌围成一圈，记录一次共同完成后的纪念。",
-    "width": 540,
-    "height": 720,
-    "sha256": "43a4b23e287eadd5b294384fe1e732a75e24c29979a3f94bea294b70de1c8362"
+    "width": 480,
+    "height": 640,
+    "sha256": "b02da0eb504ae371fc5d93c2974496a3040e2ce55a86d17d49b4bca5aa59c739"
   },
   {
     "id": "qingyuan-campus-talk-2026",
@@ -55,9 +55,9 @@
     "category": "social",
     "title": "清远马拉松校内交流",
     "description": "2026年清远马拉松相关校内交流活动合影，跑团旗帜出现在现场。",
-    "width": 720,
-    "height": 540,
-    "sha256": "01874e4f2a2f15f4001e2da01d859bde508f60b1cfc11e3cafbe38d15ddd7812"
+    "width": 640,
+    "height": 480,
+    "sha256": "57ea9af1396c4e5fffe394c3cfb8bb1480a1920d4565e4c2eab8fb6bfe80ffa5"
   },
   {
     "id": "campus-womens-race-2025",
@@ -65,9 +65,9 @@
     "category": "campus",
     "title": "校运会女子跑步比赛",
     "description": "校园田径赛道上的女子跑步比赛场景。",
-    "width": 720,
-    "height": 480,
-    "sha256": "9f98e9ae246559c7f5e18985fec68e375331ca92eacbc1449380e959cac3c102"
+    "width": 640,
+    "height": 427,
+    "sha256": "4b6db1d60a7a978e904a3ca1c0c163f48840f96fbf4d431040158161ea19a182"
   },
   {
     "id": "chongqing-college-track-team-2026",
@@ -75,9 +75,9 @@
     "category": "campus",
     "title": "重庆市大学生田径比赛合影",
     "description": "重庆邮电大学参加2026年重庆市大学生田径比赛的集体合影资料。",
-    "width": 720,
-    "height": 480,
-    "sha256": "ef787d67392fecd5e89f532450c1daae74b6e45e9013905e4a1b53ad5f261caa"
+    "width": 640,
+    "height": 427,
+    "sha256": "8a3f58f3f1c199379e39ab5a484f05dd7b543c8201ae204680c67209282332e0"
   },
   {
     "id": "chongqing-college-track-awards-2026",
@@ -85,8 +85,8 @@
     "category": "campus",
     "title": "重庆市大学生田径比赛奖状记录",
     "description": "赛后奖状合影，作为学校田径竞赛场景的资料记录。",
-    "width": 337,
-    "height": 600,
-    "sha256": "0ea43132b2d238e71662081c3faa642bb2e63549d7e82f6db0445d3d5464e2c3"
+    "width": 360,
+    "height": 640,
+    "sha256": "a52c4f572a1c5ba99b87a0209691b5d3bc3608472f62585071b2ea2909c5a701"
   }
 ]
