@@ -53,6 +53,7 @@ async function getSource(item, offline) {
     },
     {
       attempts: 3,
+      shouldRetry: error => error.retryable === true,
       onRetry: (_error, attempt) => sleep((1 + attempt) * 1000)
     }
   );
@@ -99,16 +100,68 @@ async function renderImage(item, raw, output) {
   return metadata;
 }
 
+function integrityError(message) {
+  const error = new Error(message);
+  error.retryable = false;
+  return error;
+}
+
+async function downloadPinned(url, expected, itemId) {
+  return retry(
+    async () => {
+      const raw = await downloadBytes(url, {
+        headers: { 'User-Agent': 'CQUPT-Running-Website/verified-release-fallback' },
+        maxBytes: MAX_BYTES,
+        timeoutMs: 20_000
+      });
+      if (sha256(raw) !== expected.sha256) throw integrityError(`Pinned fallback hash mismatch: ${itemId}/${expected.file}`);
+      const metadata = await decodeImage(raw);
+      if (metadata.width !== expected.width || metadata.height !== expected.height) {
+        throw integrityError(`Pinned fallback dimensions mismatch: ${itemId}/${expected.file}`);
+      }
+      return raw;
+    },
+    {
+      attempts: 3,
+      shouldRetry: error => error.retryable === true,
+      onRetry: (_error, attempt) => sleep((1 + attempt) * 1000)
+    }
+  );
+}
+
+async function usePublishedFallback(item, fallbackConfig, output, sourceError) {
+  const expected = fallbackConfig.items[item.id];
+  if (!expected || sourceError.retryable !== true) throw sourceError;
+  const baseUrl = fallbackConfig.baseUrl;
+  const mainRaw = await downloadPinned(new URL(expected.file, baseUrl).href, expected, item.id);
+  await writeFile(path.join(output, expected.file), mainRaw);
+  const metadata = { ...item, width: expected.width, height: expected.height };
+  if (expected.small) {
+    const smallRaw = await downloadPinned(new URL(expected.small.file, baseUrl).href, expected.small, item.id);
+    await writeFile(path.join(output, expected.small.file), smallRaw);
+    metadata.smallWidth = expected.small.width;
+  }
+  console.warn(`Media ${item.id}: origin unavailable, reused hash-pinned derivative from deployed commit ${fallbackConfig.sourceCommit}`);
+  return metadata;
+}
+
 export async function buildMedia({ offline = false } = {}) {
   const items = await readJson('data/media.json');
+  const fallbackConfig = await readJson('data/media-fallback.json');
   const output = path.join(root, 'dist', 'media');
   await ensureDirectory(output);
   const processed = [];
 
   for (const item of items) {
-    const raw = await getSource(item, offline);
-    await decodeImage(raw);
-    const metadata = await renderImage(item, raw, output);
+    let metadata;
+    try {
+      const raw = await getSource(item, offline);
+      await decodeImage(raw);
+      metadata = await renderImage(item, raw, output);
+    } catch (error) {
+      if (offline) throw error;
+      metadata = await usePublishedFallback(item, fallbackConfig, output, error);
+    }
     processed.push(metadata);
     console.log(`Media ${item.id}: ${metadata.width}x${metadata.height}`);
   }
