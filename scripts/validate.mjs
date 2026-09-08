@@ -19,7 +19,7 @@ export async function validateDirectory(directory) {
     const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
     if (new Set(ids).size !== ids.length) errors.push(`${filename}: duplicate ids`);
     if (/<img[^>]+src="https?:/i.test(html)) errors.push(`${filename}: remote image`);
-    for (const [, raw] of html.matchAll(/\b(?:href|src|data-motion|data-still|data-source)="([^"]+)"/g)) {
+    for (const [, raw] of html.replace(/<base\b[^>]*>/g, '').matchAll(/\b(?:href|src|data-motion|data-still|data-source)="([^"]+)"/g)) {
       const href = raw.replaceAll('&amp;', '&');
       if (/^(https?:|mailto:|data:)/.test(href)) continue;
       links++;
