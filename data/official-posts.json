@@ -11,156 +11,248 @@
     "notice": "以下来自2025年10月20日招新文章，仅用于了解当时的训练组织方式，不代表当前训练时间、集合点或本学期课表。",
     "source": "https://mp.weixin.qq.com/s/rFnYKMVPCkgz5MUhlAGItQ",
     "items": [
-      {"day":"周一","time":"18:00–20:30","type":"强度课","detail":"间歇跑、阈值跑、力量训练等"},
-      {"day":"周三","time":"18:00–20:30","type":"强度课","detail":"间歇跑、阈值跑、力量训练等"},
-      {"day":"周六","time":"下午","type":"长距离","detail":"时间与地点按当期安排；其余时间可自行约跑"}
+      {
+        "day": "周一",
+        "time": "18:00–20:30",
+        "type": "强度课",
+        "detail": "间歇跑、阈值跑、力量训练等"
+      },
+      {
+        "day": "周三",
+        "time": "18:00–20:30",
+        "type": "强度课",
+        "detail": "间歇跑、阈值跑、力量训练等"
+      },
+      {
+        "day": "周六",
+        "time": "下午",
+        "type": "长距离",
+        "detail": "时间与地点按当期安排；其余时间可自行约跑"
+      }
     ],
     "place": "文章记录的固定训练地点为太极田径场；长距离训练时间和地点不定。"
   },
   "posts": [
     {
-      "id":"qingyuan-2026",
-      "published":"2026-03-18",
-      "eventDate":"2026-03-15",
-      "year":"2026",
-      "title":"重邮跑团出征清远：高校联赛全国第六",
-      "originalTitle":"【重邮跑团出征清远】全国第六！",
-      "source":"https://mp.weixin.qq.com/s/oLYmMv0S4soq2ChWtPLHWg",
-      "image":"2026-qingyuan-team",
-      "category":"高校联赛",
-      "summary":"近30名重邮跑者集结清远，以4名全马与4名半马的阵容参与高校联赛计分。",
-      "facts":[
-        {"value":"全国第6","label":"2026清远马拉松高校联赛"},
-        {"value":"16:54:38","label":"公众号公布的团体计分总用时"},
-        {"value":"近30人","label":"文章记录的重邮参赛规模"},
-        {"value":"1984 → 2025级","label":"文章记录的最早校友与最新在校生年级跨度"}
+      "id": "qingyuan-2026",
+      "published": "2026-03-18",
+      "eventDate": "2026-03-15",
+      "year": "2026",
+      "title": "2026 清远马拉松高校联赛",
+      "originalTitle": "【重邮跑团出征清远】全国第六！",
+      "source": "https://mp.weixin.qq.com/s/oLYmMv0S4soq2ChWtPLHWg",
+      "image": "2026-qingyuan-team",
+      "category": "高校联赛",
+      "summary": "近 30 名重邮跑者参加清远马拉松，队伍以 4 名全马、4 名半马选手计分，获得高校联赛全国第六名。",
+      "facts": [
+        {
+          "value": "全国第6",
+          "label": "2026清远马拉松高校联赛"
+        },
+        {
+          "value": "16:54:38",
+          "label": "团体计分总用时"
+        },
+        {
+          "value": "近30人",
+          "label": "重邮参赛规模"
+        },
+        {
+          "value": "1984 → 2025级",
+          "label": "校友与在校生年级跨度"
+        }
       ],
-      "note":"文章称联赛组队成功117所高校、完赛105所高校；本站只整理公众号已公开的数据。"
+      "note": "文章称联赛组队成功117所高校、完赛105所高校；本站只整理公众号已公开的数据。",
+      "relationship": "跑团参赛"
     },
     {
-      "id":"recruit-2025",
-      "published":"2025-10-20",
-      "eventDate":null,
-      "year":"2025",
-      "title":"一次招新公告，留下了跑团的训练结构",
-      "originalTitle":"自邮飞翔招新啦！！！",
-      "source":"https://mp.weixin.qq.com/s/rFnYKMVPCkgz5MUhlAGItQ",
-      "image":null,
-      "category":"跑团档案",
-      "summary":"文章说明自邮飞翔由在校生和校友组成，并记录了当时周一、周三强度课与周六长距离的训练结构。",
-      "facts":[
-        {"value":"在校生 + 校友","label":"文章公开描述的队伍构成"},
-        {"value":"间歇 / 阈值 / 力量","label":"2025秋招文章列出的强度课内容"},
-        {"value":"周六长距离","label":"2025秋招文章中的历史安排"}
+      "id": "recruit-2025",
+      "published": "2025-10-20",
+      "eventDate": null,
+      "year": "2025",
+      "title": "2025 年秋季招新",
+      "originalTitle": "自邮飞翔招新啦！！！",
+      "source": "https://mp.weixin.qq.com/s/rFnYKMVPCkgz5MUhlAGItQ",
+      "image": null,
+      "category": "跑团档案",
+      "summary": "当年的招新介绍了在校生与校友组成的队伍，以及间歇、阈值、力量和长距离训练安排。",
+      "facts": [
+        {
+          "value": "在校生 + 校友",
+          "label": "队伍构成"
+        },
+        {
+          "value": "间歇 / 阈值 / 力量",
+          "label": "2025秋招强度课内容"
+        },
+        {
+          "value": "周六长距离",
+          "label": "2025秋招文章中的历史安排"
+        }
       ],
-      "note":"该文章中的报名截止日期、联系方式、二维码、成绩门槛和具体训练时间均为历史信息，本站不作为当前招新通知发布。"
+      "note": "该文章中的报名截止日期、联系方式、二维码、成绩门槛和具体训练时间均为历史信息，本站不作为当前招新通知发布。",
+      "relationship": "历史招新"
     },
     {
-      "id":"test-2025",
-      "published":"2025-09-29",
-      "eventDate":null,
-      "year":"2025",
-      "title":"太极运动场的5K测试：23名成员参与",
-      "originalTitle":"“CQUPT自邮飞翔”跑团九月测试赛暨2025高校百英里选拔赛",
-      "source":"https://mp.weixin.qq.com/s/fZVA4Lsqpr102jepbY_npQ",
-      "image":"2025-test-team",
-      "secondaryImage":"2025-test-run",
-      "category":"校园训练",
-      "summary":"公众号记录了一次在太极运动场完成的5公里集体测试，23名成员参加。",
-      "facts":[
-        {"value":"5 km","label":"测试距离"},
-        {"value":"23人","label":"文章记录的参与人数"},
-        {"value":"太极运动场","label":"文章记录的测试场地"}
+      "id": "test-2025",
+      "published": "2025-09-29",
+      "eventDate": null,
+      "year": "2025",
+      "title": "太极运动场 5 公里测试赛",
+      "originalTitle": "“CQUPT自邮飞翔”跑团九月测试赛暨2025高校百英里选拔赛",
+      "source": "https://mp.weixin.qq.com/s/fZVA4Lsqpr102jepbY_npQ",
+      "image": "2025-test-team",
+      "secondaryImage": "2025-test-run",
+      "category": "校园训练",
+      "summary": "23 名成员在太极运动场参加 5 公里测试，作为当年的高校百英里选拔参考。",
+      "facts": [
+        {
+          "value": "5 km",
+          "label": "测试距离"
+        },
+        {
+          "value": "23人",
+          "label": "参与人数"
+        },
+        {
+          "value": "太极运动场",
+          "label": "测试场地"
+        }
       ],
-      "note":"公众号原文包含个人成绩截图；本站只保留活动层面的聚合信息，不复制个人成绩表。"
+      "note": "公众号原文包含个人成绩截图；本站只保留活动层面的聚合信息，不复制个人成绩表。",
+      "relationship": "跑团训练"
     },
     {
-      "id":"qingyuan-2025",
-      "published":"2025-03-20",
-      "eventDate":"2025-03-16",
-      "year":"2025",
-      "title":"清远再集结：43名校友从多地奔赴赛场",
-      "originalTitle":"山水至清，奔跑致远｜重邮跑团清远之旅圆满结束！",
-      "source":"https://mp.weixin.qq.com/s/t6qtceKISqwcFAXWZ6vF0g",
-      "image":"2025-qingyuan-06",
-      "category":"高校联赛",
-      "summary":"重邮跑团组织来自广东、湖北、江西、四川、重庆、云南、贵州等地的43名校友参加2025清远马拉松。",
-      "facts":[
-        {"value":"43名校友","label":"文章记录的参赛校友规模"},
-        {"value":"7个省市","label":"文章列出的校友来源地"},
-        {"value":"西南地区第1","label":"公众号公布的高校联赛区域成绩"}
+      "id": "qingyuan-2025",
+      "published": "2025-03-20",
+      "eventDate": "2025-03-16",
+      "year": "2025",
+      "title": "2025 清远马拉松高校联赛",
+      "originalTitle": "山水至清，奔跑致远｜重邮跑团清远之旅圆满结束！",
+      "source": "https://mp.weixin.qq.com/s/t6qtceKISqwcFAXWZ6vF0g",
+      "image": "2025-qingyuan-06",
+      "category": "高校联赛",
+      "summary": "43 名校友从广东、湖北、江西、四川、重庆、云南、贵州等地前往清远，参加马拉松高校联赛。",
+      "facts": [
+        {
+          "value": "43名校友",
+          "label": "参赛校友规模"
+        },
+        {
+          "value": "7个省市",
+          "label": "校友来源地"
+        },
+        {
+          "value": "西南地区第1",
+          "label": "高校联赛区域成绩"
+        }
       ],
-      "note":"文章称重邮跑团在来自全国400余所高校的队伍中排名前列；本站不转载个人全马、半马成绩表。"
+      "note": "文章称重邮跑团在来自全国400余所高校的队伍中排名前列；本站不转载个人全马、半马成绩表。",
+      "relationship": "跑团参赛"
     },
     {
-      "id":"cqmarathon-2025",
-      "published":"2025-03-04",
-      "eventDate":null,
-      "year":"2025",
-      "title":"重庆马拉松：赛道、校友与志愿服务",
-      "originalTitle":"2025重庆马拉松：重邮人的速度与激情！",
-      "source":"https://mp.weixin.qq.com/s/U_4tlKjOeIJlLzvHX20Acw",
-      "image":"2025-cqmarathon-10",
-      "category":"城市赛事",
-      "summary":"公众号记录重邮跑者与校友参赛、赛后交流和志愿服务，并列出多位全马突破3小时的选手。",
-      "facts":[
-        {"value":"11位","label":"公众号列出的全程马拉松破三选手数量"},
-        {"value":"478名","label":"文章记录的重庆邮电大学赛事志愿者总数，并非跑团队员人数"}
+      "id": "cqmarathon-2025",
+      "published": "2025-03-04",
+      "eventDate": null,
+      "year": "2025",
+      "title": "2025 重庆马拉松",
+      "originalTitle": "2025重庆马拉松：重邮人的速度与激情！",
+      "source": "https://mp.weixin.qq.com/s/U_4tlKjOeIJlLzvHX20Acw",
+      "image": "2025-cqmarathon-10",
+      "category": "城市赛事",
+      "summary": "重邮跑者与校友参加重庆马拉松，赛前集合，赛后交流参赛经历。",
+      "facts": [
+        {
+          "value": "11位",
+          "label": "全程马拉松破三选手数量"
+        },
+        {
+          "value": "478名",
+          "label": "重庆邮电大学赛事志愿者总数，并非跑团队员人数"
+        }
       ],
-      "note":"本站不复制个人姓名与完赛时间。478名为文章中的学校层面志愿者数据，不表述为跑团规模。"
+      "note": "本站不复制个人姓名与完赛时间。478名为文章中的学校层面志愿者数据，不表述为跑团规模。",
+      "relationship": "跑团参赛"
     },
     {
-      "id":"night-run-2024",
-      "published":"2024-10-22",
-      "eventDate":"2024-10-19",
-      "year":"2024",
-      "title":"47位跑友集结重庆夜跑半马",
-      "originalTitle":"CQUPT自邮飞翔集结参加重庆首场大型夜跑马拉松",
-      "source":"https://mp.weixin.qq.com/s/0jrkMYn-sz61tvc6fPbs8w",
-      "image":"2024-night-05",
-      "category":"城市赛事",
-      "summary":"自邮飞翔集结参加2024重庆两江龙盛新城摇滚半程马拉松。",
-      "facts":[
-        {"value":"47位","label":"公众号记录的参与跑友人数"},
-        {"value":"报名奖第4","label":"文章记录的团队赛报名奖名次，不是竞速团体排名"},
-        {"value":"220 m","label":"文章记录的赛道累计爬升"},
-        {"value":"286 m","label":"文章记录的赛道最高海拔"}
+      "id": "night-run-2024",
+      "published": "2024-10-22",
+      "eventDate": "2024-10-19",
+      "year": "2024",
+      "title": "2024 重庆夜跑半程马拉松",
+      "originalTitle": "CQUPT自邮飞翔集结参加重庆首场大型夜跑马拉松",
+      "source": "https://mp.weixin.qq.com/s/0jrkMYn-sz61tvc6fPbs8w",
+      "image": "2024-night-05",
+      "category": "城市赛事",
+      "summary": "47 位跑友参加重庆两江龙盛新城摇滚半程马拉松，获得团队报名奖第四名。",
+      "facts": [
+        {
+          "value": "47位",
+          "label": "参与跑友人数"
+        },
+        {
+          "value": "报名奖第4",
+          "label": "团队赛报名奖名次，不是竞速团体排名"
+        },
+        {
+          "value": "220 m",
+          "label": "赛道累计爬升"
+        },
+        {
+          "value": "286 m",
+          "label": "赛道最高海拔"
+        }
       ],
-      "note":"报名奖名次与比赛竞技名次不是同一概念，本站明确区分。"
+      "note": "报名奖名次与比赛竞技名次不是同一概念，本站明确区分。",
+      "relationship": "跑团参赛"
     },
     {
-      "id":"guiyang-2024",
-      "published":"2024-06-20",
-      "eventDate":"2024-06-16",
-      "year":"2024",
-      "title":"贵阳马拉松：西南高校联赛第九",
-      "originalTitle":"重庆邮电大学2024贵阳马拉松高校联赛",
-      "source":"https://mp.weixin.qq.com/s/C-GQGBGGyfbhJroNFiP3_Q",
-      "image":"2024-guiyang-team",
-      "category":"高校联赛",
-      "summary":"公众号记录重邮跑团参加2024贵阳马拉松，并取得西南高校联赛第九名。",
-      "facts":[
-        {"value":"西南第9","label":"2024贵阳马拉松高校联赛"}
+      "id": "guiyang-2024",
+      "published": "2024-06-20",
+      "eventDate": "2024-06-16",
+      "year": "2024",
+      "title": "2024 贵阳马拉松高校联赛",
+      "originalTitle": "重庆邮电大学2024贵阳马拉松高校联赛",
+      "source": "https://mp.weixin.qq.com/s/C-GQGBGGyfbhJroNFiP3_Q",
+      "image": "2024-guiyang-team",
+      "category": "高校联赛",
+      "summary": "重邮跑团参加贵阳马拉松，获得西南高校联赛第九名。",
+      "facts": [
+        {
+          "value": "西南第9",
+          "label": "2024贵阳马拉松高校联赛"
+        }
       ],
-      "note":"以公众号2024年6月20日文章为来源。"
+      "note": "以公众号2024年6月20日文章为来源。",
+      "relationship": "跑团参赛"
     },
     {
-      "id":"relay-2024",
-      "published":"2024-05-17",
-      "eventDate":"2024-05-12",
-      "year":"2024",
-      "title":"马拉松战队首次出征：十人接力取得第20名",
-      "originalTitle":"“自邮飞翔”马拉松战队首次出征获得第二十名！",
-      "source":"https://mp.weixin.qq.com/s/JmoIiIjkod0naGt8qbe_ow",
-      "image":"2024-relay-team",
-      "category":"接力赛事",
-      "summary":"自邮飞翔马拉松战队以10人接力的形式参加重庆市第38届马拉松接力赛暨2024九龙坡区智慧环湖跑。",
-      "facts":[
-        {"value":"第20名","label":"公众号公布的团体名次"},
-        {"value":"10人接力","label":"每名选手约4.8公里"},
-        {"value":"约48 km","label":"文章记录的接力全程"}
+      "id": "relay-2024",
+      "published": "2024-05-17",
+      "eventDate": "2024-05-12",
+      "year": "2024",
+      "title": "2024 重庆马拉松接力赛",
+      "originalTitle": "“自邮飞翔”马拉松战队首次出征获得第二十名！",
+      "source": "https://mp.weixin.qq.com/s/JmoIiIjkod0naGt8qbe_ow",
+      "image": "2024-relay-team",
+      "category": "接力赛事",
+      "summary": "自邮飞翔马拉松战队以 10 人接力形式参加重庆市第 38 届马拉松接力赛，获得第二十名。",
+      "facts": [
+        {
+          "value": "第20名",
+          "label": "团体名次"
+        },
+        {
+          "value": "10人接力",
+          "label": "每名选手约4.8公里"
+        },
+        {
+          "value": "约48 km",
+          "label": "接力全程"
+        }
       ],
-      "note":"“首次出征”只指这支马拉松战队的首次出征，不用于推断协会成立年份。"
+      "note": "“首次出征”只指这支马拉松战队的首次出征，不用于推断协会成立年份。",
+      "relationship": "跑团参赛"
     }
   ]
 }

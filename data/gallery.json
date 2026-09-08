@@ -1,0 +1,175 @@
+{
+  "categories": {
+    "training": "日常训练",
+    "race": "参赛记录",
+    "social": "跑友日常"
+  },
+  "items": [
+    {
+      "id": "2026-qingyuan-team",
+      "category": "race",
+      "postId": "qingyuan-2026"
+    },
+    {
+      "id": "2026-qingyuan-eventwall",
+      "category": "race",
+      "postId": "qingyuan-2026"
+    },
+    {
+      "id": "2026-qingyuan-social",
+      "category": "social",
+      "postId": "qingyuan-2026"
+    },
+    {
+      "id": "2026-qingyuan-selfie",
+      "category": "social",
+      "postId": "qingyuan-2026"
+    },
+    {
+      "id": "2025-recruit-group",
+      "category": "social",
+      "postId": "recruit-2025"
+    },
+    {
+      "id": "2025-track-training",
+      "category": "training",
+      "postId": "recruit-2025"
+    },
+    {
+      "id": "2025-track-squad",
+      "category": "training",
+      "postId": "recruit-2025"
+    },
+    {
+      "id": "2025-test-team",
+      "category": "training",
+      "postId": "test-2025"
+    },
+    {
+      "id": "2025-test-run",
+      "category": "training",
+      "postId": "test-2025"
+    },
+    {
+      "id": "2025-test-start",
+      "category": "training",
+      "postId": "test-2025"
+    },
+    {
+      "id": "2025-qingyuan-06",
+      "category": "race",
+      "postId": "qingyuan-2025"
+    },
+    {
+      "id": "2025-qingyuan-social",
+      "category": "social",
+      "postId": "qingyuan-2025"
+    },
+    {
+      "id": "2025-qingyuan-race",
+      "category": "race",
+      "postId": "qingyuan-2025"
+    },
+    {
+      "id": "2025-cqmarathon-10",
+      "category": "race",
+      "postId": "cqmarathon-2025"
+    },
+    {
+      "id": "2025-cqmarathon-group",
+      "category": "race",
+      "postId": "cqmarathon-2025"
+    },
+    {
+      "id": "2025-cqmarathon-social",
+      "category": "social",
+      "postId": "cqmarathon-2025"
+    },
+    {
+      "id": "2024-night-05",
+      "category": "race",
+      "postId": "night-run-2024"
+    },
+    {
+      "id": "2024-night-flag",
+      "category": "race",
+      "postId": "night-run-2024"
+    },
+    {
+      "id": "2024-guiyang-team",
+      "category": "race",
+      "postId": "guiyang-2024"
+    },
+    {
+      "id": "2024-relay-team",
+      "category": "race",
+      "postId": "relay-2024"
+    },
+    {
+      "id": "member-captain-run",
+      "category": "training"
+    },
+    {
+      "id": "member-two-runners",
+      "category": "training"
+    },
+    {
+      "id": "member-school-track",
+      "category": "race"
+    },
+    {
+      "id": "member-qingyuan-talk-2026",
+      "category": "social"
+    },
+    {
+      "id": "member-hundred-miles-2025",
+      "category": "race"
+    },
+    {
+      "id": "member-changjiahui-medals-2025",
+      "category": "race"
+    },
+    {
+      "id": "member-changjiahui-team-2025",
+      "category": "social"
+    },
+    {
+      "id": "member-athletics-team-2026",
+      "category": "race"
+    },
+    {
+      "id": "member-athletics-awards-2026",
+      "category": "race"
+    },
+    {
+      "id": "race-2025",
+      "category": "race",
+      "scope": "校园赛事"
+    },
+    {
+      "id": "race-start",
+      "category": "race",
+      "scope": "校园赛事"
+    },
+    {
+      "id": "race-relay",
+      "category": "race",
+      "scope": "校园赛事"
+    },
+    {
+      "id": "race-runners",
+      "category": "race",
+      "scope": "校园赛事"
+    },
+    {
+      "id": "race-warmup",
+      "category": "race",
+      "scope": "校园赛事"
+    },
+    {
+      "id": "race-course",
+      "category": "race",
+      "scope": "校园赛事"
+    }
+  ]
+}

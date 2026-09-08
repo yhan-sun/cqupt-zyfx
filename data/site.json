@@ -1,0 +1,65 @@
+{
+  "name": "重庆邮电大学跑步爱好者协会",
+  "shortName": "跑步爱好者协会",
+  "alias": "重邮约跑团 · 自邮飞翔",
+  "origin": "https://yhan-sun.github.io/cqupt-zyfx/",
+  "description": "重邮约跑团的日常训练、参赛记录和跑步照片，以及加入方式与跑步指南。",
+  "intro": "协会面向重邮同学开展跑步交流，分享训练经验和赛事信息。刚开始跑步的同学和有训练基础的跑友都可以加入。",
+  "routine": [
+    {
+      "title": "校园约跑",
+      "text": "在群里了解当期约跑安排，确认时间、集合点和分组后参加。"
+    },
+    {
+      "title": "训练交流",
+      "text": "交流跑步方法、装备和训练感受，也可以在跑步指南里查找动作和训练知识。"
+    },
+    {
+      "title": "赛事同行",
+      "text": "交流校外赛事信息，有合适机会时结伴参赛。报名条件和流程以赛事主办方通知为准。"
+    }
+  ],
+  "homePhoto": "2025-track-training",
+  "featuredPosts": [
+    "qingyuan-2026",
+    "test-2025",
+    "qingyuan-2025"
+  ],
+  "homePhotos": [
+    "member-two-runners",
+    "2026-qingyuan-social",
+    "2024-night-flag"
+  ],
+  "navigation": [
+    {
+      "key": "home",
+      "label": "首页",
+      "path": "index.html"
+    },
+    {
+      "key": "about",
+      "label": "协会介绍",
+      "path": "about.html"
+    },
+    {
+      "key": "events",
+      "label": "活动记录",
+      "path": "club.html"
+    },
+    {
+      "key": "gallery",
+      "label": "相册",
+      "path": "gallery.html"
+    },
+    {
+      "key": "science",
+      "label": "跑步指南",
+      "path": "science.html"
+    },
+    {
+      "key": "join",
+      "label": "加入我们",
+      "path": "join.html"
+    }
+  ]
+}

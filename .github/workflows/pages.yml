@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      export_preview:
+        description: Export the standalone offline preview
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -25,31 +30,28 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci --ignore-scripts
-      - name: Unit and content tests
-        run: npm test
-      - name: Reuse hash-pinned movement sources
+      - run: npm test
+      - name: Reuse validated image sources
         uses: actions/cache@v4
         with:
-          path: .cache/science
-          key: movement-sources-${{ hashFiles('data/science-media.json') }}
-      - name: Reuse hash-pinned official-account photographs
-        uses: actions/cache@v4
-        with:
-          path: .cache/official
-          key: official-account-sources-${{ hashFiles('data/official-media.json') }}
-      - name: Build complete website
-        run: npm run build
-      - name: Set up Python for browser acceptance
-        uses: actions/setup-python@v5
+          path: |
+            .cache/*.source
+            .cache/science
+            .cache/official
+            .cache/fallback
+          key: website-sources-${{ hashFiles('data/media.json', 'data/media-fallback.json', 'data/science-media.json', 'data/official-media.json') }}
+          restore-keys: website-sources-
+      - run: npm run build
+      - run: npm run check
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install browser test runner
+      - name: Install browser acceptance runner
         run: |
           python -m pip install playwright==1.55.0
           python -m playwright install --with-deps chromium
-      - name: Association, club culture, gallery, motion, responsive and no-JS checks
+      - name: Browser acceptance
         env:
-          REQUIRE_LOCAL_MEDIA: '1'
           PYTHONUNBUFFERED: '1'
         run: |
           node scripts/serve.mjs --dir dist --base /cqupt-zyfx/ &
@@ -59,9 +61,8 @@ jobs:
             if curl --fail --silent http://127.0.0.1:4173/cqupt-zyfx/ > /dev/null; then break; fi
             sleep 1
           done
-          timeout 240s python tests/structure_browser.py
-          timeout 140s python tests/motion_browser.py
-      - name: Save screenshots and test report
+          timeout 300s npm run test:e2e
+      - name: Save browser evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -69,15 +70,17 @@ jobs:
           path: test-results/
           if-no-files-found: ignore
           retention-days: 14
-      - name: Export offline interactive preview
-        run: node scripts/preview.mjs
-      - name: Save interactive preview
+      - name: Export optional offline preview
+        if: github.event_name == 'workflow_dispatch' && inputs.export_preview
+        run: npm run preview:export
+      - name: Save optional preview
+        if: github.event_name == 'workflow_dispatch' && inputs.export_preview
         uses: actions/upload-artifact@v4
         with:
           name: interactive-preview
           path: cqupt-campus-preview.html
-          retention-days: 14
-      - name: Save portable website
+          retention-days: 7
+      - name: Save website
         uses: actions/upload-artifact@v4
         with:
           name: website
@@ -92,52 +95,24 @@ jobs:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     permissions:
+      contents: read
       pages: write
       id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Check Pages configuration
-        uses: actions/configure-pages@v5
-      - name: Deploy to GitHub Pages
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/configure-pages@v5
+      - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: Verify published association experience
+      - name: Verify published revision and resources
         env:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
-        run: |
-          python - <<'PY'
-          import os
-          import time
-          import urllib.request
-          base = os.environ['PAGE_URL'].rstrip('/') + '/'
-          checks = {
-              'about.html': ['协会介绍', '胡钢', '一个先从跑起来开始的校园社团', '9 张照片由协会侧本次提供', '468686951', 'assets/association.css'],
-              'club.html': ['训练、参赛', '协会补充照片', '20', '校园主场', 'assets/motion.js'],
-              'gallery.html': ['跑团训练与赛事照片', '协会补充', '35', 'assets/member/member-captain-run.webp', 'assets/motion.js'],
-              'join.html': ['468686951', '加入重邮约跑团'],
-              'science.html': ['科学跑步'],
-              'sources.html': ['协会侧补充照片', '9 张']
-          }
-          for path, needles in checks.items():
-              for attempt in range(5):
-                  try:
-                      with urllib.request.urlopen(base + path, timeout=20) as response:
-                          text=response.read().decode('utf-8')
-                          assert response.status==200 and all(needle in text for needle in needles)
-                          print('PASS published', path)
-                      break
-                  except Exception:
-                      if attempt==4: raise
-                      time.sleep(5)
-          for path in ['assets/member/member-captain-run.webp','assets/member/member-qingyuan-talk-2026.webp','assets/member/member-athletics-team-2026.webp']:
-              with urllib.request.urlopen(base + path, timeout=20) as response:
-                  raw=response.read(16)
-                  assert response.status==200 and raw.startswith(b'RIFF') and b'WEBP' in raw
-                  print('PASS published', path)
-          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as summary:
-              summary.write('## Published association experience\n\n'+base+'about.html\n\nVerified the standalone association page, nine supplied association photographs, 35-photo gallery, merged club archive, science hub and current QQ join path over public HTTPS.\n')
-          PY
+        run: node scripts/verify-published.mjs
