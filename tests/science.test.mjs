@@ -5,10 +5,9 @@ import { normalizeQuery, matchesResource, calculateFuel } from '../assets/scienc
 import { chapters, methods, exercises, references } from '../data/science.mjs';
 import { movementMedia, sciencePaths } from '../scripts/science.mjs';
 import { renderSite } from '../scripts/render.mjs';
+import { createModel } from '../scripts/model.mjs';
 
-const content=JSON.parse(await readFile(new URL('../data/content.json',import.meta.url),'utf8'));
-const media=JSON.parse(await readFile(new URL('../data/media.json',import.meta.url),'utf8'));
-const pages=renderSite(content,media);
+const pages=renderSite(createModel());
 
 test('science: six chapters, ten methods, fourteen exercises, eight static paths',()=>{
   assert.equal(chapters.length,6);assert.equal(methods.length,10);assert.equal(exercises.length,14);assert.equal(sciencePaths.length,8);
