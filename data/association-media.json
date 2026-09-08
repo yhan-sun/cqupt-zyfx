@@ -1,0 +1,92 @@
+[
+  {
+    "id": "track-training-duo",
+    "year": "协会资料",
+    "category": "training",
+    "title": "太极运动场并肩训练",
+    "description": "两位跑者在太极运动场进行跑步训练。",
+    "width": 900,
+    "height": 600,
+    "sha256": "3f29c107acce666cade6ff578753c3620b010e2a75cbda7f8d4a17df1b00a999"
+  },
+  {
+    "id": "track-training-solo",
+    "year": "协会资料",
+    "category": "training",
+    "title": "太极运动场跑步训练",
+    "description": "跑者在太极运动场进行跑步训练，呈现校园日常训练场景。",
+    "width": 900,
+    "height": 600,
+    "sha256": "775c8bb0c5f4d0351dadf3f43ada6bef6d077aa26964c8ddf3367d18d417a077"
+  },
+  {
+    "id": "hundred-mile-southwest-2025",
+    "year": "2025",
+    "category": "race",
+    "title": "高校百英里西南分站赛集结",
+    "description": "2025年高校百英里西南分站赛现场的团队集结合影。",
+    "width": 900,
+    "height": 600,
+    "sha256": "653de6014f159284c228cc529903707efb2784e787b016fd11bee96591428eee"
+  },
+  {
+    "id": "changjiahui-team-2025",
+    "year": "2025",
+    "category": "race",
+    "title": "长嘉汇跑友合影",
+    "description": "2025年长嘉汇跑步活动后的跑友合影。",
+    "width": 900,
+    "height": 675,
+    "sha256": "c71aa79485edb6e284fb62b11cb6a7aa332958e152fd99561d3bffff02d7d517"
+  },
+  {
+    "id": "changjiahui-medals-2025",
+    "year": "2025",
+    "category": "social",
+    "title": "长嘉汇完赛奖牌",
+    "description": "跑友用完赛奖牌围成一圈，记录一次共同完成后的纪念。",
+    "width": 675,
+    "height": 900,
+    "sha256": "500a3df4c096bee809288b78f70269496f8a8b2f94f84db5000750420593b6d7"
+  },
+  {
+    "id": "qingyuan-campus-talk-2026",
+    "year": "2026",
+    "category": "social",
+    "title": "清远马拉松校内交流",
+    "description": "2026年清远马拉松相关校内交流活动合影，跑团旗帜出现在现场。",
+    "width": 900,
+    "height": 675,
+    "sha256": "cd8d3d1c62bed2366639c23cbadc378a951491186091f68d6f3b57c490a67cd9"
+  },
+  {
+    "id": "campus-womens-race-2025",
+    "year": "2025",
+    "category": "campus",
+    "title": "校运会女子跑步比赛",
+    "description": "校园田径赛道上的女子跑步比赛场景。",
+    "width": 900,
+    "height": 600,
+    "sha256": "bcd181c6eb5a8d8eeb00c765c4a5e5816b2eb774b55b48f81ab89b13d01df3ad"
+  },
+  {
+    "id": "chongqing-college-track-team-2026",
+    "year": "2026",
+    "category": "campus",
+    "title": "重庆市大学生田径比赛合影",
+    "description": "重庆邮电大学参加2026年重庆市大学生田径比赛的集体合影资料。",
+    "width": 900,
+    "height": 600,
+    "sha256": "089649ad8c6398d8c579406041eac359a3cc69a28ec2efcb4c6e548f49f6843f"
+  },
+  {
+    "id": "chongqing-college-track-awards-2026",
+    "year": "2026",
+    "category": "campus",
+    "title": "重庆市大学生田径比赛奖状记录",
+    "description": "赛后奖状合影，作为学校田径竞赛场景的资料记录。",
+    "width": 506,
+    "height": 900,
+    "sha256": "acc939e0901ef77888d97f60f2d82e177b81652b57cd816ef99f9998def98117"
+  }
+]
