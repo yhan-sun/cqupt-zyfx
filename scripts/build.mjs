@@ -20,7 +20,7 @@ const media = JSON.parse(await readFile(path.join(dist, 'media/credits.json'), '
 const model = createModel({ media, photoMedia });
 const pages = renderSite(model);
 await mkdir(path.join(dist, 'assets'), { recursive: true });
-for (const file of ['site.css', 'site.js', 'science.css', 'science.js', 'science-core.mjs', 'mark.svg', 'join-qq.svg']) {
+for (const file of ['site.css', 'editorial.css', 'site.js', 'science.css', 'science.js', 'science-core.mjs', 'mark.svg', 'join-qq.svg']) {
   await cp(path.join(root, 'assets', file), path.join(dist, 'assets', file));
 }
 for (const [filename, html] of pages) {
