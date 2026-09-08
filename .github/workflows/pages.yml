@@ -27,11 +27,6 @@ jobs:
       - run: npm ci --ignore-scripts
       - name: Unit and content tests
         run: npm test
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Install image tooling
-        run: python -m pip install Pillow==11.3.0
       - name: Reuse hash-pinned movement sources
         uses: actions/cache@v4
         with:
@@ -44,6 +39,10 @@ jobs:
           key: official-account-sources-${{ hashFiles('data/official-media.json') }}
       - name: Build complete website
         run: npm run build
+      - name: Set up Python for browser acceptance
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - name: Install browser test runner
         run: |
           python -m pip install playwright==1.55.0
