@@ -1,8 +1,7 @@
 {
   "categories": {
     "training": "日常训练",
-    "race": "参赛记录",
-    "social": "跑友日常"
+    "race": "参赛记录"
   },
   "items": [
     {
@@ -17,17 +16,17 @@
     },
     {
       "id": "2026-qingyuan-social",
-      "category": "social",
+      "category": "race",
       "postId": "qingyuan-2026"
     },
     {
       "id": "2026-qingyuan-selfie",
-      "category": "social",
+      "category": "race",
       "postId": "qingyuan-2026"
     },
     {
       "id": "2025-recruit-group",
-      "category": "social",
+      "category": "race",
       "postId": "recruit-2025"
     },
     {
@@ -62,7 +61,7 @@
     },
     {
       "id": "2025-qingyuan-social",
-      "category": "social",
+      "category": "race",
       "postId": "qingyuan-2025"
     },
     {
@@ -82,7 +81,7 @@
     },
     {
       "id": "2025-cqmarathon-social",
-      "category": "social",
+      "category": "race",
       "postId": "cqmarathon-2025"
     },
     {
@@ -119,7 +118,7 @@
     },
     {
       "id": "member-qingyuan-talk-2026",
-      "category": "social"
+      "category": "race"
     },
     {
       "id": "member-hundred-miles-2025",
@@ -131,7 +130,7 @@
     },
     {
       "id": "member-changjiahui-team-2025",
-      "category": "social"
+      "category": "race"
     },
     {
       "id": "member-athletics-team-2026",
