@@ -123,6 +123,7 @@ if (copy) {
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const revealSelectors = [
   '.hero-copy > *',
+  '.page-heading > *',
   '.section-heading > *',
   '.home-activities .activity-row',
   '.photo-teasers figure',
@@ -140,6 +141,7 @@ const revealSelectors = [
   '.join-questions > *',
   '.article-header > *',
   '.article .prose > *',
+  '.fact-list > div',
   '.article-photos figure',
   '.sc-chapter',
   '.sc-feature > *',
