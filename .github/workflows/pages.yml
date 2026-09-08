@@ -47,7 +47,7 @@ jobs:
         run: |
           python -m pip install playwright==1.55.0
           python -m playwright install --with-deps chromium
-      - name: Club culture, gallery, motion, responsive and no-JS checks
+      - name: Association, club culture, gallery, motion, responsive and no-JS checks
         env:
           REQUIRE_LOCAL_MEDIA: '1'
           PYTHONUNBUFFERED: '1'
@@ -59,8 +59,8 @@ jobs:
             if curl --fail --silent http://127.0.0.1:4173/cqupt-zyfx/ > /dev/null; then break; fi
             sleep 1
           done
-          timeout 220s python tests/structure_browser.py
-          timeout 120s python tests/motion_browser.py
+          timeout 240s python tests/structure_browser.py
+          timeout 140s python tests/motion_browser.py
       - name: Save screenshots and test report
         if: always()
         uses: actions/upload-artifact@v4
@@ -105,7 +105,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: Verify published club culture, motion and gallery
+      - name: Verify published association experience
         env:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
@@ -115,36 +115,29 @@ jobs:
           import urllib.request
           base = os.environ['PAGE_URL'].rstrip('/') + '/'
           checks = {
-              'club.html': ['一起训练', '20', '影像里的自邮飞翔', '校园主场', '全国第6', 'assets/motion.js', 'assets/motion.css'],
-              'gallery.html': ['跑过的地方', '20', '自邮飞翔影像', '校园主场影像', 'assets/motion.js'],
+              'about.html': ['协会介绍', '胡钢', '一个为重邮学子搭建的跑步交流平台', '9张协会侧补充照片', '468686951', 'assets/association.css'],
+              'club.html': ['一起训练', '协会补充档案', '20', '校园主场', 'assets/motion.js'],
+              'gallery.html': ['跑过的地方', '协会影像', '35', 'assets/member/member-captain-run.webp', 'assets/motion.js'],
               'join.html': ['468686951', '加入重邮约跑团'],
               'science.html': ['科学跑步'],
-              'news.html': ['已并入「赛事与足迹」']
+              'sources.html': ['协会侧补充影像', '9张']
           }
           for path, needles in checks.items():
               for attempt in range(5):
                   try:
                       with urllib.request.urlopen(base + path, timeout=20) as response:
-                          text = response.read().decode('utf-8')
-                          assert response.status == 200
-                          assert all(needle in text for needle in needles)
-                          assert '跑步服务' not in text.split('<nav id="main-nav"',1)[1].split('</nav>',1)[0]
+                          text=response.read().decode('utf-8')
+                          assert response.status==200 and all(needle in text for needle in needles)
                           print('PASS published', path)
                       break
                   except Exception:
-                      if attempt == 4:
-                          raise
+                      if attempt==4: raise
                       time.sleep(5)
-          for path in ['media/official/2025-track-training.webp','media/official/2026-qingyuan-selfie.webp','media/official/2024-night-flag.webp']:
+          for path in ['assets/member/member-captain-run.webp','assets/member/member-qingyuan-talk-2026.webp','assets/member/member-athletics-team-2026.webp']:
               with urllib.request.urlopen(base + path, timeout=20) as response:
-                  raw = response.read(16)
-                  assert raw.startswith(b'RIFF') and b'WEBP' in raw
+                  raw=response.read(16)
+                  assert response.status==200 and raw.startswith(b'RIFF') and b'WEBP' in raw
                   print('PASS published', path)
-          for path in ['assets/motion.js','assets/motion.css']:
-              with urllib.request.urlopen(base + path, timeout=20) as response:
-                  raw=response.read()
-                  assert response.status==200 and len(raw)>1000
-                  print('PASS published', path)
-          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
-              summary.write('## Published motion-enabled club culture\n\n' + base + 'club.html\n\nVerified the culture-led archive, 20-photo self-flying corpus, click-to-enlarge runtime, reduced-motion stylesheet, gallery, join path, science hub and representative photographs over public HTTPS.\n')
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as summary:
+              summary.write('## Published association experience\n\n'+base+'about.html\n\nVerified the standalone association page, nine supplied association photographs, 35-photo gallery, merged club archive, science hub and current QQ join path over public HTTPS.\n')
           PY

@@ -15,6 +15,7 @@ import {
 
 const MAX_BYTES = 15_000_000;
 const MAX_PIXELS = 35_000_000;
+const unavailableOrigins = new Set();
 
 function imageInput(raw) {
   return sharp(raw, { limitInputPixels: MAX_PIXELS });
@@ -29,35 +30,49 @@ async function decodeImage(raw) {
   return metadata;
 }
 
+function unavailableError(item) {
+  const error = new Error(`Origin already marked unavailable during this build: ${new URL(item.url).origin}`);
+  error.retryable = true;
+  return error;
+}
+
 async function getSource(item, offline) {
   const cache = path.join(root, '.cache');
   const identity = sha256(item.url).slice(0, 16);
   const cached = path.join(cache, `${item.id}-${identity}.source`);
   const legacy = path.join(cache, `${item.id}.source`);
+  const origin = new URL(item.url).origin;
   await ensureDirectory(cache);
 
   if (await fileExists(cached)) return readFile(cached);
   if (offline && await fileExists(legacy)) return readFile(legacy);
   if (offline) throw new Error(`Offline source missing: ${item.id}`);
+  if (unavailableOrigins.has(origin)) throw unavailableError(item);
 
-  const raw = await retry(
-    async () => {
-      const candidate = await downloadBytes(item.url, {
-        headers: { 'User-Agent': 'Mozilla/5.0 (CQUPT-Running-Website; public source attribution in sources.html)' },
-        maxBytes: MAX_BYTES,
-        timeoutMs: 25_000
-      });
-      if (candidate.length < 100) throw new Error(`Invalid image size: ${item.id}`);
-      await decodeImage(candidate);
-      return candidate;
-    },
-    {
-      attempts: 3,
-      onRetry: (_error, attempt) => sleep((1 + attempt) * 1000)
-    }
-  );
-  await writeFile(cached, raw);
-  return raw;
+  try {
+    const raw = await retry(
+      async () => {
+        const candidate = await downloadBytes(item.url, {
+          headers: { 'User-Agent': 'Mozilla/5.0 (CQUPT-Running-Website; public source attribution in sources.html)' },
+          maxBytes: MAX_BYTES,
+          timeoutMs: 12_000
+        });
+        if (candidate.length < 100) throw new Error(`Invalid image size: ${item.id}`);
+        await decodeImage(candidate);
+        return candidate;
+      },
+      {
+        attempts: 2,
+        shouldRetry: error => error.retryable === true,
+        onRetry: (_error, attempt) => sleep((1 + attempt) * 1000)
+      }
+    );
+    await writeFile(cached, raw);
+    return raw;
+  } catch (error) {
+    if (error.retryable === true) unavailableOrigins.add(origin);
+    throw error;
+  }
 }
 
 async function fileExists(filename) {
@@ -99,16 +114,68 @@ async function renderImage(item, raw, output) {
   return metadata;
 }
 
+function integrityError(message) {
+  const error = new Error(message);
+  error.retryable = false;
+  return error;
+}
+
+async function downloadPinned(url, expected, itemId) {
+  return retry(
+    async () => {
+      const raw = await downloadBytes(url, {
+        headers: { 'User-Agent': 'CQUPT-Running-Website/verified-release-fallback' },
+        maxBytes: MAX_BYTES,
+        timeoutMs: 15_000
+      });
+      if (sha256(raw) !== expected.sha256) throw integrityError(`Pinned fallback hash mismatch: ${itemId}/${expected.file}`);
+      const metadata = await decodeImage(raw);
+      if (metadata.width !== expected.width || metadata.height !== expected.height) {
+        throw integrityError(`Pinned fallback dimensions mismatch: ${itemId}/${expected.file}`);
+      }
+      return raw;
+    },
+    {
+      attempts: 2,
+      shouldRetry: error => error.retryable === true,
+      onRetry: (_error, attempt) => sleep((1 + attempt) * 1000)
+    }
+  );
+}
+
+async function usePublishedFallback(item, fallbackConfig, output, sourceError) {
+  const expected = fallbackConfig.items[item.id];
+  if (!expected || sourceError.retryable !== true) throw sourceError;
+  const baseUrl = fallbackConfig.baseUrl;
+  const mainRaw = await downloadPinned(new URL(expected.file, baseUrl).href, expected, item.id);
+  await writeFile(path.join(output, expected.file), mainRaw);
+  const metadata = { ...item, width: expected.width, height: expected.height };
+  if (expected.small) {
+    const smallRaw = await downloadPinned(new URL(expected.small.file, baseUrl).href, expected.small, item.id);
+    await writeFile(path.join(output, expected.small.file), smallRaw);
+    metadata.smallWidth = expected.small.width;
+  }
+  console.warn(`Media ${item.id}: origin unavailable, reused hash-pinned derivative from deployed commit ${fallbackConfig.sourceCommit}`);
+  return metadata;
+}
+
 export async function buildMedia({ offline = false } = {}) {
   const items = await readJson('data/media.json');
+  const fallbackConfig = await readJson('data/media-fallback.json');
   const output = path.join(root, 'dist', 'media');
   await ensureDirectory(output);
   const processed = [];
 
   for (const item of items) {
-    const raw = await getSource(item, offline);
-    await decodeImage(raw);
-    const metadata = await renderImage(item, raw, output);
+    let metadata;
+    try {
+      const raw = await getSource(item, offline);
+      await decodeImage(raw);
+      metadata = await renderImage(item, raw, output);
+    } catch (error) {
+      if (offline) throw error;
+      metadata = await usePublishedFallback(item, fallbackConfig, output, error);
+    }
     processed.push(metadata);
     console.log(`Media ${item.id}: ${metadata.width}x${metadata.height}`);
   }
