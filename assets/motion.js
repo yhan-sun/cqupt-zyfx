@@ -1,10 +1,10 @@
 const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)');
-const revealSelectors=['.hero-inner>*','.structure-quick-links>a','.about-layout>*','.culture-home-head>*','.culture-home-lead>*','.culture-home-card','.science-entry .section-heading','.science-entry .science-entry-grid>a','.home-join-band>*','.culture-hero-copy>*','.culture-hero-photo>*','.culture-identity>*','.culture-moment','.culture-year-rail','.culture-event','.culture-campus-card','.running-gallery-hero .container>*','.running-gallery-card','.join-hero>*','.join-steps>*','.sc-hero-inner>*','.sc-chapter'];
+const revealSelectors=['.hero-inner>*','.structure-quick-links>a','.about-layout>*','.culture-home-head>*','.culture-home-lead>*','.culture-home-card','.science-entry .section-heading','.science-entry .science-entry-grid>a','.home-join-band>*','.culture-hero-copy>*','.culture-hero-photo>*','.culture-identity>*','.culture-moment','.culture-year-rail','.culture-event','.culture-campus-card','.running-gallery-hero .container>*','.running-gallery-card','.join-hero>*','.join-steps>*','.sc-hero-inner>*','.sc-chapter','.association-hero-grid>*','.association-intro>*','.association-value-grid article','.association-scene','.association-home-grid>*','.association-club-strip-head>*','.association-club-strip-grid>*','.association-cta>*'];
 const revealTargets=[...new Set(revealSelectors.flatMap(selector=>[...document.querySelectorAll(selector)]))];
 revealTargets.forEach((element,index)=>{
   if(element.matches('.culture-event-reverse'))element.dataset.reveal='left';
   else if(element.matches('.culture-event'))element.dataset.reveal='right';
-  else if(element.matches('.culture-hero-photo>*'))element.dataset.reveal='scale';
+  else if(element.matches('.culture-hero-photo>*,.association-hero-photo>*'))element.dataset.reveal='scale';
   else element.dataset.reveal='up';
   element.style.setProperty('--reveal-delay',`${Math.min(index%4,3)*55}ms`);
 });
