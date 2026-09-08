@@ -63,6 +63,7 @@ with sync_playwright() as p:
     check('gallery filter: all restores thirty-five photos',page.locator('[data-gallery-page-item]:visible').count()==35)
     check('gallery: every image is same-origin',page.locator('[data-gallery-page-item] img').evaluate_all("ims=>ims.every(i=>new URL(i.src).origin===location.origin&&i.naturalWidth>0)"))
     trigger=page.locator('[data-gallery-page-item] [data-gallery-photo]').nth(20);trigger.click()
+    page.wait_for_function("selector=>{const i=document.querySelector(selector);return i?.complete&&i.naturalWidth>0}", arg="#running-gallery-dialog-image", timeout=25000)
     check('gallery: supplied image opens in dedicated viewer',page.locator('#running-gallery-dialog').is_visible() and page.locator('#running-gallery-dialog-image').evaluate('i=>i.naturalWidth>0'))
     page.keyboard.press('Escape');check('gallery: Escape closes and returns focus',not page.locator('#running-gallery-dialog').is_visible() and trigger.evaluate('el=>el===document.activeElement'))
     page.screenshot(path=str(out/'association-gallery.png'),full_page=True)
