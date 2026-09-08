@@ -35,6 +35,7 @@ await buildClubCulture();
 runPython('association-media.py', 'Association media processing');
 const { buildAssociationProfile } = await import('./association-build.mjs');
 const associationPages = await buildAssociationProfile();
+await import('./association-polish.mjs');
 const { buildMotionExperience } = await import('./motion-build.mjs');
 await buildMotionExperience();
 const origin = 'https://yhan-sun.github.io/cqupt-zyfx/';
