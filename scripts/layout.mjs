@@ -35,7 +35,7 @@ export function page(filename, title, body, { active = '', description = site.de
   const fullTitle = `${title} · ${site.name}`;
   const science = active === 'science';
   const hasPhotos = body.includes('data-photo-view=');
-  const nav = site.navigation.map(item => `<a href="${prefix}${item.path}"${item.key === active ? ' aria-current="page"' : ''}${item.key === 'join' ? ' class="nav-join"' : ''}>${e(item.label)}</a>`).join('');
+  const nav = site.navigation.map(item => `<a href="${prefix}${item.path}"${item.key === active ? ' aria-current="page"' : ''}${item.key === 'join' ? ` class="nav-join"${item.key === active ? ' style="color:#fff"' : ''}` : ''}>${e(item.label)}</a>`).join('');
   return `<!doctype html>
 <html lang="zh-CN">
 <head>
