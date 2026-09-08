@@ -69,11 +69,15 @@ with sync_playwright() as p:
     images_ready(page)
     ids = page.locator('[data-gallery-item] [data-photo-view]').evaluate_all('nodes => nodes.map(node => node.dataset.photoView)')
     check('gallery: unique photographs', len(ids) == len(set(ids)))
-    for category in ['training', 'race', 'social']:
+    for category in ['training', 'race']:
         page.locator(f'[data-gallery-filter="{category}"]').click()
         visible = page.locator('[data-gallery-item]:visible')
         expected = page.locator(f'[data-gallery-item][data-category="{category}"]').count()
         check(f'gallery: {category} respects content categories', visible.count() == expected and visible.evaluate_all(f"nodes => nodes.every(node => node.dataset.category === '{category}')"))
+    check('gallery: social filter removed after merge', page.locator('[data-gallery-filter="social"]').count() == 0)
+    page.locator('[data-gallery-filter="race"]').click()
+    for photo_id in ['2026-qingyuan-social', '2026-qingyuan-selfie', '2025-recruit-group', '2025-qingyuan-social', '2025-cqmarathon-social', 'member-qingyuan-talk-2026', 'member-changjiahui-team-2025']:
+        check(f'gallery: race includes merged {photo_id}', page.locator(f'[data-photo-view="{photo_id}"]').is_visible())
     page.locator('[data-gallery-filter="training"]').click()
     for photo_id in ['member-captain-run', 'member-two-runners', '2025-track-training']:
         check(f'gallery: training includes {photo_id}', page.locator(f'[data-photo-view="{photo_id}"]').is_visible())
