@@ -15,6 +15,7 @@ import {
 
 const MAX_BYTES = 15_000_000;
 const MAX_PIXELS = 35_000_000;
+const unavailableOrigins = new Set();
 
 function imageInput(raw) {
   return sharp(raw, { limitInputPixels: MAX_PIXELS });
@@ -29,36 +30,49 @@ async function decodeImage(raw) {
   return metadata;
 }
 
+function unavailableError(item) {
+  const error = new Error(`Origin already marked unavailable during this build: ${new URL(item.url).origin}`);
+  error.retryable = true;
+  return error;
+}
+
 async function getSource(item, offline) {
   const cache = path.join(root, '.cache');
   const identity = sha256(item.url).slice(0, 16);
   const cached = path.join(cache, `${item.id}-${identity}.source`);
   const legacy = path.join(cache, `${item.id}.source`);
+  const origin = new URL(item.url).origin;
   await ensureDirectory(cache);
 
   if (await fileExists(cached)) return readFile(cached);
   if (offline && await fileExists(legacy)) return readFile(legacy);
   if (offline) throw new Error(`Offline source missing: ${item.id}`);
+  if (unavailableOrigins.has(origin)) throw unavailableError(item);
 
-  const raw = await retry(
-    async () => {
-      const candidate = await downloadBytes(item.url, {
-        headers: { 'User-Agent': 'Mozilla/5.0 (CQUPT-Running-Website; public source attribution in sources.html)' },
-        maxBytes: MAX_BYTES,
-        timeoutMs: 25_000
-      });
-      if (candidate.length < 100) throw new Error(`Invalid image size: ${item.id}`);
-      await decodeImage(candidate);
-      return candidate;
-    },
-    {
-      attempts: 3,
-      shouldRetry: error => error.retryable === true,
-      onRetry: (_error, attempt) => sleep((1 + attempt) * 1000)
-    }
-  );
-  await writeFile(cached, raw);
-  return raw;
+  try {
+    const raw = await retry(
+      async () => {
+        const candidate = await downloadBytes(item.url, {
+          headers: { 'User-Agent': 'Mozilla/5.0 (CQUPT-Running-Website; public source attribution in sources.html)' },
+          maxBytes: MAX_BYTES,
+          timeoutMs: 12_000
+        });
+        if (candidate.length < 100) throw new Error(`Invalid image size: ${item.id}`);
+        await decodeImage(candidate);
+        return candidate;
+      },
+      {
+        attempts: 2,
+        shouldRetry: error => error.retryable === true,
+        onRetry: (_error, attempt) => sleep((1 + attempt) * 1000)
+      }
+    );
+    await writeFile(cached, raw);
+    return raw;
+  } catch (error) {
+    if (error.retryable === true) unavailableOrigins.add(origin);
+    throw error;
+  }
 }
 
 async function fileExists(filename) {
@@ -112,7 +126,7 @@ async function downloadPinned(url, expected, itemId) {
       const raw = await downloadBytes(url, {
         headers: { 'User-Agent': 'CQUPT-Running-Website/verified-release-fallback' },
         maxBytes: MAX_BYTES,
-        timeoutMs: 20_000
+        timeoutMs: 15_000
       });
       if (sha256(raw) !== expected.sha256) throw integrityError(`Pinned fallback hash mismatch: ${itemId}/${expected.file}`);
       const metadata = await decodeImage(raw);
@@ -122,7 +136,7 @@ async function downloadPinned(url, expected, itemId) {
       return raw;
     },
     {
-      attempts: 3,
+      attempts: 2,
       shouldRetry: error => error.retryable === true,
       onRetry: (_error, attempt) => sleep((1 + attempt) * 1000)
     }
