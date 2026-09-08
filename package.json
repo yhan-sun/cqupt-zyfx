@@ -11,5 +11,8 @@
     "test:e2e": "python tests/browser.py",
     "preview:export": "node scripts/preview.mjs"
   },
+  "dependencies": {
+    "sharp": "0.35.4"
+  },
   "engines": { "node": ">=22" }
 }

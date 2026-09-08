@@ -1,22 +1,18 @@
 import { readFile, writeFile, mkdir, rm, cp } from 'node:fs/promises';
 import path from 'node:path';
-import { spawnSync } from 'node:child_process';
 import { renderSite } from './render.mjs';
+import { buildMedia } from './media.mjs';
+import { buildScienceMedia } from './science-media.mjs';
+import { buildOfficialMedia } from './official-media.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const dist = path.join(root, 'dist');
 const offline = process.argv.includes('--offline');
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
-const result = spawnSync(process.env.PYTHON || 'python3', [path.join(root, 'scripts/media.py'), ...(offline ? ['--offline'] : [])], { stdio: 'inherit', cwd: root });
-if (result.error) throw result.error;
-if (result.status !== 0) throw new Error(`Media processing failed (${result.status})`);
-const movementResult = spawnSync(process.env.PYTHON || 'python3', [path.join(root, 'scripts/science-media.py'), ...(offline ? ['--offline'] : [])], { stdio: 'inherit', cwd: root });
-if (movementResult.error) throw movementResult.error;
-if (movementResult.status !== 0) throw new Error(`Movement processing failed (${movementResult.status})`);
-const officialMediaResult = spawnSync(process.env.PYTHON || 'python3', [path.join(root, 'scripts/official-media.py'), ...(offline ? ['--offline'] : [])], { stdio: 'inherit', cwd: root });
-if (officialMediaResult.error) throw officialMediaResult.error;
-if (officialMediaResult.status !== 0) throw new Error(`Official media processing failed (${officialMediaResult.status})`);
+await buildMedia({ offline });
+await buildScienceMedia({ offline });
+await buildOfficialMedia({ offline });
 const content = JSON.parse(await readFile(path.join(root, 'data/content.json'), 'utf8'));
 const media = JSON.parse(await readFile(path.join(dist, 'media/credits.json'), 'utf8'));
 const pages = renderSite(content, media);

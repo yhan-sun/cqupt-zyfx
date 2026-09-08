@@ -28,14 +28,15 @@ Pages：https://yhan-sun.github.io/cqupt-zyfx/ 。主要入口：
 
 ## 开发与构建
 
-Node.js 22+、Python 3.12+、Pillow。浏览器端没有第三方 JavaScript 运行依赖。
+Node.js 22+、npm。构建阶段使用 Node.js 的 `sharp` 处理和校验图片；浏览器端没有第三方 JavaScript 运行依赖。
 
 ```sh
-python -m pip install Pillow==11.3.0
 npm ci
 npm run build
 node scripts/serve.mjs --dir dist --base /cqupt-zyfx/
 ```
+
+生产构建不需要 Python；仓库中的浏览器验收脚本仍使用 Python Playwright，只有执行这组验收命令时才需要 Python 环境。
 
 正式构建会验证并同站托管校园/赛事图片、科学跑步动作媒体和公众号跑团资料图。20 张公众号图片均登记原文章、尺寸和 SHA-256；源文件变化时构建失败，不自动接受未知替换。跑团提供的 QQ 二维码解析为 `https://qm.qq.com/q/9rKOuWR8Ag`，站内使用同一目标生成的 `assets/join-qq.svg`。
 
