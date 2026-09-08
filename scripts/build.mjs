@@ -35,6 +35,8 @@ const { buildClubCulture } = await import('./culture-build.mjs');
 await buildClubCulture();
 const { buildAssociationExperience } = await import('./association-build.mjs');
 const associationPages = await buildAssociationExperience();
+const { finalizeAssociationExperience } = await import('./association-finalize.mjs');
+await finalizeAssociationExperience();
 const { buildMotionExperience } = await import('./motion-build.mjs');
 await buildMotionExperience();
 const origin = 'https://yhan-sun.github.io/cqupt-zyfx/';
