@@ -116,7 +116,7 @@ jobs:
           base = os.environ['PAGE_URL'].rstrip('/') + '/'
           checks = {
               'about.html': ['协会介绍', '胡钢', '一个先从跑起来开始的校园社团', '9 张照片由协会侧本次提供', '468686951', 'assets/association.css'],
-              'club.html': ['一起训练', '协会补充照片', '20', '校园主场', 'assets/motion.js'],
+              'club.html': ['训练、参赛', '协会补充照片', '20', '校园主场', 'assets/motion.js'],
               'gallery.html': ['跑团训练与赛事照片', '协会补充', '35', 'assets/member/member-captain-run.webp', 'assets/motion.js'],
               'join.html': ['468686951', '加入重邮约跑团'],
               'science.html': ['科学跑步'],
