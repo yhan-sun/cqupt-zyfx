@@ -24,10 +24,7 @@ function normalizeAboutNav(html,file){
 
 function polishPublicCopy(html){
   return html
-    .replaceAll('协会补充影像 · 用户附件','协会补充影像')
-    .replaceAll('9张照片由委托方本次提供，和公众号档案分开标注。','9张协会侧补充照片，与公众号公开档案分开标注。')
-    .replaceAll('委托方提供 · 本站不声明开放许可','协会侧提供 · 本站不声明开放许可')
-    .replaceAll('文字由本人随附件提供','文字由本人提供');
+    .replaceAll('委托方提供 · 本站不声明开放许可','协会侧提供 · 本站不声明开放许可');
 }
 
 export async function finalizeAssociationExperience(){
@@ -39,8 +36,8 @@ export async function finalizeAssociationExperience(){
   }
   const sourcePath=path.join(dist,'sources.html');
   let sources=await readFile(sourcePath,'utf8');
-  if(!sources.includes('协会侧补充影像')){
-    const section=`<section id="association-supplied-media"><h2>协会侧补充影像</h2><p>另有${data.items.length}张校园跑步、赛事交流与跑友合影由协会侧在本次网站完善中直接提供。它们用于补充协会介绍与影像档案，不据此声明开放许可，也不从照片自行识别个人身份或成绩。</p><p>其中，2026重庆市大学生田径比赛的公开成绩仅作为学校体育背景引用；2025重庆（长嘉汇）半程马拉松的公开赛事数据仅用于说明对应场景。两者都不等同于协会主办或协会团体成绩。</p><a href="about.html#member-media">查看协会补充影像与说明 →</a></section>`;
+  if(!sources.includes('协会侧补充照片')){
+    const section=`<section id="association-supplied-media"><h2>协会侧补充照片</h2><p>另有 ${data.items.length} 张校园训练、校内赛事和跑友合影由协会侧提供。它们用于补充协会介绍和影像档案，版权与使用范围按提供方说明处理；本站不宣称开放许可，也不从照片自行识别个人身份或成绩。</p><p>其中，2026 年重庆市大学生田径比赛的公开成绩只作为学校体育背景；2025 年长嘉汇半程马拉松的公开信息只用于说明赛事场景。两者都不写作协会主办活动或协会团体成绩。</p><a href="about.html#member-media">查看协会补充照片与说明 →</a></section>`;
     sources=sources.replace('</main>',section+'</main>');
   }
   await writeFile(sourcePath,sources);

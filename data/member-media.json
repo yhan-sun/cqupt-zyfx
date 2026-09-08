@@ -11,15 +11,15 @@
     ]
   },
   "items": [
-    {"id":"member-captain-run","file":"member-captain-run.webp","title":"校园跑道上的会长胡钢","year":"2026","category":"people","description":"由委托方提供的校园跑步照片，用于协会介绍与跑团日常叙事。","width":200,"height":133},
-    {"id":"member-two-runners","file":"member-two-runners.webp","title":"校园跑道上的伙伴","year":"2026","category":"training","description":"跑步不只是个人训练，也是在校园里找到一起坚持的人。","width":200,"height":133},
-    {"id":"member-school-track","file":"member-school-track.webp","title":"校运会赛道上的跑者","year":"2025","category":"campus","description":"校内田径与跑步场景。照片只用于呈现校园跑步氛围，不据此推断个人成绩。","width":300,"height":200},
-    {"id":"member-qingyuan-talk-2026","file":"member-qingyuan-talk-2026.webp","title":"2026年清远马拉松校内宣讲","year":"2026","category":"community","description":"从训练到参赛，赛前交流和信息分享也是跑团连接同学的一部分。","width":320,"height":240},
-    {"id":"member-hundred-miles-2025","file":"member-hundred-miles-2025.webp","title":"2025年高校百英里西南分站赛","year":"2025","category":"race","description":"委托方提供的高校接力赛事团队影像，作为跑团外出交流与参赛记录补充。","width":200,"height":133},
-    {"id":"member-changjiahui-medals-2025","file":"member-changjiahui-medals-2025.webp","title":"2025长嘉汇半马奖牌合影","year":"2025","category":"race","description":"跑友完赛后的集体留影。赛事本身不等同于协会主办活动。","width":150,"height":200,"evidence":"https://www.cq.gov.cn/ywdt/jrcq/202511/t20251103_15132593.html"},
-    {"id":"member-changjiahui-team-2025","file":"member-changjiahui-team-2025.webp","title":"2025长嘉汇半马跑友合影","year":"2025","category":"community","description":"南滨路赛事中的跑友集结场景，补充公众号之外的跑团影像。","width":200,"height":150,"evidence":"https://www.cqna.gov.cn/zwxx_254/qxdt/202511/t20251103_15133288.html"},
-    {"id":"member-athletics-team-2026","file":"member-athletics-team-2026.webp","title":"2026重庆市大学生田径比赛合影","year":"2026","category":"campus","description":"委托方提供的赛事合影。重庆市教委公开成绩显示重庆邮电大学获甲组女子团体第一；这是学校代表队成绩，不写作协会团体成绩。","width":200,"height":133,"evidence":"https://jw.cq.gov.cn/jygz/twygfjy/cjgs/202606/P020260605368104890055.pdf"},
-    {"id":"member-athletics-awards-2026","file":"member-athletics-awards-2026.webp","title":"2026重庆市大学生田径比赛奖状记录","year":"2026","category":"campus","description":"赛事奖状与参赛记录补充；官网不从照片自行识别个人姓名、单项和名次。","width":112,"height":200,"evidence":"https://jw.cq.gov.cn/jygz/twygfjy/cjgs/202606/P020260605368104890055.pdf"}
+    {"id":"member-captain-run","file":"member-captain-run.webp","title":"胡钢在校园跑道训练","year":"2026","category":"people","description":"会长胡钢提供的校园跑步照片，用于说明协会日常训练场景。","width":2400,"height":1600},
+    {"id":"member-two-runners","file":"member-two-runners.webp","title":"校园跑道上的两位跑者","year":"2026","category":"training","description":"两位跑者在校园跑道上训练的画面；照片只说明所见场景，不推断个人成绩。","width":2400,"height":1600},
+    {"id":"member-school-track","file":"member-school-track.webp","title":"校运会赛道上的跑者","year":"2025","category":"campus","description":"校内田径比赛中的跑步场景；照片只用于呈现赛道现场，不据此推断个人名次。","width":2400,"height":1600},
+    {"id":"member-qingyuan-talk-2026","file":"member-qingyuan-talk-2026.webp","title":"清远马拉松校内宣讲","year":"2026","category":"community","description":"校内宣讲活动合影，画面中可以看到赛事主题背景和跑团旗帜。","width":1706,"height":1279},
+    {"id":"member-hundred-miles-2025","file":"member-hundred-miles-2025.webp","title":"高校百英里接力赛现场","year":"2025","category":"race","description":"2025 年高校百英里接力赛现场合影，画面中可以看到重邮队旗。","width":1600,"height":1066},
+    {"id":"member-changjiahui-medals-2025","file":"member-changjiahui-medals-2025.webp","title":"长嘉汇半马的奖牌","year":"2025","category":"race","description":"长嘉汇半程马拉松赛后，跑友展示赛事奖牌。","width":1800,"height":2400,"evidence":"https://www.cq.gov.cn/ywdt/jrcq/202511/t20251103_15132593.html"},
+    {"id":"member-changjiahui-team-2025","file":"member-changjiahui-team-2025.webp","title":"长嘉汇半马赛后合影","year":"2025","category":"community","description":"长嘉汇半程马拉松结束后的跑友合影；照片不表示赛事由协会主办。","width":1707,"height":1280,"evidence":"https://www.cqna.gov.cn/zwxx_254/qxdt/202511/t20251103_15133288.html"},
+    {"id":"member-athletics-team-2026","file":"member-athletics-team-2026.webp","title":"重庆市大学生田径比赛合影","year":"2026","category":"campus","description":"重庆市大学生田径比赛期间的参赛队伍合影。学校代表队成绩另有公开资料，不写作协会团体成绩。","width":1920,"height":1280,"evidence":"https://jw.cq.gov.cn/jygz/twygfjy/cjgs/202606/P020260605368104890055.pdf"},
+    {"id":"member-athletics-awards-2026","file":"member-athletics-awards-2026.webp","title":"重庆市大学生田径比赛的奖状","year":"2026","category":"campus","description":"重庆市大学生田径比赛现场的奖状与奖牌。照片只作为赛事记录，不从证书或画面识别个人名次。","width":1350,"height":2400,"evidence":"https://jw.cq.gov.cn/jygz/twygfjy/cjgs/202606/P020260605368104890055.pdf"}
   ],
-  "rights": "以上9张照片由委托方在本次网站完善中提供。本站按委托用于协会网站展示，不据此声明开放许可；如公开展示范围发生变化，应由运营方及时替换或下架。"
+  "rights": "以上 9 张照片由协会侧在本次网站完善中提供。本站依据提供方说明用于协会网站展示，不据此声明开放许可；如公开展示范围发生变化，应由运营方及时替换或下架。"
 }

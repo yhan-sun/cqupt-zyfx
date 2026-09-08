@@ -35,7 +35,7 @@ with sync_playwright() as p:
     check('about: four association identities are explained',page.locator('.association-aliases>div').count()==4)
     check('about: nine supplied photographs are archived',page.locator('.association-photo-grid article').count()==9 and page.locator('.association-photo-grid img').count()==9)
     check('about: all supplied photographs load locally',page.locator('.association-photo-grid img').evaluate_all("ims=>ims.every(i=>new URL(i.src).origin===location.origin&&i.naturalWidth>0)"))
-    check('about: evidence boundaries remain scoped','不写作协会团体成绩' in page.locator('.association-proof').inner_text() and '不代表赛事由协会主办' in page.locator('.association-proof').inner_text())
+    check('about: evidence boundaries remain scoped','不是协会团体成绩' in page.locator('.association-proof').inner_text() and '不代表协会主办赛事' in page.locator('.association-proof').inner_text())
     check('about: current QQ join route is present','468686951' in page.locator('.association-join').inner_text() and page.locator('.association-join a[href="join.html"]').count()==1)
     page.screenshot(path=str(out/'association-about.png'),full_page=True);page.screenshot(path=str(out/'association-about-top.png'))
 
@@ -69,7 +69,7 @@ with sync_playwright() as p:
 
     page.goto(url+'sources.html',wait_until='networkidle')
     check('sources: official WeChat ledger remains twenty images',page.locator('#official-wechat .official-media-source-grid>div').count()==20)
-    check('sources: supplied media has a separate disclosure',page.locator('#association-supplied-media').count()==1 and '9张' in page.locator('#association-supplied-media').inner_text())
+    check('sources: supplied media has a separate disclosure',page.locator('#association-supplied-media').count()==1 and '9 张' in page.locator('#association-supplied-media').inner_text())
 
     page.goto(url+'science.html',wait_until='networkidle')
     check('science: six chapters and search index remain',page.locator('.sc-chapter').count()==6 and page.locator('[data-resource]').count()==30)

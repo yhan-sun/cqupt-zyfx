@@ -16,6 +16,30 @@ for (const [postId, ids] of Object.entries(culture.postImages)) for (const id of
 const external = 'target="_blank" rel="noopener noreferrer"';
 const e = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 
+function polishCultureCopy(html) {
+  return html
+    .replaceAll('从最新记录开始 →', '查看公开记录 →')
+    .replaceAll('看完整跑步影像', '浏览跑步影像')
+    .replaceAll('看跑步影像', '浏览跑步影像')
+    .replaceAll('看赛事与足迹 →', '查看赛事与足迹 →')
+    .replaceAll('回到赛事与足迹 →', '查看赛事与足迹 →')
+    .replaceAll('先看跑团自己的训练与活动。', '公众号记录的训练与活动')
+    .replaceAll('同一面旗帜，不同的场景。', '训练场和比赛现场，都有记录。')
+    .replaceAll('成绩之外，还有一起跑的人。', '训练、比赛和赛后交流，都留在记录里。')
+    .replaceAll('现有公众号资料里，训练、出征和赛后交流反复出现。这里把这些团队场景放回档案里，而不是只留下名次和数字。', '现有公众号资料涉及校园训练、出征比赛和赛后交流。这里按年份整理原文和照片，不把历史记录写成当前活动安排。')
+    .replaceAll('一段段跑出来的记录。', '按年份查看公开记录。')
+    .replaceAll('公众号曾记录过怎样的一周。', '2025 年招新文章里的训练安排')
+    .replaceAll('去科学跑步理解这些训练 →', '了解科学跑步')
+    .replaceAll('历史公告原文 ↗', '查看历史公告原文 ↗')
+    .replaceAll('赛事档案 →', '查看赛事档案 →')
+    .replaceAll('自邮飞翔 · RUNNING ARCHIVE', '自邮飞翔 · 跑步影像')
+    .replaceAll('跑过的地方，<br>一起跑的人。', '跑团训练与赛事照片')
+    .replaceAll('从太极运动场训练，到清远、重庆、贵阳的赛场集结。新增影像来自自邮飞翔官方公众号，保留文章日期与出处。', '这里集中展示自邮飞翔公众号公开的训练、集结和赛事照片；每张图保留文章日期与出处。')
+    .replaceAll('在跑步影像里继续看 →', '查看跑步影像 →')
+    .replaceAll('从太极运动场的集体训练，到高校联赛与城市马拉松，公众号公开记录把这支跑团的训练、集结和赛后交流串在一起。', '公众号公开记录了太极运动场训练、高校联赛和城市马拉松，也保留了赛前集合与赛后交流的片段。')
+    .replaceAll('看校园赛事影像 →', '查看校园赛事影像 →');
+}
+
 function replaceMain(html, main) {
   const start = html.indexOf('<main id="main"');
   const end = html.lastIndexOf('</main>');
@@ -137,22 +161,23 @@ function homeSection() {
 
 export async function buildClubCulture() {
   let club = await readFile(path.join(dist, 'club.html'), 'utf8');
-  club = replaceMain(club, clubMain());
+  club = polishCultureCopy(replaceMain(club, clubMain()));
   club = ensureCultureCss(club);
   await writeFile(path.join(dist, 'club.html'), club);
 
   let gallery = await readFile(path.join(dist, 'gallery.html'), 'utf8');
-  gallery = replaceMain(gallery, galleryMain());
+  gallery = polishCultureCopy(replaceMain(gallery, galleryMain()));
   gallery = ensureCultureCss(gallery);
   await writeFile(path.join(dist, 'gallery.html'), gallery);
 
   let home = await readFile(path.join(dist, 'index.html'), 'utf8');
-  home = replaceSection(home, '<section class="club-footprints-home', '<section class="container section science-entry"', homeSection());
+  home = polishCultureCopy(replaceSection(home, '<section class="club-footprints-home', '<section class="container section science-entry"', homeSection()));
   home = ensureCultureCss(home);
   await writeFile(path.join(dist, 'index.html'), home);
 
   let sources = await readFile(path.join(dist, 'sources.html'), 'utf8');
   sources = sources.replace(/本版选用其中8幅团队、校园训练或赛事照片/, `本版选用其中${officialMedia.length}幅团队、校园训练、赛事或跑友交流照片`);
+  sources = polishCultureCopy(sources);
   sources = ensureCultureCss(sources);
   await writeFile(path.join(dist, 'sources.html'), sources);
 
