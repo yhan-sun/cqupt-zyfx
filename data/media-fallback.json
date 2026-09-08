@@ -1,0 +1,20 @@
+{
+  "baseUrl": "https://yhan-sun.github.io/cqupt-zyfx/media/",
+  "sourceCommit": "d73dbace06135c0ca5e7f3a2882a40a131b4513b",
+  "items": {
+    "logo": {"file":"logo.png","sha256":"62d9900358d74e18e8738283c9380937597dd9308b126c7594f8171c43d43fc7","width":272,"height":69},
+    "logo-white": {"file":"logo-white.png","sha256":"a9736a72058fa5f3ce4c7c011382e852535eed4c76229d822a75425e6618bc1a","width":277,"height":70},
+    "campus-pond": {"file":"campus-pond.webp","sha256":"2afea7db13b09ca7b783558ba384bf92b1b58dd3c42de06674d10924a12194fd","width":1920,"height":960,"small":{"file":"campus-pond-small.webp","sha256":"a52dc244dd192d7abf17d0550c424f07240956574c12f601073cd6591dfbec90","width":640,"height":320}},
+    "campus-autumn": {"file":"campus-autumn.webp","sha256":"8da37136eff19c067f4d02aac6f7f64f316f05ce2c36468d94fe436c13ffab55","width":240,"height":160},
+    "campus-teaching": {"file":"campus-teaching.webp","sha256":"6ae8e6400e0de55efa9a2c4834e20624c5ed9fa4d9d3728d4315a16b49a38da7","width":240,"height":160},
+    "campus-letters": {"file":"campus-letters.webp","sha256":"7e6e41054712e51398e8247b7c1a6572ec9c63f040577e837b2a30bcf1b90c82","width":240,"height":160},
+    "race-2025": {"file":"race-2025.webp","sha256":"97b72a3778ca2e6b8a38030598f531b7881a41518941c49cf23bec7dc133dd14","width":550,"height":373},
+    "race-start": {"file":"race-start.webp","sha256":"4917f4028ac7775c72f55e06b20569c67dfb929e0a7aa684fd725211ef37be76","width":800,"height":600,"small":{"file":"race-start-small.webp","sha256":"31b5aa31606d9a4aef009d1b4deaf525de53add4b9dae3b673ecf0b7f1bb81d1","width":640,"height":480}},
+    "race-relay": {"file":"race-relay.webp","sha256":"935befeaf05ecad899980f3d22e9ea9d4220a0cad10b0adec2cb2cc2d1504a8f","width":800,"height":533,"small":{"file":"race-relay-small.webp","sha256":"89cea18c6aea70f79114629217a63dd7b266e7640793de2b83de4697bbc326a3","width":640,"height":426}},
+    "race-runners": {"file":"race-runners.webp","sha256":"9d8133729bf5821c2c4ea7c14f56b6c5aaa391ce0a5898cf64c25c49507c6c7f","width":800,"height":600,"small":{"file":"race-runners-small.webp","sha256":"3aa0eb2442b80b9c806f0930bfc57d457f71f69f8a88b4b882e0d9f9d6151202","width":640,"height":480}},
+    "race-warmup": {"file":"race-warmup.webp","sha256":"fff7985c2fc1dbf7776e08e95b66afd80bee5c1a3a3891260e58f704fcd07fac","width":800,"height":600,"small":{"file":"race-warmup-small.webp","sha256":"1720969ef2ed1b1f8c7cea4ec4316a1623a865490c1da93943d6df3adf88287f","width":640,"height":480}},
+    "race-course": {"file":"race-course.webp","sha256":"837bfb466b796d26ddebd77086cda2d8f60b6c465ec4293180bbd71bd0729958","width":800,"height":600,"small":{"file":"race-course-small.webp","sha256":"d8e4a373a2f336f6e982ea5cbfe33dd2bee73bf9c895ff96807c945257e6d2c6","width":640,"height":480}},
+    "campus-gate": {"file":"campus-gate.webp","sha256":"33f7afdc468832558a7750c5c327d1c23b6b8236ac3b36d2b3d836eb01efd025","width":1280,"height":960,"small":{"file":"campus-gate-small.webp","sha256":"a978bb38715cb16274e8672c2072d94d183730332e6654a4b1e9c07cb5af463a","width":640,"height":480}},
+    "track": {"file":"track.webp","sha256":"f191bb7570e178e059da0b444079b54c516197135d516dfb71095736a74c95b4","width":731,"height":1024,"small":{"file":"track-small.webp","sha256":"19b61e3a1c2cdf8a3c16527a610e571a813e2ee5d0a04f9c26cb4fc6c6fe54eb","width":457,"height":640}}
+  }
+}
