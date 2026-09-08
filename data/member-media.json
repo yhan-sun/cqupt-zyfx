@@ -1,0 +1,25 @@
+{
+  "reviewedAt": "2026-09-08",
+  "captain": {
+    "name": "胡钢",
+    "role": "跑步爱好者协会会长",
+    "grade": "25级",
+    "story": [
+      "我与跑步的故事始于2023年。最开始和很多同学一样，我没有运动基础，跑完一圈便气喘乏力。坚持一路走来，如今已经可以从容跑完半程马拉松。",
+      "跑步带给我的改变不止是体能，更让我从曾经的腼腆内向，逐渐变得自信开朗。于我而言，跑步能够强健体魄，更可贵的是磨炼意志、重塑精神状态。",
+      "重邮跑步爱好者协会，是所有奔跑爱好者相聚的大家庭。无论你是长跑老手，还是从未尝试过长跑的新手，都欢迎加入，一起跑、一起进步。"
+    ]
+  },
+  "items": [
+    {"id":"member-captain-run","file":"member-captain-run.webp","title":"校园跑道上的会长胡钢","year":"2026","category":"people","description":"由委托方提供的校园跑步照片，用于协会介绍与跑团日常叙事。","width":200,"height":133},
+    {"id":"member-two-runners","file":"member-two-runners.webp","title":"校园跑道上的伙伴","year":"2026","category":"training","description":"跑步不只是个人训练，也是在校园里找到一起坚持的人。","width":200,"height":133},
+    {"id":"member-school-track","file":"member-school-track.webp","title":"校运会赛道上的跑者","year":"2025","category":"campus","description":"校内田径与跑步场景。照片只用于呈现校园跑步氛围，不据此推断个人成绩。","width":300,"height":200},
+    {"id":"member-qingyuan-talk-2026","file":"member-qingyuan-talk-2026.webp","title":"2026年清远马拉松校内宣讲","year":"2026","category":"community","description":"从训练到参赛，赛前交流和信息分享也是跑团连接同学的一部分。","width":320,"height":240},
+    {"id":"member-hundred-miles-2025","file":"member-hundred-miles-2025.webp","title":"2025年高校百英里西南分站赛","year":"2025","category":"race","description":"委托方提供的高校接力赛事团队影像，作为跑团外出交流与参赛记录补充。","width":200,"height":133},
+    {"id":"member-changjiahui-medals-2025","file":"member-changjiahui-medals-2025.webp","title":"2025长嘉汇半马奖牌合影","year":"2025","category":"race","description":"跑友完赛后的集体留影。赛事本身不等同于协会主办活动。","width":150,"height":200,"evidence":"https://www.cq.gov.cn/ywdt/jrcq/202511/t20251103_15132593.html"},
+    {"id":"member-changjiahui-team-2025","file":"member-changjiahui-team-2025.webp","title":"2025长嘉汇半马跑友合影","year":"2025","category":"community","description":"南滨路赛事中的跑友集结场景，补充公众号之外的跑团影像。","width":200,"height":150,"evidence":"https://www.cqna.gov.cn/zwxx_254/qxdt/202511/t20251103_15133288.html"},
+    {"id":"member-athletics-team-2026","file":"member-athletics-team-2026.webp","title":"2026重庆市大学生田径比赛合影","year":"2026","category":"campus","description":"委托方提供的赛事合影。重庆市教委公开成绩显示重庆邮电大学获甲组女子团体第一；这是学校代表队成绩，不写作协会团体成绩。","width":200,"height":133,"evidence":"https://jw.cq.gov.cn/jygz/twygfjy/cjgs/202606/P020260605368104890055.pdf"},
+    {"id":"member-athletics-awards-2026","file":"member-athletics-awards-2026.webp","title":"2026重庆市大学生田径比赛奖状记录","year":"2026","category":"campus","description":"赛事奖状与参赛记录补充；官网不从照片自行识别个人姓名、单项和名次。","width":112,"height":200,"evidence":"https://jw.cq.gov.cn/jygz/twygfjy/cjgs/202606/P020260605368104890055.pdf"}
+  ],
+  "rights": "以上9张照片由委托方在本次网站完善中提供。本站按委托用于协会网站展示，不据此声明开放许可；如公开展示范围发生变化，应由运营方及时替换或下架。"
+}
