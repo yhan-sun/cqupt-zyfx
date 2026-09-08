@@ -1,0 +1,42 @@
+{
+  "name": "重庆邮电大学跑步爱好者协会",
+  "aliases": ["重邮约跑团", "自邮飞翔"],
+  "mission": "让不同水平的重邮跑者在同一条跑道上相遇：一起交流、训练、打卡，也在合适的时候一起走向更远的赛场。",
+  "president": {
+    "name": "胡钢",
+    "grade": "25级",
+    "role": "跑步爱好者协会会长",
+    "runningSince": 2023,
+    "story": "胡钢在自述中提到，自己从没有运动基础、跑一圈便气喘乏力开始，坚持跑步后逐渐能够从容完成半程马拉松。对他而言，跑步带来的改变不只在体能，也包括自信、开朗与长期坚持的能力。",
+    "quote": "无论你是长跑老手，还是从未尝试过长跑的新手，都欢迎加入我们。让我们并肩奔跑，彼此陪伴，一同进步。"
+  },
+  "principles": [
+    {"title":"不同水平，都能找到起点","text":"不把配速和成绩当作加入门槛。新手可以从走跑结合、操场慢跑开始，有训练经验的同学也可以交流专项训练和比赛准备。"},
+    {"title":"校园日常，比一次比赛更重要","text":"鼓励在校内形成稳定的跑步习惯：约跑、打卡、交流训练体验，让跑步成为大学生活里长期可持续的一部分。"},
+    {"title":"训练要认真，也要尊重身体","text":"官网的科学跑步专区提供热身、训练、力量、营养和恢复资料；线下参与仍应根据个人状态、天气和场地安排调整。"},
+    {"title":"一起出发，也一起回来","text":"有机会共同参与校外路跑、高校赛事和交流活动。比赛是经历的一部分，同行的人、训练过程和安全完赛同样重要。"}
+  ],
+  "media": [
+    {"id":"captain-hu-run","filename":"captain-hu-run.webp","title":"会长胡钢在田径场奔跑","alt":"胡钢在田径场跑步的协会提供照片","year":2026,"category":"people","width":640,"height":427,"sha256":"d621272672504017aa481e0de2776b03cf054ee9c05a53a3c86ce560379b3287"},
+    {"id":"captain-hu-li-run","filename":"captain-hu-li-run.webp","title":"胡钢与李俊熹在田径场奔跑","alt":"25级胡钢与24级李俊熹在田径场跑步的协会提供照片","year":2026,"category":"training","width":640,"height":427,"sha256":"20357f59323e651624a29c05c712bf9a72e876e319300fa1134225bb2acc6282"},
+    {"id":"2025-hundred-miles-southwest","filename":"2025-hundred-miles-southwest.webp","title":"2025高校百英里西南分站赛集结","alt":"重邮跑者在高校百英里西南分站赛现场持校旗与自邮飞翔旗帜合影","year":2025,"category":"race","width":640,"height":426,"sha256":"6de717d63e346585543eb245b39ec21fc5b9bb4ccc275dd5a14d3c2b7580a6af"},
+    {"id":"2026-cq-college-track-awards","filename":"2026-cq-college-track-awards.webp","title":"2026重庆市大学生田径比赛奖状现场","alt":"重庆市2026年大学生田径比赛奖状与参赛队员围合的协会提供照片","year":2026,"category":"school","width":506,"height":900,"sha256":"dd5759261bf2cb131c79ea6a453f01e7abb178f871f3c5ed123a9ea48aba871a"},
+    {"id":"2026-cq-college-track-team","filename":"2026-cq-college-track-team.webp","title":"重庆邮电大学参加2026重庆市大学生田径比赛","alt":"重庆邮电大学参赛队在2026重庆市大学生田径比赛现场合影","year":2026,"category":"school","width":640,"height":427,"sha256":"083ba386b723ae04b5e1b8ca38d5c0b6f1a4cfc0484135678a106d306a3df7be"},
+    {"id":"2026-qingyuan-campus-talk","filename":"2026-qingyuan-campus-talk.webp","title":"2026清远马拉松校内交流宣讲","alt":"校内教室中与清远马拉松相关的跑步交流宣讲合影，现场展示自邮飞翔旗帜","year":2026,"category":"community","width":640,"height":480,"sha256":"2602ed6cab1f0c73a3a386e2014a1d6bffa780110530dd17b656462668deb2c1"},
+    {"id":"2025-campus-games-cai","filename":"2025-campus-games-cai.webp","title":"2025校运会赛道影像","alt":"2025级女子队员蔡依玲参加校运会跑步项目的协会提供照片","year":2025,"category":"campus","width":640,"height":427,"sha256":"4e413c9184b75ddc393042076c364045953feb772f2e133cece10b79eea5bc24"},
+    {"id":"2025-changjiahui-team","filename":"2025-changjiahui-team.webp","title":"2025长嘉汇城市跑步合影","alt":"跑友在重庆长嘉汇城市景观前的协会提供合影","year":2025,"category":"community","width":640,"height":480,"sha256":"f3c74b0567e4976054e1c4a54c5cf580fee0a3a29948e51e307747f288167295"},
+    {"id":"2025-changjiahui-medals","filename":"2025-changjiahui-medals.webp","title":"2025长嘉汇完赛奖牌合影","alt":"跑友在长嘉汇活动后展示完赛奖牌的协会提供照片","year":2025,"category":"community","width":640,"height":853,"sha256":"bf10686809881d960bd5b5e10450dcf8a7ba1e90599d3fda9dd818173868a989"}
+  ],
+  "schoolAthletics": {
+    "title": "2026年重庆市大学生田径比赛 · 重庆邮电大学",
+    "scope": "school",
+    "note": "以下为重庆邮电大学校级参赛成绩，用于说明校园田径氛围，不等同于跑步爱好者协会战绩，也不据此推断照片中个人身份或成绩。",
+    "facts": [
+      {"value":"第1","label":"甲组女子团体","detail":"85分"},
+      {"value":"第6","label":"甲组男子团体","detail":"50.5分"},
+      {"value":"体育道德风尚奖","label":"学校集体奖项","detail":"重庆市教育委员会成绩册"}
+    ],
+    "source": "https://jw.cq.gov.cn/jygz/twygfjy/cjgs/202606/P020260605368104890055.pdf",
+    "sourceName": "重庆市教育委员会 · 2026年重庆市大学生田径比赛成绩册"
+  }
+}
