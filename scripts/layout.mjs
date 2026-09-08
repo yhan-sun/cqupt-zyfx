@@ -35,6 +35,8 @@ export function page(filename, title, body, { active = '', description = site.de
   const fullTitle = `${title} · ${site.name}`;
   const science = active === 'science';
   const hasPhotos = body.includes('data-photo-view=');
+  const pageKey = filename.replace(/\.html$/, '').replaceAll('/', '-');
+  const bodyClass = `page page-${active || 'utility'}`;
   const nav = site.navigation.map(item => `<a href="${prefix}${item.path}"${item.key === active ? ' aria-current="page"' : ''}${item.key === 'join' ? ` class="nav-join"${item.key === active ? ' style="color:#fff"' : ''}` : ''}>${e(item.label)}</a>`).join('');
   return `<!doctype html>
 <html lang="zh-CN">
@@ -47,10 +49,10 @@ export function page(filename, title, body, { active = '', description = site.de
 <meta property="og:url" content="${e(canonical)}"><meta property="og:image" content="${e(new URL(shareImage, site.origin).href)}">
 <meta name="theme-color" content="#087c80">${noindex ? '<meta name="robots" content="noindex,follow">' : ''}
 <link rel="icon" href="${prefix}assets/mark.svg" type="image/svg+xml">
-<link rel="stylesheet" href="${prefix}assets/site.css">${science ? `<link rel="stylesheet" href="${prefix}assets/science.css">` : ''}
+<link rel="stylesheet" href="${prefix}assets/site.css">${science ? `<link rel="stylesheet" href="${prefix}assets/science.css">` : ''}<link rel="stylesheet" href="${prefix}assets/editorial.css">
 <script type="module" src="${prefix}assets/site.js"></script>${science ? `<script type="module" src="${prefix}assets/science.js"></script>` : ''}
 </head>
-<body>
+<body class="${e(bodyClass)}" data-page="${e(pageKey)}">
 <a class="skip-link" href="#main">跳到正文</a>
 <header class="site-header"><div class="container header-inner"><a class="brand" href="${prefix}index.html"><span>重庆邮电大学</span><strong>${e(site.shortName)}</strong><small>${e(site.alias)}</small></a><button class="menu-toggle" aria-controls="main-nav" aria-expanded="false" type="button" hidden>菜单</button><nav id="main-nav" aria-label="主导航">${nav}</nav></div></header>
 ${body}
