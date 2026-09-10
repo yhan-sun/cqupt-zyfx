@@ -150,6 +150,21 @@
       "motto": "Keep Running!",
       "source": "本人提供",
       "note": "个人资料与照片由本人提供，用于协会网站人物展示。"
+    },
+    {
+      "id": "he-yao",
+      "name": "何耀",
+      "grade": "2023级",
+      "college": "通信学院",
+      "image": "runner-he-yao",
+      "records": [
+        {"label": "5000m PB", "value": "18:30"},
+        {"label": "万州马拉松（半马）", "value": "1:22:59"},
+        {"label": "上合昆明马拉松（全马）", "value": "3:22:33"}
+      ],
+      "motto": "听风",
+      "source": "本人提供",
+      "note": "个人资料与照片由本人提供，用于协会网站人物展示。"
     }
   ],
   "photos": [
@@ -239,6 +254,16 @@
       "width": 1280,
       "height": 1920,
       "sha256": "1fac15f7a3a93938c7b99f83865358cfacda70a2aa6b5cdaac463fc08fc02691",
+      "sourceLabel": "本人提供",
+      "fit": "contain"
+    },
+    {
+      "id": "runner-he-yao",
+      "file": "runner-he-yao.webp",
+      "title": "跑友个人照片",
+      "width": 1057,
+      "height": 1587,
+      "sha256": "0d8c63ea77398ceb556f661a96f09fb398d0de7258699d86f584940294c34a2f",
       "sourceLabel": "本人提供",
       "fit": "contain"
     }

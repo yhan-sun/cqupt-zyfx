@@ -8,7 +8,7 @@ const pages = renderSite(createModel());
 const siteCss = await readFile(new URL('../assets/site.css', import.meta.url), 'utf8');
 
 test('runners: profile data keeps the supplied fields and registered image', () => {
-  assert.equal(runners.items.length, 10);
+  assert.equal(runners.items.length, 11);
   const profile = runners.items.find(item => item.id === 'hu-gang');
   const secondProfile = runners.items.find(item => item.id === 'yu-peijun');
   const thirdProfile = runners.items.find(item => item.id === 'yang-haoxian');
@@ -19,6 +19,7 @@ test('runners: profile data keeps the supplied fields and registered image', () 
   const eighthProfile = runners.items.find(item => item.id === 'wang-xuecong');
   const ninthProfile = runners.items.find(item => item.id === 'yang-pengyu');
   const tenthProfile = runners.items.find(item => item.id === 'liu-ake');
+  const eleventhProfile = runners.items.find(item => item.id === 'he-yao');
   assert.ok(profile);
   assert.ok(secondProfile);
   assert.ok(thirdProfile);
@@ -29,6 +30,7 @@ test('runners: profile data keeps the supplied fields and registered image', () 
   assert.ok(eighthProfile);
   assert.ok(ninthProfile);
   assert.ok(tenthProfile);
+  assert.ok(eleventhProfile);
   assert.deepEqual(
     { name: profile.name, grade: profile.grade, college: profile.college, image: profile.image },
     { name: '胡钢', grade: '2025级', college: '自动化学院', image: 'member-captain-run' }
@@ -93,6 +95,16 @@ test('runners: profile data keeps the supplied fields and registered image', () 
     ['2025年垫江马拉松（全马）', '2:58:49']
   ]);
   assert.equal(tenthProfile.motto, 'Keep Running!');
+  assert.deepEqual(
+    { name: eleventhProfile.name, grade: eleventhProfile.grade, college: eleventhProfile.college, image: eleventhProfile.image },
+    { name: '何耀', grade: '2023级', college: '通信学院', image: 'runner-he-yao' }
+  );
+  assert.deepEqual(eleventhProfile.records.map(record => [record.label, record.value]), [
+    ['5000m PB', '18:30'],
+    ['万州马拉松（半马）', '1:22:59'],
+    ['上合昆明马拉松（全马）', '3:22:33']
+  ]);
+  assert.equal(eleventhProfile.motto, '听风');
 });
 
 test('runners: page is rendered from the shared model and preserves provenance', () => {
@@ -108,7 +120,8 @@ test('runners: page is rendered from the shared model and preserves provenance',
     '金炜程', '通信学院', '16:42', '1:18:59', '2:56:14', '我的少鹏无限猖狂',
     '王学聪', '2022级研', '经济管理学院', '15:45', '1:11:36', '2:28:54', '无人扶我青云志，我自己也不想动',
     '杨鹏宇', '2021级', '17:04', '1:15:19', '2:46:21', '111',
-    '刘阿克', '2022级', '17:54', '1:22:41', '2:58:49', 'Keep Running!'
+    '刘阿克', '2022级', '17:54', '1:22:41', '2:58:49', 'Keep Running!',
+    '何耀', '2023级', '通信学院', '18:30', '1:22:59', '3:22:33', '听风'
   ]) {
     assert.ok(html.includes(text), text);
   }
@@ -122,6 +135,7 @@ test('runners: page is rendered from the shared model and preserves provenance',
   assert.match(html, /data-photo-view="runner-wang-xuecong"/);
   assert.match(html, /data-photo-view="runner-yang-pengyu"/);
   assert.match(html, /data-photo-view="runner-liu-ake"/);
+  assert.match(html, /data-photo-view="runner-he-yao"/);
   assert.ok(html.includes('照片由本人提供'));
   for (const removed of ['当前展示', '从一位跑友开始', '资料说明', '不做横向排名', '每位跑友沿用相同的信息结构']) {
     assert.ok(!html.includes(removed), removed);
