@@ -6,7 +6,7 @@ Read README.md, docs/CONTENT.md and the relevant domain document before changing
 
 Keep CQUPT's teal-and-white character, readable Chinese navigation and genuine running photography. Do not add decorative slogans, fabricated counters, automatic carousels or another visual-polish stylesheet.
 
-Navigation is 首页 / 协会介绍 / 活动记录 / 相册 / 跑步指南 / 加入我们. The join destination is a distinct action in the same accessible navigation. Keep existing news, note and science URLs working.
+Navigation is 首页 / 协会介绍 / 活动记录 / 相册 / 跑友风采 / 跑步指南 / 加入我们. The join destination is a distinct action in the same accessible navigation. Keep existing news, note and science URLs working.
 
 The association name and aliases live in data/site.json. Do not redefine a name as merely a QQ channel or a public account. Do not infer a formal relationship between school teams, alumni teams and the association without evidence. Do not infer identity, results, health status or membership from a photograph.
 
@@ -19,6 +19,8 @@ Current QQ details are owned only by data/join.json. The verified group is 46868
 Activities retain eventDate separately from published. Missing event dates remain missing; publication dates must be labeled. Historical recruitment and weekly schedules are not current notices. School volunteer numbers are not club membership; registration awards are not competitive rankings.
 
 Gallery categories describe content, not who supplied the photo. All provided and official photos retain source and rights information. Member images, official-account images and science media have integrity checks; never remove them to accept changed sources.
+
+跑友资料维护在 `data/runner-profiles.json`。这是本人确认的资料展示，不是完整或实时的队员名册；成绩、宣言、年级、学院和照片只在本人提供或明确核实后发布，不做横向排名，不把照片当作身份、成绩或成员关系的推断依据。
 
 ## Architecture and verification
 

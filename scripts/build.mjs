@@ -28,6 +28,7 @@ for (const [filename, html] of pages) {
   await writeFile(path.join(dist, filename), html);
 }
 await writeFile(path.join(dist, '.nojekyll'), '');
+await writeFile(path.join(dist, 'CNAME'), `${new URL(model.site.origin).hostname}\n`);
 await writeFile(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${model.site.origin}sitemap.xml\n`);
 const locations = [...pages.keys()].filter(file => !['404.html', 'news.html'].includes(file))
   .map(file => `<url><loc>${model.site.origin}${file === 'index.html' ? '' : file}</loc></url>`).join('');

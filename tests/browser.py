@@ -55,12 +55,12 @@ with sync_playwright() as p:
             page.screenshot(path=str(output / (route.replace('.html', '') + '-mobile.png')), full_page=True)
         page.set_viewport_size({'width': 1440, 'height': 1000})
 
-    for route in ['index.html', 'about.html', 'club.html', 'gallery.html', 'science.html', 'join.html']:
+    for route in ['index.html', 'about.html', 'club.html', 'gallery.html', 'runners.html', 'science.html', 'join.html']:
         navigate(page, route)
         page.set_viewport_size({'width': 390, 'height': 844})
         check(f'{route}: mobile menu initially closed', page.locator('#main-nav').is_hidden())
         page.locator('.menu-toggle').click()
-        check(f'{route}: six destinations', page.locator('#main-nav a:visible').count() == 6)
+        check(f'{route}: seven destinations', page.locator('#main-nav a:visible').count() == 7)
         page.keyboard.press('Escape')
         check(f'{route}: Escape closes menu and returns focus', page.locator('#main-nav').is_hidden() and page.locator('.menu-toggle').evaluate('node => node === document.activeElement'))
 
@@ -166,14 +166,16 @@ with sync_playwright() as p:
 
     nojs = browser.new_context(java_script_enabled=False, viewport={'width': 390, 'height': 844})
     fallback = nojs.new_page()
-    for route in ['index.html', 'about.html', 'club.html', 'gallery.html', 'join.html', 'science.html', 'science/strength.html', 'science/nutrition.html']:
+    for route in ['index.html', 'about.html', 'club.html', 'gallery.html', 'runners.html', 'join.html', 'science.html', 'science/strength.html', 'science/nutrition.html']:
         if preview is not None:
             fallback.goto('about:blank')
             fallback.set_content(preview[route])
         else:
             fallback.goto(base + route, wait_until='load')
         images_ready(fallback)
-        check(f'no JS: {route} navigation and content readable', fallback.locator('h1').is_visible() and fallback.locator('#main-nav a:visible').count() == 6)
+        check(f'no JS: {route} navigation and content readable', fallback.locator('h1').is_visible() and fallback.locator('#main-nav a:visible').count() == 7)
+        if route == 'runners.html':
+            check('no JS: runner profile and records remain readable', fallback.locator('[data-runner-profile="hu-gang"]').is_visible() and '1:20:57' in fallback.locator('#main').inner_text())
         if route == 'gallery.html':
             check('no JS: all photos and original-image links remain', fallback.locator('[data-gallery-item]:visible').count() == len(ids))
             check('no JS: unavailable filters hidden', fallback.locator('[data-gallery-filter]:visible').count() == 0)

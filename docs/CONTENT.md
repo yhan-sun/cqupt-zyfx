@@ -2,7 +2,7 @@
 
 ## 最终信息架构
 
-当前一级导航固定为：**首页 / 协会介绍 / 赛事与足迹 / 跑步影像 / 科学跑步 / 加入我们**。
+当前一级导航固定为：**首页 / 协会介绍 / 活动记录 / 相册 / 跑友风采 / 跑步指南 / 加入我们**。
 
 “校园赛事”与“跑团足迹”不再作为两个一级栏目。`club.html` 同页呈现：
 
@@ -28,6 +28,12 @@
 公众号图片未发现开放许可，版权仍归原权利人。校园赛事图片沿用 `data/media.json` 的权利说明。署名和原文链接不等于开放授权；正式运营前仍应确认转载、摄影与肖像使用范围，或逐步替换成已获授权的跑团自有照片。
 
 首页只展示少量跑步影像预览，不再复制完整相册。
+
+## 跑友风采
+
+`runners.html` 展示由跑友本人确认的资料。当前先登记胡钢：2025级自动化学院、500m PB 17:24、10000m PB 36:35、2025璧山半马 1:20:57，个人宣言为“日拱一卒，功不唐捐”。使用的校园跑道照片登记在 `data/member-media.json`，人物字段与展示范围登记在 `data/runner-profiles.json`。
+
+该栏目用于认识一起跑的人，不是完整或实时的队员名册，也不做横向排名。每位跑友沿用本人资料、个人记录、个人宣言和照片来源的同一结构；新增资料前必须由本人提供或明确确认。人物资料与照片不因署名而获得开放许可，来源说明保留在 `sources.html#runner-profiles`。
 
 ## 校园赛事资料
 
@@ -55,9 +61,9 @@
 
 ## 修改与发布
 
-基础赛事内容修改 `data/content.json` / `data/media.json`；公众号档案修改 `data/official-posts.json` / `data/official-media.json`；当前加入信息修改 `data/join.json`。
+基础赛事内容修改 `data/content.json` / `data/media.json`；公众号档案修改 `data/official-posts.json` / `data/official-media.json`；跑友资料修改 `data/runner-profiles.json`；当前加入信息修改 `data/join.json`。
 
-最终页面结构由 `scripts/structure-build.mjs` 在基础、公众号与加入构建完成后统一收敛。不要直接编辑 `dist`，也不要仅修改基础模板后假设最终页面一定相同。
+最终页面结构由 `scripts/build.mjs` 统一从模型渲染。不要直接编辑 `dist`，也不要仅修改生成后的页面。
 
 发布前至少完成：
 
@@ -67,4 +73,4 @@ npm run build
 python tests/structure_browser.py
 ```
 
-浏览器检查应覆盖 320 / 390 / 768 / 1024 / 1440 px、移动菜单、无 JavaScript、旧赛事直达 URL、35 张跑步影像、图片同站加载、来源链接、科学跑步和 QQ 加入入口。合并到 `main` 后等待 Pages deploy 成功，并检查公开的 `club.html`、`gallery.html`、`science.html`、`join.html` 与兼容 `news.html`。
+浏览器检查应覆盖 320 / 390 / 768 / 1024 / 1440 px、移动菜单、无 JavaScript、旧赛事直达 URL、35 张跑步影像、跑友风采、图片同站加载、来源链接、科学跑步和 QQ 加入入口。合并到 `main` 后等待 Pages deploy 成功，并检查公开的 `club.html`、`gallery.html`、`runners.html`、`science.html`、`join.html` 与兼容 `news.html`。

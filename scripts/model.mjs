@@ -6,6 +6,7 @@ export const join = json('join');
 export const content = json('content');
 export const official = json('official-posts');
 export const members = json('member-media');
+export const runners = json('runner-profiles');
 export const gallery = json('gallery');
 export const baseMedia = json('media');
 export const officialMedia = json('official-media');
@@ -52,6 +53,20 @@ export function createModel({ media = baseMedia, photoMedia = [] } = {}) {
     dateLabel: post.eventDate || `${post.published} 发布`,
     photos: photos.filter(photo => photo.postId === post.id)
   })).sort((a, b) => b.date.localeCompare(a.date));
+  if (!Array.isArray(runners.items) || runners.items.length === 0) throw new Error('Runner profile data must contain at least one item');
+  const runnerIds = new Set();
+  const memberIds = new Set(members.items.map(item => item.id));
+  for (const profile of runners.items) {
+    if (!profile.id || runnerIds.has(profile.id)) throw new Error(`Runner profile id is missing or duplicated: ${profile.id}`);
+    runnerIds.add(profile.id);
+    if (!profile.name || !profile.grade || !profile.college || !profile.image || !profile.motto || !profile.source) {
+      throw new Error(`Runner profile is missing required identity fields: ${profile.id}`);
+    }
+    if (!memberIds.has(profile.image)) throw new Error(`Runner profile image is not registered: ${profile.image}`);
+    if (!Array.isArray(profile.records) || profile.records.length === 0 || profile.records.some(record => !record.label || !record.value)) {
+      throw new Error(`Runner profile records are incomplete: ${profile.id}`);
+    }
+  }
   for (const id of [...site.homePhotos, site.homePhoto]) {
     if (!seen.has(id)) throw new Error(`Unknown home photo: ${id}`);
   }
@@ -61,5 +76,5 @@ export function createModel({ media = baseMedia, photoMedia = [] } = {}) {
   if (!/^https:\/\/qm\.qq\.com\//.test(join.joinUrl) || !/^\d+$/.test(join.groupNumber)) {
     throw new Error('Invalid verified QQ configuration');
   }
-  return { site, join, content, official, members, gallery, media, photos, posts };
+  return { site, join, content, official, members, runners, gallery, media, photos, posts };
 }

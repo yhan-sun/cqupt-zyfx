@@ -2,8 +2,8 @@
   "name": "重庆邮电大学跑步爱好者协会",
   "shortName": "跑步爱好者协会",
   "alias": "重邮约跑团 · 自邮飞翔",
-  "origin": "https://yhan-sun.github.io/cqupt-zyfx/",
-  "description": "重邮约跑团的日常训练、参赛记录和跑步照片，以及加入方式与跑步指南。",
+  "origin": "https://cqupt.yhan.fun/",
+  "description": "重邮约跑团的日常训练、跑友资料、参赛记录和跑步照片，以及加入方式与跑步指南。",
   "intro": "协会面向重邮同学开展跑步交流，分享训练经验和赛事信息。刚开始跑步的同学和有训练基础的跑友都可以加入。",
   "routine": [
     {
@@ -50,6 +50,11 @@
       "key": "gallery",
       "label": "相册",
       "path": "gallery.html"
+    },
+    {
+      "key": "runners",
+      "label": "跑友风采",
+      "path": "runners.html"
     },
     {
       "key": "science",

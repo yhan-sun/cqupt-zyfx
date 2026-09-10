@@ -41,7 +41,7 @@ export function page(filename, title, body, { active = '', description = site.de
   return `<!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">${filename === '404.html' ? `<base href="${e(new URL(site.origin).pathname)}">` : ''}<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">${filename === '404.html' ? '<base href="./">' : ''}<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${e(fullTitle)}</title><meta name="description" content="${e(description)}">
 <link rel="canonical" href="${e(canonical)}"><meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="${e(site.name)}">
