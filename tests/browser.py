@@ -175,7 +175,7 @@ with sync_playwright() as p:
         images_ready(fallback)
         check(f'no JS: {route} navigation and content readable', fallback.locator('h1').is_visible() and fallback.locator('#main-nav a:visible').count() == 7)
         if route == 'runners.html':
-            check('no JS: runner profiles and records remain readable', fallback.locator('[data-runner-profile="hu-gang"]').is_visible() and fallback.locator('[data-runner-profile="yu-peijun"]').is_visible() and '1:20:57' in fallback.locator('#main').inner_text() and '3:48:00' in fallback.locator('#main').inner_text())
+            check('no JS: runner profiles and records remain readable', fallback.locator('[data-runner-profile="hu-gang"]').is_visible() and fallback.locator('[data-runner-profile="yu-peijun"]').is_visible() and fallback.locator('[data-runner-profile="yang-haoxian"]').is_visible() and '1:20:57' in fallback.locator('#main').inner_text() and '3:48:00' in fallback.locator('#main').inner_text() and '2:59:47' in fallback.locator('#main').inner_text())
         if route == 'gallery.html':
             check('no JS: all photos and original-image links remain', fallback.locator('[data-gallery-item]:visible').count() == len(ids))
             check('no JS: unavailable filters hidden', fallback.locator('[data-gallery-filter]:visible').count() == 0)

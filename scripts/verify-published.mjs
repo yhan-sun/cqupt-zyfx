@@ -34,6 +34,6 @@ for (const file of ['assets/site.css','assets/site.js','assets/science.css','ass
   await fetchVerified(file, bytes => bytes.length > 100 && !bytes.toString('utf8').startsWith('<!doctype'));
 }
 await fetchVerified('assets/join-qq.svg', bytes => bytes.toString('utf8').includes('<svg'));
-for (const file of ['media/photos/member-two-runners-480.webp','media/photos/member-captain-run-1600.webp','media/photos/runner-yu-peijun-1600.webp','media/official/2025-track-training.webp','media/science/calf-raise.webp']) {
+for (const file of ['media/photos/member-two-runners-480.webp','media/photos/member-captain-run-1600.webp','media/photos/runner-yu-peijun-1600.webp','media/photos/runner-yang-haoxian-1600.webp','media/official/2025-track-training.webp','media/science/calf-raise.webp']) {
   await fetchVerified(file, bytes => bytes.toString('ascii', 0, 4) === 'RIFF' && bytes.toString('ascii', 8, 12) === 'WEBP');
 }

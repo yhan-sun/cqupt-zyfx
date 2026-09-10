@@ -30,6 +30,21 @@
       "motto": "繁霜尽是心头血，洒向千峰秋叶丹",
       "source": "本人提供",
       "note": "个人资料与照片由本人提供，用于协会网站人物展示。"
+    },
+    {
+      "id": "yang-haoxian",
+      "name": "杨昊贤",
+      "grade": "2023级",
+      "college": "国际学院",
+      "image": "runner-yang-haoxian",
+      "records": [
+        {"label": "5000m PB", "value": "17:30"},
+        {"label": "2025璧山马拉松（半马）", "value": "1:21:30"},
+        {"label": "2025重庆马拉松（全马）", "value": "2:59:47"}
+      ],
+      "motto": "我是奶龙！我就是奶龙！！！",
+      "source": "本人提供",
+      "note": "个人资料与照片由本人提供，用于协会网站人物展示。"
     }
   ],
   "photos": [
@@ -41,6 +56,16 @@
       "height": 1798,
       "sha256": "8e607d7501bbb8ca11725f700dd29e0ca80168f6b836f228cf3524cf142d0614",
       "sourceLabel": "本人提供"
+    },
+    {
+      "id": "runner-yang-haoxian",
+      "file": "runner-yang-haoxian.webp",
+      "title": "跑友个人照片",
+      "width": 627,
+      "height": 941,
+      "sha256": "d562976e64e0a0fa1f88900e076894fe7034868b20ed28c081c5acb062d39146",
+      "sourceLabel": "本人提供",
+      "fit": "contain"
     }
   ],
   "rights": "人物资料与照片仅在本人确认的展示范围内使用。资料不构成完整或实时的队员名册，成绩由本人提供，后续以本人更新为准。"
