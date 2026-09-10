@@ -274,10 +274,6 @@ details > p { padding: 6px 0 12px; }
 /* 跑友风采：把本人资料、个人记录与照片放在同一条清晰阅读路径上。 */
 .section-overline { margin: 0 0 12px; color: var(--accent); font-size: 12px; letter-spacing: .12em; }
 .runner-page { background: #fff; overflow: clip; }
-.runner-hero { background: var(--surface-strong); border-bottom: 1px solid var(--line); padding-block: 0 30px; }
-.runner-hero-grid { display: block; }
-.runner-hero-copy { max-width: 720px; padding-block: 50px 0; }
-.runner-hero h1 { margin-bottom: 0; color: var(--deep); font: 700 clamp(36px, 5vw, 58px)/1.35 Georgia, 'Songti SC', serif; letter-spacing: .04em; text-wrap: balance; }
 .runner-directory { padding-block: 48px 66px; }
 .runner-profile-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 26px; }
 .runner-profile-card { display: grid; grid-template-columns: minmax(0, 1.07fr) minmax(340px, .93fr); grid-template-rows: 1fr; min-width: 0; overflow: hidden; background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow-soft); transition: transform .25s ease, box-shadow .25s ease; }
@@ -332,8 +328,6 @@ details > p { padding: 6px 0 12px; }
   .runner-home-teaser-grid { gap: 38px; }
 }
 @media (max-width: 850px) {
-  .runner-hero { padding-bottom: 0; }
-  .runner-hero-copy { padding-block: 53px 34px; }
   .runner-profile-grid { grid-template-columns: 1fr; }
   .runner-profile-card, .runner-profile-card:nth-child(even) { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
   .runner-profile-card:nth-child(even) .runner-profile-photo, .runner-profile-card:nth-child(even) .runner-profile-body { grid-column: auto; grid-row: auto; }
@@ -363,8 +357,6 @@ details > p { padding: 6px 0 12px; }
   .runner-home-profile .text-link { margin-top: 16px; }
 }
 @media (max-width: 360px) {
-  .runner-hero-copy { padding-block: 43px 28px; }
-  .runner-hero h1 { font-size: 34px; }
   .runner-profile-photo figcaption { right: 13px; left: 13px; }
   .runner-profile-body { padding-inline: 16px; }
   .runner-home-profile > div { padding-inline: 17px; }

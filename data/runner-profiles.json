@@ -135,6 +135,21 @@
       "motto": "111",
       "source": "本人提供",
       "note": "个人资料与照片由本人提供，用于协会网站人物展示。"
+    },
+    {
+      "id": "liu-ake",
+      "name": "刘阿克",
+      "grade": "2022级",
+      "college": "人工智能学院",
+      "image": "runner-liu-ake",
+      "records": [
+        {"label": "5000m PB", "value": "17:54"},
+        {"label": "2025年仁寿半程马拉松", "value": "1:22:41"},
+        {"label": "2025年垫江马拉松（全马）", "value": "2:58:49"}
+      ],
+      "motto": "Keep Running!",
+      "source": "本人提供",
+      "note": "个人资料与照片由本人提供，用于协会网站人物展示。"
     }
   ],
   "photos": [
@@ -214,6 +229,16 @@
       "width": 1125,
       "height": 1462,
       "sha256": "fa5b0ae81540566a0d58f675025e84f63cd44dccc882207c699a556aa23a568e",
+      "sourceLabel": "本人提供",
+      "fit": "contain"
+    },
+    {
+      "id": "runner-liu-ake",
+      "file": "runner-liu-ake.webp",
+      "title": "跑友个人照片",
+      "width": 1280,
+      "height": 1920,
+      "sha256": "1fac15f7a3a93938c7b99f83865358cfacda70a2aa6b5cdaac463fc08fc02691",
       "sourceLabel": "本人提供",
       "fit": "contain"
     }
