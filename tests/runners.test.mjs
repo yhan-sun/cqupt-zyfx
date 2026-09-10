@@ -55,7 +55,7 @@ test('runners: profile data keeps the supplied fields and registered image', () 
   );
   assert.deepEqual(thirdProfile.records.map(record => [record.label, record.value]), [
     ['5000m PB', '17:30'],
-    ['2025璧山马拉松（半马）', '1:21:30'],
+    ['2025垫江半马', '1:21:30'],
     ['2025重庆马拉松（全马）', '2:59:47']
   ]);
   assert.equal(thirdProfile.motto, '我是奶龙！我就是奶龙！！！');
