@@ -284,8 +284,9 @@ details > p { padding: 6px 0 12px; }
 .runner-profile-card:nth-child(even) { grid-template-columns: minmax(340px, .93fr) minmax(0, 1.07fr); }
 .runner-profile-card:nth-child(even) .runner-profile-photo { grid-column: 2; grid-row: 1; }
 .runner-profile-card:nth-child(even) .runner-profile-body { grid-column: 1; grid-row: 1; }
-.runner-profile-photo { position: relative; min-width: 0; min-height: 410px; overflow: hidden; background: var(--deep); }
-.runner-profile-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 42%; outline: 1px solid rgba(0, 0, 0, .1); outline-offset: -1px; transition: transform .45s ease; }
+.runner-profile-photo { position: relative; min-width: 0; height: 410px; min-height: 410px; max-height: 410px; overflow: hidden; background: var(--deep); }
+.runner-profile-photo .photo-link { display: block; width: 100%; height: 100%; }
+.runner-profile-photo img { width: 100%; height: 100%; max-height: 100%; object-fit: cover; object-position: center 42%; outline: 1px solid rgba(0, 0, 0, .1); outline-offset: -1px; transition: transform .45s ease; }
 .runner-profile-photo--contain img { object-fit: contain; }
 .runner-profile-photo::after { content: ''; position: absolute; inset: auto 0 0; height: 42%; pointer-events: none; background: linear-gradient(0deg, rgba(5, 44, 54, .75), transparent); }
 .runner-profile-photo figcaption { position: absolute; z-index: 1; right: 18px; bottom: 15px; left: 18px; display: flex; align-items: end; justify-content: space-between; gap: 12px; color: #fff; font-size: 9px; line-height: 1.5; text-shadow: 0 1px 4px rgba(0, 0, 0, .5); }
@@ -326,7 +327,7 @@ details > p { padding: 6px 0 12px; }
 }
 @media (max-width: 1100px) {
   .runner-profile-card, .runner-profile-card:nth-child(even) { grid-template-columns: minmax(0, 1fr) minmax(320px, .9fr); }
-  .runner-profile-photo { min-height: 370px; }
+  .runner-profile-photo { height: 370px; min-height: 370px; max-height: 370px; }
   .runner-profile-body { padding-inline: 28px; }
   .runner-home-teaser-grid { gap: 38px; }
 }
@@ -336,14 +337,14 @@ details > p { padding: 6px 0 12px; }
   .runner-profile-grid { grid-template-columns: 1fr; }
   .runner-profile-card, .runner-profile-card:nth-child(even) { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
   .runner-profile-card:nth-child(even) .runner-profile-photo, .runner-profile-card:nth-child(even) .runner-profile-body { grid-column: auto; grid-row: auto; }
-  .runner-profile-photo { min-height: 310px; }
+  .runner-profile-photo { height: 340px; min-height: 310px; max-height: 360px; }
   .runner-home-teaser-grid { grid-template-columns: 1fr; gap: 30px; }
   .runner-home-teaser-copy > p:not(.section-overline) { max-width: 520px; }
 }
 @media (max-width: 620px) {
   .runner-directory { padding-block: 47px 55px; }
   .runner-profile-grid { gap: 18px; }
-  .runner-profile-photo { min-height: 0; aspect-ratio: 1.42; }
+  .runner-profile-photo { height: auto; min-height: 0; max-height: none; aspect-ratio: 1.42; }
   .runner-profile-body { padding: 23px 20px 22px; }
   .runner-profile-header { padding-bottom: 14px; }
   .runner-profile-header h2 { font-size: 31px; }

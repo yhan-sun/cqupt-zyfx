@@ -45,6 +45,96 @@
       "motto": "我是奶龙！我就是奶龙！！！",
       "source": "本人提供",
       "note": "个人资料与照片由本人提供，用于协会网站人物展示。"
+    },
+    {
+      "id": "yang-tao",
+      "name": "杨涛",
+      "grade": "2026级研",
+      "college": "集成电路学院",
+      "image": "runner-yang-tao",
+      "records": [
+        {"label": "5000m PB", "value": "18:24"},
+        {"label": "2025年长嘉汇马拉松（半马）", "value": "1:27:40"},
+        {"label": "2025年厦门马拉松（全马）", "value": "3:09:47"}
+      ],
+      "motto": "理论永远是灰色的，而生命之树常青",
+      "source": "本人提供",
+      "note": "个人资料与照片由本人提供，用于协会网站人物展示。"
+    },
+    {
+      "id": "jiang-lin",
+      "name": "江林",
+      "grade": "2023级",
+      "college": "人工智能学院",
+      "image": "runner-jiang-lin",
+      "records": [
+        {"label": "5000m PB", "value": "17:05"},
+        {"label": "2025年清远马拉松（半马）", "value": "1:20:27"},
+        {"label": "2025年重庆马拉松（全马）", "value": "2:58:41"}
+      ],
+      "motto": "长路漫漫，稳即是快",
+      "source": "本人提供",
+      "note": "个人资料与照片由本人提供，用于协会网站人物展示。"
+    },
+    {
+      "id": "chai-weiyu",
+      "name": "柴威宇",
+      "grade": "2024级",
+      "college": "安法学院",
+      "image": "runner-chai-weiyu",
+      "records": [
+        {"label": "5000m PB", "value": "16:55"},
+        {"label": "2025年长嘉汇马拉松（半马）", "value": "1:23:11"},
+        {"label": "2025年重庆马拉松（全马）", "value": "2:52:55"}
+      ],
+      "motto": "你说被火烧过才能出现凤凰",
+      "source": "本人提供",
+      "note": "个人资料与照片由本人提供，用于协会网站人物展示。"
+    },
+    {
+      "id": "jin-weicheng",
+      "name": "金炜程",
+      "grade": "2023级",
+      "college": "通信学院",
+      "image": "runner-jin-weicheng",
+      "records": [
+        {"label": "2025年重庆市大运会（5000m）", "value": "16:42"},
+        {"label": "2025年北京半程马拉松", "value": "1:18:59"},
+        {"label": "2024年江津爱情马拉松（全马）", "value": "2:56:14"}
+      ],
+      "motto": "我的少鹏无限猖狂",
+      "source": "本人提供",
+      "note": "个人资料与照片由本人提供，用于协会网站人物展示。"
+    },
+    {
+      "id": "wang-xuecong",
+      "name": "王学聪",
+      "grade": "2022级研",
+      "college": "经济管理学院",
+      "image": "runner-wang-xuecong",
+      "records": [
+        {"label": "5000m PB", "value": "15:45"},
+        {"label": "2024年衡水马拉松（半马）", "value": "1:11:36"},
+        {"label": "2026年重庆马拉松（全马）", "value": "2:28:54"}
+      ],
+      "motto": "无人扶我青云志，我自己也不想动",
+      "source": "本人提供",
+      "note": "个人资料与照片由本人提供，用于协会网站人物展示。"
+    },
+    {
+      "id": "yang-pengyu",
+      "name": "杨鹏宇",
+      "grade": "2021级",
+      "college": "安法学院",
+      "image": "runner-yang-pengyu",
+      "records": [
+        {"label": "2024年重庆市大运会（5000m）", "value": "17:04"},
+        {"label": "2025年仁寿半程马拉松", "value": "1:15:19"},
+        {"label": "2025年清远马拉松（全马）", "value": "2:46:21"}
+      ],
+      "motto": "111",
+      "source": "本人提供",
+      "note": "个人资料与照片由本人提供，用于协会网站人物展示。"
     }
   ],
   "photos": [
@@ -64,6 +154,66 @@
       "width": 627,
       "height": 941,
       "sha256": "d562976e64e0a0fa1f88900e076894fe7034868b20ed28c081c5acb062d39146",
+      "sourceLabel": "本人提供",
+      "fit": "contain"
+    },
+    {
+      "id": "runner-yang-tao",
+      "file": "runner-yang-tao.webp",
+      "title": "跑友个人照片",
+      "width": 1080,
+      "height": 1620,
+      "sha256": "aa7c8cf4abeffcbb95d201c09dcd5676e1d16aa064a4576f6a609c8b050914e2",
+      "sourceLabel": "本人提供",
+      "fit": "contain"
+    },
+    {
+      "id": "runner-jiang-lin",
+      "file": "runner-jiang-lin.webp",
+      "title": "跑友个人照片",
+      "width": 853,
+      "height": 1280,
+      "sha256": "b204d4bdd67df3b1f58558191d18a151080f4a08de920b554e907b2a0d1571df",
+      "sourceLabel": "本人提供",
+      "fit": "contain"
+    },
+    {
+      "id": "runner-chai-weiyu",
+      "file": "runner-chai-weiyu.webp",
+      "title": "跑友个人照片",
+      "width": 500,
+      "height": 750,
+      "sha256": "077049cda29f5114794e08c0abf4f4db04fd7918e2581383ecfc60cf80f2735e",
+      "sourceLabel": "本人提供",
+      "fit": "contain"
+    },
+    {
+      "id": "runner-jin-weicheng",
+      "file": "runner-jin-weicheng.webp",
+      "title": "跑友个人照片",
+      "width": 1166,
+      "height": 1762,
+      "sha256": "73296467105e405e7f09cd6e3b1c96baf4760d43c4f2cd237c5ab92c74ddaf62",
+      "sourceLabel": "本人提供",
+      "fit": "contain"
+    },
+    {
+      "id": "runner-wang-xuecong",
+      "file": "runner-wang-xuecong.webp",
+      "title": "跑友个人照片",
+      "width": 1080,
+      "height": 1620,
+      "sha256": "d5ba1d9b42bbfff2f4699cdcfff11cc3e0859f93fe1ea3b4c0001eadc2b95e84",
+      "sourceLabel": "本人提供",
+      "fit": "contain"
+    },
+    {
+      "id": "runner-yang-pengyu",
+      "file": "runner-yang-pengyu.webp",
+      "title": "跑友个人照片",
+      "width": 1125,
+      "height": 1462,
+      "sha256": "fa5b0ae81540566a0d58f675025e84f63cd44dccc882207c699a556aa23a568e",
       "sourceLabel": "本人提供",
       "fit": "contain"
     }
