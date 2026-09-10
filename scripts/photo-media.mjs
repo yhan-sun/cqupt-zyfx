@@ -8,13 +8,16 @@ export async function buildPhotoMedia() {
   const output = path.join(root, 'dist/media/photos');
   await mkdir(output, { recursive: true });
   const result = [];
-  for (const photo of createModel().photos) {
-    const sourcePath = path.join(root, photo.kind === 'member' ? photo.src : `dist/${photo.src}`);
+  const model = createModel();
+  const photos = [...model.photos, ...model.profilePhotos];
+  for (const photo of photos) {
+    const ownedPhoto = photo.kind === 'member' || photo.kind === 'runner';
+    const sourcePath = path.join(root, ownedPhoto ? photo.src : `dist/${photo.src}`);
     const raw = await readFile(sourcePath);
-    if (photo.kind === 'member' && sha256(raw) !== photo.sha256) throw new Error(`Member image changed: ${photo.id}`);
+    if (ownedPhoto && sha256(raw) !== photo.sha256) throw new Error(`Registered profile image changed: ${photo.id}`);
     const metadata = await sharp(raw, { limitInputPixels: 35_000_000 }).metadata();
-    if (photo.kind === 'member' && (metadata.width !== photo.width || metadata.height !== photo.height)) {
-      throw new Error(`Member image dimensions changed: ${photo.id}`);
+    if (ownedPhoto && (metadata.width !== photo.width || metadata.height !== photo.height)) {
+      throw new Error(`Registered profile image dimensions changed: ${photo.id}`);
     }
     const widths = [...new Set([480, 960, 1600].map(width => Math.min(width, metadata.width)))];
     const variants = [];

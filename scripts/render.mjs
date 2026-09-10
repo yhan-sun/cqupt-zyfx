@@ -4,9 +4,9 @@ import { page, image, photoLink, breadcrumbs, pageHeading, external, localHref, 
 export { escapeHtml } from './layout.mjs';
 
 export function renderSite(model) {
-  const { site, join, members, runners, photos, posts, content, media, gallery, official } = model;
+  const { site, join, members, runners, photos, profilePhotos = [], posts, content, media, gallery, official } = model;
   const pages = new Map();
-  const photoById = new Map(photos.map(item => [item.id, item]));
+  const photoById = new Map([...photos, ...profilePhotos].map(item => [item.id, item]));
   const postById = new Map(posts.map(item => [item.id, item]));
   const baseImage = id => {
     const item = media.find(item => item.id === id);
@@ -73,7 +73,11 @@ export function renderSite(model) {
   }
 
   const mediaEntry = item => `<li id="${e(item.id)}"><h3>${e(item.title)}</h3><p>${e(item.credit || item.sourceLabel || '协会提供')} · ${e(item.year || item.published || '')}</p><p>${e(item.license || members.rights)}</p><a href="${e(item.article || item.source || item.evidence || 'gallery.html')}" ${(item.article || item.source || item.evidence || '').startsWith('https:') ? external : ''}>${item.article ? '公众号原文' : item.source || item.evidence ? '原始资料' : '查看照片'} ↗</a>${item.licenseUrl ? ` · <a href="${e(item.licenseUrl)}" ${external}>许可说明 ↗</a>` : ''}</li>`;
-  const runnerSourceRows = runners.items.map(profile => `<li id="runner-source-${e(profile.id)}"><h3>${e(profile.name)}的跑友资料</h3><p>个人资料、跑步记录与照片 · ${e(profile.source)} · ${e(runners.reviewedAt)}</p><p>${e(profile.note)} ${e(runners.rights)}</p><a href="runners.html#runner-${e(profile.id)}">查看跑友风采 ↗</a></li>`).join('');
+  const runnerSourceRows = runners.items.map(profile => {
+    const photo = photoById.get(profile.image);
+    const photoSource = photo ? `照片：${e(photo.title)} · ${e(photo.sourceLabel || profile.source)}。` : '';
+    return `<li id="runner-source-${e(profile.id)}"><h3>${e(profile.name)}的跑友资料</h3><p>个人资料、跑步记录与照片 · ${e(profile.source)} · ${e(runners.reviewedAt)}</p><p>${e(profile.note)} ${e(runners.rights)} ${photoSource}</p><a href="runners.html#runner-${e(profile.id)}">查看跑友风采 ↗</a></li>`;
+  }).join('');
   add('sources.html', '资料与图片来源', `<main id="main">${breadcrumbs('资料与图片来源')}<article class="container sources-page">${pageHeading('资料与图片来源')}<div class="prose"><p>活动摘要保留原文链接。协会提供的照片、公众号图片、跑友资料和学校赛事资料分别登记；图片署名并不等于授权。</p><p>本站没有报名后台，不收集学号、手机号或个人报名资料。如需更正内容或下架图片，请通过<a href="https://github.com/yhan-sun/cqupt-zyfx/issues" ${external}>网站反馈</a>或联系跑团管理员。请勿在公开反馈中提交敏感信息。</p></div><section class="section" id="association-supplied-media"><h2>协会提供的照片</h2><p>${e(members.rights)}</p><p>学校代表队比赛照片不作为协会团体成绩。会长自述由本人提供。</p><ul class="source-list">${members.items.map(item => mediaEntry({ ...item, source: null, credit: '协会提供' })).join('')}</ul></section><section class="section" id="runner-profiles"><h2>跑友风采资料</h2><p>人物资料与照片仅在本人确认的展示范围内使用；成绩由本人提供，不构成协会或学校的排名。</p><ul class="source-list">${runnerSourceRows}</ul></section><section class="section" id="official-wechat"><h2>公众号活动记录与图片</h2><p>来源：${e(official.sourceName)}。仅整理活动摘要，不转载个人成绩表；公众号图片未发现开放许可。</p><ul class="source-posts">${posts.map(post => `<li><time>${post.published}</time><a href="${e(post.source)}" ${external}>${e(post.originalTitle)} ↗</a></li>`).join('')}</ul><details><summary>逐张查看公众号图片来源</summary><ul class="source-list">${photos.filter(item => item.kind === 'official').map(mediaEntry).join('')}</ul></details></section><section class="section" id="campus-media"><h2>校园与赛事资料</h2><p>校园赛事由学校或赛事主办方组织。2026 年重邮人马拉松所用配图为校园资料图，不是该届比赛现场。</p><ul class="source-list">${media.map(mediaEntry).join('')}</ul></section><section class="section"><h2>跑步指南</h2><p>动作图源、许可和文字参考资料单独列出。</p><a href="science/references.html">跑步指南参考资料 ${arrow}</a></section></article></main>`, { description: '活动原文、照片署名、人物资料、使用范围与更正方式。' });
   add('404.html', '页面未找到', `<main id="main" class="container error-page"><p class="meta">404</p><h1>页面未找到</h1><p>链接可能已经变更，可以从首页继续查找。</p><a class="button" href="${site.origin}">返回首页</a></main>`, { noindex: true });
 

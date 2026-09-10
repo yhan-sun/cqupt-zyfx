@@ -45,7 +45,7 @@ python tests/motion_browser.py
 - `data/content.json`：基础校园赛事与站点内容。
 - `data/official-posts.json`、`data/official-media.json`：CQUPT自邮飞翔公众号公开记录和筛选影像。
 - `data/member-media.json`：协会侧本次提供的 9 张补充照片，以及会长本人提供的自述文字。
-- `data/runner-profiles.json`：跑友风采的人物资料、个人记录、宣言和本人确认范围；图片必须引用已登记的协会照片。
+- `data/runner-profiles.json`：跑友风采的人物资料、个人记录、宣言、本人确认范围和专属照片登记；图片必须引用已登记的资料照片。
 - `data/science.mjs`、`data/science-media.json`：科学跑步内容及动作图源。
 
 新增或修改资料时，保持“本人自述 / 协会侧提供 / 公众号公开记录 / 外部官方资料”之间的来源边界。不得从照片自行推断个人身份、项目或成绩；学校代表队成绩不能改写为协会成绩，公开赛事背景不能改写为协会主办。

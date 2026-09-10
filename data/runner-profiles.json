@@ -8,13 +8,39 @@
       "college": "自动化学院",
       "image": "member-captain-run",
       "records": [
-        {"label": "500m PB", "value": "17:24"},
+        {"label": "5000m PB", "value": "17:24"},
         {"label": "10000m PB", "value": "36:35"},
         {"label": "2025璧山半马", "value": "1:20:57"}
       ],
       "motto": "日拱一卒，功不唐捐",
       "source": "本人提供",
       "note": "个人资料与照片由本人提供，用于协会网站人物展示。"
+    },
+    {
+      "id": "yu-peijun",
+      "name": "俞沛君",
+      "grade": "2023级",
+      "college": "生命健康信息学院",
+      "image": "runner-yu-peijun",
+      "records": [
+        {"label": "5000m PB", "value": "17:59"},
+        {"label": "半马 PB", "value": "1:31:52"},
+        {"label": "全马 PB", "value": "3:48:00"}
+      ],
+      "motto": "繁霜尽是心头血，洒向千峰秋叶丹",
+      "source": "本人提供",
+      "note": "个人资料与照片由本人提供，用于协会网站人物展示。"
+    }
+  ],
+  "photos": [
+    {
+      "id": "runner-yu-peijun",
+      "file": "runner-yu-peijun.webp",
+      "title": "跑友个人照片",
+      "width": 2400,
+      "height": 1798,
+      "sha256": "8e607d7501bbb8ca11725f700dd29e0ca80168f6b836f228cf3524cf142d0614",
+      "sourceLabel": "本人提供"
     }
   ],
   "rights": "人物资料与照片仅在本人确认的展示范围内使用。资料不构成完整或实时的队员名册，成绩由本人提供，后续以本人更新为准。"

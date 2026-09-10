@@ -19,6 +19,7 @@ const photoMedia = await buildPhotoMedia();
 const media = JSON.parse(await readFile(path.join(dist, 'media/credits.json'), 'utf8'));
 const model = createModel({ media, photoMedia });
 const pages = renderSite(model);
+const photoCount = model.photos.length + model.profilePhotos.length;
 await mkdir(path.join(dist, 'assets'), { recursive: true });
 for (const file of ['site.css', 'editorial.css', 'site.js', 'science.css', 'science.js', 'science-core.mjs', 'mark.svg', 'join-qq.svg']) {
   await cp(path.join(root, 'assets', file), path.join(dist, 'assets', file));
@@ -33,5 +34,5 @@ await writeFile(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap
 const locations = [...pages.keys()].filter(file => !['404.html', 'news.html'].includes(file))
   .map(file => `<url><loc>${model.site.origin}${file === 'index.html' ? '' : file}</loc></url>`).join('');
 await writeFile(path.join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${locations}</urlset>\n`);
-await writeFile(path.join(dist, 'build.json'), JSON.stringify({ commit: process.env.GITHUB_SHA || 'local', pages: pages.size, photos: model.photos.length }) + '\n');
-console.log(`Built ${pages.size} static pages and ${model.photos.length} responsive photographs${offline ? ' from verified caches' : ''}.`);
+await writeFile(path.join(dist, 'build.json'), JSON.stringify({ commit: process.env.GITHUB_SHA || 'local', pages: pages.size, photos: photoCount }) + '\n');
+console.log(`Built ${pages.size} static pages and ${photoCount} responsive photographs${offline ? ' from verified caches' : ''}.`);

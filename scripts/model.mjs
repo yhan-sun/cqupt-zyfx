@@ -13,6 +13,7 @@ export const officialMedia = json('official-media');
 
 export function createModel({ media = baseMedia, photoMedia = [] } = {}) {
   const derivatives = new Map(photoMedia.map(item => [item.id, item]));
+  const runnerProfileAssets = Array.isArray(runners.photos) ? runners.photos : [];
   const sources = new Map([
     ...media.map(item => [item.id, {
       ...item, kind: 'campus', src: `media/${item.id}.${item.format || 'webp'}`,
@@ -29,6 +30,12 @@ export function createModel({ media = baseMedia, photoMedia = [] } = {}) {
       date: item.year, dateLabel: `${item.year} 年`,
       source: `sources.html#${item.id}`, sourceLabel: '协会提供', credit: '协会提供',
       license: members.rights
+    }]),
+    ...runnerProfileAssets.map(item => [item.id, {
+      ...item, kind: 'runner', src: `assets/member/${item.file}`,
+      date: item.year, dateLabel: item.year ? `${item.year} 年` : '跑友资料',
+      source: 'sources.html#runner-profiles', sourceLabel: item.sourceLabel || '本人提供',
+      credit: item.sourceLabel || '本人提供', license: item.license || runners.rights
     }])
   ]);
   const seen = new Set();
@@ -56,17 +63,32 @@ export function createModel({ media = baseMedia, photoMedia = [] } = {}) {
   if (!Array.isArray(runners.items) || runners.items.length === 0) throw new Error('Runner profile data must contain at least one item');
   const runnerIds = new Set();
   const memberIds = new Set(members.items.map(item => item.id));
+  const runnerPhotoIds = new Set();
+  for (const photo of runnerProfileAssets) {
+    if (!photo.id || runnerPhotoIds.has(photo.id) || memberIds.has(photo.id)) throw new Error(`Runner profile image id is missing or duplicated: ${photo.id}`);
+    if (!photo.file || !photo.width || !photo.height || !/^[a-f0-9]{64}$/.test(photo.sha256)) throw new Error(`Runner profile image metadata is incomplete: ${photo.id}`);
+    runnerPhotoIds.add(photo.id);
+  }
+  const registeredPhotoIds = new Set([...memberIds, ...runnerPhotoIds]);
   for (const profile of runners.items) {
     if (!profile.id || runnerIds.has(profile.id)) throw new Error(`Runner profile id is missing or duplicated: ${profile.id}`);
     runnerIds.add(profile.id);
     if (!profile.name || !profile.grade || !profile.college || !profile.image || !profile.motto || !profile.source) {
       throw new Error(`Runner profile is missing required identity fields: ${profile.id}`);
     }
-    if (!memberIds.has(profile.image)) throw new Error(`Runner profile image is not registered: ${profile.image}`);
+    if (!registeredPhotoIds.has(profile.image)) throw new Error(`Runner profile image is not registered: ${profile.image}`);
     if (!Array.isArray(profile.records) || profile.records.length === 0 || profile.records.some(record => !record.label || !record.value)) {
       throw new Error(`Runner profile records are incomplete: ${profile.id}`);
     }
   }
+  const galleryPhotoIds = new Set(photos.map(photo => photo.id));
+  const profilePhotos = [...new Set(runners.items.map(profile => profile.image))]
+    .filter(id => !galleryPhotoIds.has(id))
+    .map(id => {
+      const source = sources.get(id);
+      if (!source) throw new Error(`Runner profile image source is missing: ${id}`);
+      return { ...source, ...derivatives.get(id) };
+    });
   for (const id of [...site.homePhotos, site.homePhoto]) {
     if (!seen.has(id)) throw new Error(`Unknown home photo: ${id}`);
   }
@@ -76,5 +98,5 @@ export function createModel({ media = baseMedia, photoMedia = [] } = {}) {
   if (!/^https:\/\/qm\.qq\.com\//.test(join.joinUrl) || !/^\d+$/.test(join.groupNumber)) {
     throw new Error('Invalid verified QQ configuration');
   }
-  return { site, join, content, official, members, runners, gallery, media, photos, posts };
+  return { site, join, content, official, members, runners, gallery, media, photos, profilePhotos, posts };
 }
