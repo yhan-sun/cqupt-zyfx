@@ -70,7 +70,8 @@
 ```text
 npm test
 npm run build
-python tests/structure_browser.py
+npm run check
+npm run test:e2e
 ```
 
 浏览器检查应覆盖 320 / 390 / 768 / 1024 / 1440 px、移动菜单、无 JavaScript、旧赛事直达 URL、35 张跑步影像、跑友风采、图片同站加载、来源链接、科学跑步和 QQ 加入入口。合并到 `main` 后等待 Pages deploy 成功，并检查公开的 `club.html`、`gallery.html`、`runners.html`、`science.html`、`join.html` 与兼容 `news.html`。

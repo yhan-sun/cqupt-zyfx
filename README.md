@@ -30,13 +30,13 @@ node scripts/serve.mjs --dir dist --base /cqupt-zyfx/
 ## 自动化检查
 
 ```sh
-python -m pip install playwright==1.55.0
-python -m playwright install chromium
-python tests/structure_browser.py
-python tests/motion_browser.py
+npm test
+npm run build
+npm run check
+npm run test:e2e
 ```
 
-先启动 `dist` 服务。Actions 运行单元与内容测试、图片校验、桌面/手机浏览器检查、无 JavaScript 降级检查、动作/大图交互检查。`main` 部署后再通过公网 HTTPS 校验关键页面与代表性图片资源。
+`npm run test:e2e` 使用 Python Playwright（`python -m pip install playwright==1.55.0`、`python -m playwright install chromium`），需要先启动 `dist` 服务。Actions 运行单元与内容测试、图片校验、桌面/手机浏览器检查、无 JavaScript 降级检查、动作/大图交互检查。`main` 部署后再通过公网 HTTPS 校验关键页面与代表性图片资源。
 
 `npm run preview:export` 导出离线互动预览；生产网站由构建脚本生成独立静态页面。
 
