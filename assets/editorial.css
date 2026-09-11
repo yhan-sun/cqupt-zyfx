@@ -113,7 +113,7 @@ body[data-page="about"] .routine dl > div::before {
 body[data-page="club"] .page-heading { margin-bottom: 0; }
 body[data-page="club"] .year-nav {
   position: sticky;
-  top: 88px;
+  top: 124px;
   z-index: 20;
   margin: -24px clamp(18px, 3vw, 42px) 24px;
   padding: 8px 12px;
@@ -148,7 +148,7 @@ body[data-page="club"] .year-section::before {
 }
 body[data-page="club"] .year-section > h2 {
   position: sticky;
-  top: 150px;
+  top: 190px;
   align-self: start;
   z-index: 1;
   margin: 10px 0 0;
@@ -377,10 +377,10 @@ body[data-page="science"] .page-heading {
 }
 
 @media (max-width: 900px) {
-  body[data-page="club"] .year-nav { top: 72px; }
+  body[data-page="club"] .year-nav { top: 12px; }
   body[data-page="club"] .year-section { grid-template-columns: 88px 1fr; gap: 24px; }
   body[data-page="club"] .year-section::before { left: 43px; }
-  body[data-page="club"] .year-section > h2 { width: 86px; font-size: 30px; top: 132px; }
+  body[data-page="club"] .year-section > h2 { width: 86px; font-size: 30px; top: 24px; }
   body[data-page="club"] .activity-row { grid-template-columns: 190px 1fr; gap: 22px; }
   body[data-page="club"] .campus-events { grid-template-columns: 1fr; }
   body[data-page^="activities-"] .article-photos { grid-template-columns: 1fr 1fr; }

@@ -281,7 +281,9 @@ details > p { padding: 6px 0 12px; }
 .runner-profile-card:nth-child(even) .runner-profile-photo { grid-column: 2; grid-row: 1; }
 .runner-profile-card:nth-child(even) .runner-profile-body { grid-column: 1; grid-row: 1; }
 .runner-profile-photo { position: relative; min-width: 0; height: 410px; min-height: 410px; max-height: 410px; overflow: hidden; background: var(--deep); }
-.runner-profile-photo .photo-link { display: block; width: 100%; height: 100%; }
+.runner-profile-photo .photo-link { position: relative; display: block; width: 100%; height: 100%; background: transparent; }
+.runner-profile-photo--contain .runner-photo-backdrop { position: absolute; inset: 0; overflow: hidden; }
+.runner-profile-photo--contain .runner-photo-backdrop img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; filter: blur(26px) saturate(1.08); transform: scale(1.22); }
 .runner-profile-photo img { width: 100%; height: 100%; max-height: 100%; object-fit: cover; object-position: center 20%; outline: 1px solid rgba(0, 0, 0, .1); outline-offset: -1px; transition: transform .45s ease; }
 .runner-profile-photo--contain img { object-fit: contain; }
 .runner-profile-photo::after { content: ''; position: absolute; inset: auto 0 0; height: 42%; pointer-events: none; background: linear-gradient(0deg, rgba(5, 44, 54, .75), transparent); }
@@ -316,10 +318,14 @@ details > p { padding: 6px 0 12px; }
 .runner-home-profile > div { display: flex; flex-direction: column; justify-content: center; padding: 25px 26px; }
 .runner-home-profile > div > span { color: var(--muted); font-size: 10px; line-height: 1.7; }
 .runner-home-profile strong { margin-top: 8px; color: var(--deep); font: 700 31px/1.4 Georgia, 'Songti SC', serif; letter-spacing: .06em; }
-.runner-home-profile .text-link { margin-top: 22px; color: var(--accent); font-size: 13px; }
+.runner-home-profile .text-link { margin-top: 18px; color: var(--accent); font-size: 13px; }
+.runner-home-record { display: flex; align-items: baseline; gap: 10px; margin: 14px 0 0; }
+.runner-home-record span { color: var(--muted); font-size: 11px; line-height: 1.6; }
+.runner-home-record strong { margin-top: 0; color: var(--accent-dark); font: 600 21px/1.3 Georgia, 'Times New Roman', serif; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.runner-home-motto { margin: 13px 0 0; padding: 2px 0 2px 12px; border-left: 2px solid var(--gold); color: var(--deep); font: 600 14px/1.75 Georgia, 'Songti SC', serif; }
 @media (hover: hover) {
   .runner-profile-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
-  .runner-profile-card:hover .runner-profile-photo img, .runner-home-profile:hover img { transform: scale(1.018); }
+  .runner-profile-card:hover .runner-profile-photo .photo-link img, .runner-home-profile:hover img { transform: scale(1.018); }
 }
 @media (max-width: 1100px) {
   .runner-profile-card, .runner-profile-card:nth-child(even) { grid-template-columns: minmax(0, 1fr) minmax(320px, .9fr); }
@@ -364,7 +370,7 @@ details > p { padding: 6px 0 12px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .runner-profile-card, .runner-profile-photo img, .runner-home-profile img { transition: none; }
-  .runner-profile-card:hover, .runner-profile-card:hover .runner-profile-photo img, .runner-home-profile:hover img { transform: none; }
+  .runner-profile-card:hover, .runner-profile-card:hover .runner-profile-photo .photo-link img, .runner-home-profile:hover img { transform: none; }
 }
 
 :root {
@@ -426,17 +432,13 @@ html { scroll-behavior: smooth; }
 .home-activities .activity-cover img { width: 100%; transition: transform .45s cubic-bezier(.2,.72,.2,1), filter .35s ease; }
 .home-activities .activity-row > div { padding: 22px 22px 24px; }
 .home-activities .activity-row .meta { color: var(--accent-dark); }
-.photo-section { background: linear-gradient(135deg, #063f46 0%, #0b5960 100%); color: #fff; }
-.photo-section .section-heading { border-color: rgba(255,255,255,.18); }
-.photo-section .section-heading h2 { color: #fff; }
-.photo-section .section-heading > a { color: #e7c891; }
-.photo-section .photo-link { background: #124e54; box-shadow: 0 14px 34px rgba(0,0,0,.16); }
+.photo-section { background: var(--surface); }
+.photo-section .photo-link { background: #fff; box-shadow: 0 14px 34px rgba(9, 55, 59, .10); }
 .photo-section .photo-link img { transition: transform .5s cubic-bezier(.2,.72,.2,1), filter .35s ease; }
-.photo-section figcaption { color: #d7e6e5; }
-.photo-section figcaption a { color: #f0cf94; }
 .guide-links { gap: 18px; border-top: 0; }
 .guide-links a { position: relative; border: 1px solid var(--line); background: linear-gradient(180deg,#fff,#fbfdfc); padding: 25px 24px 20px; box-shadow: 0 8px 24px rgba(7,65,69,.045); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
 .guide-links a::before { content: ''; position: absolute; left: -1px; right: -1px; top: -1px; height: 3px; background: linear-gradient(90deg, var(--accent), var(--gold)); }
+.guide-links .guide-meta { display: block; margin-bottom: 7px; color: var(--accent); font-size: 12px; font-weight: 600; letter-spacing: .08em; }
 .join-strip {
   position: relative;
   min-height: 190px;
